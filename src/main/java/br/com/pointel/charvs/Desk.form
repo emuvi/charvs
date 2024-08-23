@@ -4,7 +4,6 @@
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
     <Property name="title" type="java.lang.String" value="Charvs"/>
-    <Property name="alwaysOnTop" type="boolean" value="true"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -28,12 +27,9 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="scrollText" pref="513" max="32767" attributes="0"/>
-                  <Group type="102" attributes="0">
-                      <Component id="buttonStart" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="buttonQuery" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                  <Component id="scrollText" pref="572" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       <Component id="checkOnTop" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -41,11 +37,13 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="comboChats" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
+                      <Component id="buttonSet" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="buttonAppend" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="buttonCopy" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="buttonPaste" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="buttonCopy" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -57,20 +55,17 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="buttonStart" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="buttonQuery" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="checkOnTop" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="comboChats" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="buttonSet" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="buttonAppend" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="buttonCopy" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="buttonRefresh" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="buttonPaste" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="buttonCopy" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="scrollText" pref="181" max="32767" attributes="0"/>
+              <Component id="scrollText" pref="215" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="checkOnTop" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -94,30 +89,29 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="buttonStart">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Start"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="buttonAppend">
+    <Component class="javax.swing.JButton" name="buttonSet">
       <Properties>
         <Property name="text" type="java.lang.String" value="Set"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonSetActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="buttonCopy">
+    <Component class="javax.swing.JButton" name="buttonAppend">
       <Properties>
         <Property name="text" type="java.lang.String" value="Append"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonAppendActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="buttonPaste">
       <Properties>
         <Property name="text" type="java.lang.String" value="Paste"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="buttonQuery">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Query"/>
-      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonPasteActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JComboBox" name="comboChats">
       <Properties>
@@ -140,6 +134,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="checkOnTopActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="buttonCopy">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Copy"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonCopyActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
