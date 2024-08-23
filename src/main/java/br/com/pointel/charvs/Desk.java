@@ -30,6 +30,7 @@ public class Desk extends javax.swing.JFrame {
         buttonRefresh = new javax.swing.JButton();
         checkOnTop = new javax.swing.JCheckBox();
         buttonCopy = new javax.swing.JButton();
+        buttonAuto = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Charvs");
@@ -79,6 +80,13 @@ public class Desk extends javax.swing.JFrame {
             }
         });
 
+        buttonAuto.setText("*");
+        buttonAuto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAutoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -101,7 +109,9 @@ public class Desk extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttonPaste)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonCopy)))
+                        .addComponent(buttonCopy)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonAuto)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -114,7 +124,8 @@ public class Desk extends javax.swing.JFrame {
                     .addComponent(buttonAppend)
                     .addComponent(buttonRefresh)
                     .addComponent(buttonPaste)
-                    .addComponent(buttonCopy))
+                    .addComponent(buttonCopy)
+                    .addComponent(buttonAuto))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scrollText, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -167,6 +178,12 @@ public class Desk extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_buttonCopyActionPerformed
 
+    private void buttonAutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAutoActionPerformed
+        buttonSetActionPerformed(evt);
+        buttonPasteActionPerformed(evt);
+        buttonCopyActionPerformed(evt);
+    }//GEN-LAST:event_buttonAutoActionPerformed
+
     private void loadChats() {
         modelChats.removeAllElements();
         for (var inside : FOLDER_CHATS.listFiles()) {
@@ -191,6 +208,7 @@ public class Desk extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAppend;
+    private javax.swing.JButton buttonAuto;
     private javax.swing.JButton buttonCopy;
     private javax.swing.JButton buttonPaste;
     private javax.swing.JButton buttonRefresh;

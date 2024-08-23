@@ -44,6 +44,8 @@
                       <Component id="buttonPaste" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="buttonCopy" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="buttonAuto" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -61,6 +63,7 @@
                   <Component id="buttonRefresh" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="buttonPaste" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="buttonCopy" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="buttonAuto" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="scrollText" pref="215" max="32767" attributes="0"/>
@@ -142,6 +145,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonCopyActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="buttonAuto">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="*"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonAutoActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
