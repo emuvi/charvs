@@ -33,8 +33,6 @@
                       <Component id="checkOnTop" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="buttonRefresh" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="comboChats" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="buttonSet" min="-2" max="-2" attributes="0"/>
@@ -60,7 +58,6 @@
                   <Component id="comboChats" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="buttonSet" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="buttonAppend" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="buttonRefresh" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="buttonPaste" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="buttonCopy" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="buttonAuto" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -126,11 +123,6 @@
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JButton" name="buttonRefresh">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Refresh"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JCheckBox" name="checkOnTop">
       <Properties>
         <Property name="text" type="java.lang.String" value="On Top"/>
@@ -149,7 +141,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="buttonAuto">
       <Properties>
-        <Property name="text" type="java.lang.String" value="*"/>
+        <Property name="text" type="java.lang.String" value="Auto"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonAutoActionPerformed"/>

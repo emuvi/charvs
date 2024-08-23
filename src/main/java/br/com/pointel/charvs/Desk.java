@@ -27,7 +27,6 @@ public class Desk extends javax.swing.JFrame {
         buttonAppend = new javax.swing.JButton();
         buttonPaste = new javax.swing.JButton();
         comboChats = new javax.swing.JComboBox<>();
-        buttonRefresh = new javax.swing.JButton();
         checkOnTop = new javax.swing.JCheckBox();
         buttonCopy = new javax.swing.JButton();
         buttonAuto = new javax.swing.JButton();
@@ -64,8 +63,6 @@ public class Desk extends javax.swing.JFrame {
 
         comboChats.setModel(modelChats);
 
-        buttonRefresh.setText("Refresh");
-
         checkOnTop.setText("On Top");
         checkOnTop.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -80,7 +77,7 @@ public class Desk extends javax.swing.JFrame {
             }
         });
 
-        buttonAuto.setText("*");
+        buttonAuto.setText("Auto");
         buttonAuto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonAutoActionPerformed(evt);
@@ -99,8 +96,6 @@ public class Desk extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(checkOnTop))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(buttonRefresh)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(comboChats, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttonSet)
@@ -122,7 +117,6 @@ public class Desk extends javax.swing.JFrame {
                     .addComponent(comboChats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonSet)
                     .addComponent(buttonAppend)
-                    .addComponent(buttonRefresh)
                     .addComponent(buttonPaste)
                     .addComponent(buttonCopy)
                     .addComponent(buttonAuto))
@@ -211,7 +205,6 @@ public class Desk extends javax.swing.JFrame {
     private javax.swing.JButton buttonAuto;
     private javax.swing.JButton buttonCopy;
     private javax.swing.JButton buttonPaste;
-    private javax.swing.JButton buttonRefresh;
     private javax.swing.JButton buttonSet;
     private javax.swing.JCheckBox checkOnTop;
     private javax.swing.JComboBox<String> comboChats;
