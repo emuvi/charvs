@@ -27,7 +27,6 @@ public class Desk extends javax.swing.JFrame {
         buttonAppend = new javax.swing.JButton();
         buttonPaste = new javax.swing.JButton();
         comboChats = new javax.swing.JComboBox<>();
-        checkOnTop = new javax.swing.JCheckBox();
         buttonCopy = new javax.swing.JButton();
         buttonAuto = new javax.swing.JButton();
 
@@ -63,13 +62,6 @@ public class Desk extends javax.swing.JFrame {
 
         comboChats.setModel(modelChats);
 
-        checkOnTop.setText("On Top");
-        checkOnTop.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                checkOnTopActionPerformed(evt);
-            }
-        });
-
         buttonCopy.setText("Copy");
         buttonCopy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -92,9 +84,6 @@ public class Desk extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(scrollText, javax.swing.GroupLayout.DEFAULT_SIZE, 572, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(checkOnTop))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(comboChats, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -121,18 +110,12 @@ public class Desk extends javax.swing.JFrame {
                     .addComponent(buttonCopy)
                     .addComponent(buttonAuto))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrollText, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(checkOnTop)
+                .addComponent(scrollText, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void checkOnTopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkOnTopActionPerformed
-        setAlwaysOnTop(checkOnTop.isSelected());
-    }//GEN-LAST:event_checkOnTopActionPerformed
 
     private String readSelectedChat() throws Exception {
         return Files.readString(new File(FOLDER_CHATS, comboChats.getSelectedItem().toString()).toPath(), StandardCharsets.UTF_8);
@@ -206,7 +189,6 @@ public class Desk extends javax.swing.JFrame {
     private javax.swing.JButton buttonCopy;
     private javax.swing.JButton buttonPaste;
     private javax.swing.JButton buttonSet;
-    private javax.swing.JCheckBox checkOnTop;
     private javax.swing.JComboBox<String> comboChats;
     private javax.swing.JTextArea editText;
     private javax.swing.JScrollPane scrollText;
