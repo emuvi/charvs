@@ -28,7 +28,7 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="scrollText" pref="572" max="32767" attributes="0"/>
+                  <Component id="scrollText" pref="636" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="comboChats" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -40,7 +40,9 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="buttonCopy" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="buttonAuto" min="-2" max="-2" attributes="0"/>
+                      <Component id="buttonPasteCopy" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="buttonSetPasteCopy" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -57,7 +59,8 @@
                   <Component id="buttonAppend" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="buttonPaste" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="buttonCopy" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="buttonAuto" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="buttonSetPasteCopy" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="buttonPasteCopy" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="scrollText" pref="230" max="32767" attributes="0"/>
@@ -126,12 +129,20 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonCopyActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="buttonAuto">
+    <Component class="javax.swing.JButton" name="buttonSetPasteCopy">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Auto"/>
+        <Property name="text" type="java.lang.String" value="SPC"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonAutoActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonSetPasteCopyActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="buttonPasteCopy">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="PC"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonPasteCopyActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

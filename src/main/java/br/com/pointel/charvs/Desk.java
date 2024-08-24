@@ -28,7 +28,8 @@ public class Desk extends javax.swing.JFrame {
         buttonPaste = new javax.swing.JButton();
         comboChats = new javax.swing.JComboBox<>();
         buttonCopy = new javax.swing.JButton();
-        buttonAuto = new javax.swing.JButton();
+        buttonSetPasteCopy = new javax.swing.JButton();
+        buttonPasteCopy = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Charvs");
@@ -70,10 +71,17 @@ public class Desk extends javax.swing.JFrame {
             }
         });
 
-        buttonAuto.setText("Auto");
-        buttonAuto.addActionListener(new java.awt.event.ActionListener() {
+        buttonSetPasteCopy.setText("SPC");
+        buttonSetPasteCopy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonAutoActionPerformed(evt);
+                buttonSetPasteCopyActionPerformed(evt);
+            }
+        });
+
+        buttonPasteCopy.setText("PC");
+        buttonPasteCopy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonPasteCopyActionPerformed(evt);
             }
         });
 
@@ -84,7 +92,7 @@ public class Desk extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(scrollText, javax.swing.GroupLayout.DEFAULT_SIZE, 572, Short.MAX_VALUE)
+                    .addComponent(scrollText, javax.swing.GroupLayout.DEFAULT_SIZE, 636, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(comboChats, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -96,7 +104,9 @@ public class Desk extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttonCopy)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonAuto)))
+                        .addComponent(buttonPasteCopy)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonSetPasteCopy)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -109,7 +119,8 @@ public class Desk extends javax.swing.JFrame {
                     .addComponent(buttonAppend)
                     .addComponent(buttonPaste)
                     .addComponent(buttonCopy)
-                    .addComponent(buttonAuto))
+                    .addComponent(buttonSetPasteCopy)
+                    .addComponent(buttonPasteCopy))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scrollText, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
                 .addContainerGap())
@@ -156,11 +167,16 @@ public class Desk extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_buttonCopyActionPerformed
 
-    private void buttonAutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAutoActionPerformed
+    private void buttonSetPasteCopyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSetPasteCopyActionPerformed
         buttonSetActionPerformed(evt);
         buttonPasteActionPerformed(evt);
         buttonCopyActionPerformed(evt);
-    }//GEN-LAST:event_buttonAutoActionPerformed
+    }//GEN-LAST:event_buttonSetPasteCopyActionPerformed
+
+    private void buttonPasteCopyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPasteCopyActionPerformed
+        buttonPasteActionPerformed(evt);
+        buttonCopyActionPerformed(evt);
+    }//GEN-LAST:event_buttonPasteCopyActionPerformed
 
     private void loadChats() {
         modelChats.removeAllElements();
@@ -186,10 +202,11 @@ public class Desk extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAppend;
-    private javax.swing.JButton buttonAuto;
     private javax.swing.JButton buttonCopy;
     private javax.swing.JButton buttonPaste;
+    private javax.swing.JButton buttonPasteCopy;
     private javax.swing.JButton buttonSet;
+    private javax.swing.JButton buttonSetPasteCopy;
     private javax.swing.JComboBox<String> comboChats;
     private javax.swing.JTextArea editText;
     private javax.swing.JScrollPane scrollText;
