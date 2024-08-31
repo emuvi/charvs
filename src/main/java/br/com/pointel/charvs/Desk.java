@@ -35,7 +35,6 @@ public class Desk extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Charvs");
-        setAlwaysOnTop(true);
 
         editText.setColumns(20);
         editText.setLineWrap(true);

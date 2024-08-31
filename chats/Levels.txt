@@ -1,0 +1,3 @@
+Extraia uma lista hierarquizada em pelo menos três níveis com todos os pontos chaves do seguinte conteúdo. Forneça apenas a lista, nada além dela.
+
+Conteúdo:
