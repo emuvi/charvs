@@ -1,6 +1,6 @@
 package br.com.pointel.charvs;
 
-import com.formdev.flatlaf.FlatLightLaf;
+import com.formdev.flatlaf.FlatDarculaLaf;
 import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -223,7 +223,7 @@ public class Desk extends javax.swing.JFrame {
 
     public static void start(String args[]) {
         try {
-            UIManager.setLookAndFeel(new FlatLightLaf());
+            UIManager.setLookAndFeel(new FlatDarculaLaf());
         } catch (Exception ex) {
             ex.printStackTrace();
         }
