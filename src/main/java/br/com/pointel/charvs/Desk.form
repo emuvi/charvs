@@ -28,9 +28,13 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="scrollText" pref="636" max="32767" attributes="0"/>
+                  <Component id="scrollText" pref="653" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="comboChats" max="32767" attributes="0"/>
+                      <Component id="buttonOpen" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="buttonReload" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="comboChats" pref="127" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="buttonSet" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -61,6 +65,8 @@
                   <Component id="buttonCopy" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="buttonSetPasteCopy" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="buttonPasteCopy" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="buttonOpen" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="buttonReload" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="scrollText" pref="230" max="32767" attributes="0"/>
@@ -143,6 +149,22 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonPasteCopyActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="buttonOpen">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="*"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonOpenActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="buttonReload">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="#"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonReloadActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

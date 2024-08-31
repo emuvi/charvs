@@ -30,6 +30,8 @@ public class Desk extends javax.swing.JFrame {
         buttonCopy = new javax.swing.JButton();
         buttonSetPasteCopy = new javax.swing.JButton();
         buttonPasteCopy = new javax.swing.JButton();
+        buttonOpen = new javax.swing.JButton();
+        buttonReload = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Charvs");
@@ -85,6 +87,20 @@ public class Desk extends javax.swing.JFrame {
             }
         });
 
+        buttonOpen.setText("*");
+        buttonOpen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonOpenActionPerformed(evt);
+            }
+        });
+
+        buttonReload.setText("#");
+        buttonReload.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonReloadActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -92,9 +108,13 @@ public class Desk extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(scrollText, javax.swing.GroupLayout.DEFAULT_SIZE, 636, Short.MAX_VALUE)
+                    .addComponent(scrollText, javax.swing.GroupLayout.DEFAULT_SIZE, 653, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(comboChats, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(buttonOpen)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonReload)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(comboChats, 0, 127, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttonSet)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -120,7 +140,9 @@ public class Desk extends javax.swing.JFrame {
                     .addComponent(buttonPaste)
                     .addComponent(buttonCopy)
                     .addComponent(buttonSetPasteCopy)
-                    .addComponent(buttonPasteCopy))
+                    .addComponent(buttonPasteCopy)
+                    .addComponent(buttonOpen)
+                    .addComponent(buttonReload))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scrollText, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
                 .addContainerGap())
@@ -178,6 +200,18 @@ public class Desk extends javax.swing.JFrame {
         buttonCopyActionPerformed(evt);
     }//GEN-LAST:event_buttonPasteCopyActionPerformed
 
+    private void buttonReloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonReloadActionPerformed
+        loadChats();
+    }//GEN-LAST:event_buttonReloadActionPerformed
+
+    private void buttonOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOpenActionPerformed
+        try {
+            WizSwing.open(FOLDER_CHATS);
+        } catch (Exception e) {
+            WizSwing.showError(e);
+        }
+    }//GEN-LAST:event_buttonOpenActionPerformed
+
     private void loadChats() {
         modelChats.removeAllElements();
         for (var inside : FOLDER_CHATS.listFiles()) {
@@ -203,8 +237,10 @@ public class Desk extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAppend;
     private javax.swing.JButton buttonCopy;
+    private javax.swing.JButton buttonOpen;
     private javax.swing.JButton buttonPaste;
     private javax.swing.JButton buttonPasteCopy;
+    private javax.swing.JButton buttonReload;
     private javax.swing.JButton buttonSet;
     private javax.swing.JButton buttonSetPasteCopy;
     private javax.swing.JComboBox<String> comboChats;
