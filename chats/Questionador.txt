@@ -1,0 +1,3 @@
+Crie uma lista extensiva com perguntas e respostas que capturem todo o seguinte conteúdo. Cada pergunta deve ser completa em si, contendo toda a informação necessária para entendê-la. Utilize uma linguagem erudita e acadêmica com pincelas de elementos altamente explicativos que com exatidão exponham todo o conteúdo. Forneça apenas o link para download da lista, nada além dela, em formato CSV separados por ponto e vírgula e sem cabeçalho.
+
+Conteúdo:
