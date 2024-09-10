@@ -61,6 +61,9 @@ public class Desk extends javax.swing.JFrame {
                 }
                 for (int i = 1; i < lines.length; i++) {
                     lines[i] = cleanLine(lines[i]);
+                    if (lines[i].startsWith("#") && !lines[i].endsWith(".")) {
+                        lines[i] = lines[i] + ".";
+                    }
                 }
                 content = String.join("\n", lines);
                 save(content, title);
