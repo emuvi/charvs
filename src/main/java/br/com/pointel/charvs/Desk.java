@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
 import java.util.Objects;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
 public class Desk extends javax.swing.JFrame {
@@ -55,6 +56,9 @@ public class Desk extends javax.swing.JFrame {
                 }
                 var title = cleanTitle(lines[0]);
                 lines[0] = title;
+                if (!lines[0].endsWith(".")) {
+                    lines[0] = lines[0] + ".";
+                }
                 for (int i = 1; i < lines.length; i++) {
                     lines[i] = cleanLine(lines[i]);
                 }
@@ -97,7 +101,7 @@ public class Desk extends javax.swing.JFrame {
             
             private void save(String content, String title) throws Exception {
                 Files.writeString(new File(destinyFolder, "(H) " + title + ".txt").toPath(), content, StandardCharsets.UTF_8);
-                WizSwing.showInfo("Saved content on: " + title);
+                SwingUtilities.invokeLater(() -> textStatus.setText("Saved content on: " + title));
             }
             
         }.start();
@@ -119,6 +123,7 @@ public class Desk extends javax.swing.JFrame {
         buttonOpen = new javax.swing.JButton();
         buttonReload = new javax.swing.JButton();
         checkAutoContent = new javax.swing.JCheckBox();
+        textStatus = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Charvs");
@@ -206,6 +211,10 @@ public class Desk extends javax.swing.JFrame {
         checkAutoContent.setText("9");
         checkAutoContent.setToolTipText("Auto Capture Content");
 
+        textStatus.setEditable(false);
+        textStatus.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        textStatus.setBorder(null);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -213,13 +222,13 @@ public class Desk extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(scrollText, javax.swing.GroupLayout.DEFAULT_SIZE, 601, Short.MAX_VALUE)
+                    .addComponent(scrollText, javax.swing.GroupLayout.DEFAULT_SIZE, 520, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(buttonOpen)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttonReload)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(comboChats, 0, 333, Short.MAX_VALUE)
+                        .addComponent(comboChats, 0, 252, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttonSet)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -233,7 +242,8 @@ public class Desk extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttonSetPasteCopy)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(checkAutoContent)))
+                        .addComponent(checkAutoContent))
+                    .addComponent(textStatus))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -252,7 +262,9 @@ public class Desk extends javax.swing.JFrame {
                     .addComponent(buttonReload)
                     .addComponent(checkAutoContent))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrollText, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
+                .addComponent(scrollText, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(textStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -355,5 +367,6 @@ public class Desk extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> comboChats;
     private javax.swing.JTextArea editText;
     private javax.swing.JScrollPane scrollText;
+    private javax.swing.JTextField textStatus;
     // End of variables declaration//GEN-END:variables
 }

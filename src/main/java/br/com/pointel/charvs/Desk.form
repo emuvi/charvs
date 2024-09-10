@@ -27,13 +27,13 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="scrollText" pref="601" max="32767" attributes="0"/>
+                  <Component id="scrollText" pref="520" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="buttonOpen" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="buttonReload" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="comboChats" pref="333" max="32767" attributes="0"/>
+                      <Component id="comboChats" pref="252" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="buttonSet" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -49,6 +49,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="checkAutoContent" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <Component id="textStatus" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -71,7 +72,9 @@
                   <Component id="checkAutoContent" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="scrollText" pref="230" max="32767" attributes="0"/>
+              <Component id="scrollText" pref="176" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="textStatus" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -189,6 +192,15 @@
         <Property name="mnemonic" type="int" value="57"/>
         <Property name="text" type="java.lang.String" value="9"/>
         <Property name="toolTipText" type="java.lang.String" value="Auto Capture Content"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="textStatus">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+        <Property name="horizontalAlignment" type="int" value="4"/>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="null"/>
+        </Property>
       </Properties>
     </Component>
   </SubComponents>
