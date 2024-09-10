@@ -96,7 +96,13 @@ public class Desk extends javax.swing.JFrame {
             }
             
             private String cleanLine(String line) {
-                return line.trim();
+                return line
+                        .replaceAll("\\*+", "*")
+                        .replaceAll("\\#+", "#")
+                        .replaceAll("\\_+", "_")
+                        .replaceAll("\\-+", "-")
+                        .replaceAll("\\++", "+")
+                        .trim();
             }
             
             private void save(String content, String title) throws Exception {
