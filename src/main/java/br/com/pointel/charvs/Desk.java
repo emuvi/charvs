@@ -268,8 +268,8 @@ public class Desk extends javax.swing.JFrame {
         }
     }
 
-    private String produce(String content) throws Exception {
-        var lines = content.split("\\r?\\n");
+    private String produce(String origin) throws Exception {
+        var lines = origin.split("\\r?\\n");
         if (lines.length < 3) {
             throw new Exception("Actual content has too little lines.");
         }
@@ -284,9 +284,9 @@ public class Desk extends javax.swing.JFrame {
                 lines[i] = lines[i] + ".";
             }
         }
-        content = String.join("\n", lines);
-        save(content, title);
-        return content;
+        var transformed = String.join("\n", lines);
+        save(origin, transformed, title);
+        return origin;
     }
 
     private String cleanTitle(String title) {
@@ -330,8 +330,9 @@ public class Desk extends javax.swing.JFrame {
     
     private final File destinyFolder = new File("D:\\emuvi\\OneDrive\\Documentos\\Educação\\AELIN\\ABIN\\Heary");
 
-    private void save(String content, String title) throws Exception {
-        Files.writeString(new File(destinyFolder, "(H) " + title + ".txt").toPath(), content, StandardCharsets.UTF_8);
+    private void save(String origin, String transformed, String title) throws Exception {
+        Files.writeString(new File(destinyFolder, "(H) " + title + ".md").toPath(), origin, StandardCharsets.UTF_8);
+        Files.writeString(new File(destinyFolder, "(H) " + title + ".txt").toPath(), transformed, StandardCharsets.UTF_8);
         SwingUtilities.invokeLater(() -> fieldStatus.setText("Saved content on: " + title));
     }
     
