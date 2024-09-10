@@ -4,6 +4,8 @@ import com.formdev.flatlaf.FlatDarculaLaf;
 import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.StandardOpenOption;
+import java.util.Objects;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.UIManager;
 
@@ -15,6 +17,90 @@ public class Desk extends javax.swing.JFrame {
         initComponents();
         loadChats();
         WizSwing.initFrame(this);
+        startAutoCaptureContent();
+    }
+    
+    private void startAutoCaptureContent() {
+        new Thread(){
+            
+            private final File destinyFolder = new File("D:\\emuvi\\OneDrive\\Documentos\\Educação\\AELIN\\ABIN\\Heary");
+            private String lastContent = null;
+            
+            @Override
+            public void run() {
+                while (true) {
+                    try {
+                        WizBase.sleep(1000);
+                        if (checkAutoContent.isSelected()) {
+                            var actualContent = WizSwing.getStringOnClipboard();
+                            if (actualContent == null) {
+                                continue;
+                            }
+                            actualContent = actualContent.trim();
+                            if (actualContent.length() > 900 && !Objects.equals(lastContent, actualContent)) {
+                                lastContent = actualContent;
+                                produce(actualContent);
+                            }
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            
+            private void produce(String content) throws Exception {
+                var lines = content.split("\\r?\\n");
+                if (lines.length < 3) {
+                    throw new Exception("Actual content has too little lines.");
+                }
+                var title = cleanTitle(lines[0]);
+                lines[0] = title;
+                for (int i = 1; i < lines.length; i++) {
+                    lines[i] = cleanLine(lines[i]);
+                }
+                content = String.join("\n", lines);
+                save(content, title);
+            }
+            
+            private String cleanTitle(String title) {
+                title = title.trim();
+                while (!title.isEmpty() && !Character.isAlphabetic(title.charAt(0))) {
+                    title = title.substring(1);
+                    title = title.trim();
+                }
+                while (!title.isEmpty() && !Character.isAlphabetic(title.charAt(title.length() -1))) {
+                    title = title.substring(0, title.length() -1);
+                    title = title.trim();
+                }
+                return title
+                        .replace("\"", "")
+                        .replace("'", "")
+                        .replace("/", "")
+                        .replace("|", "")
+                        .replace("\\", "")
+                        .replace("?", "")
+                        .replace("!", "")
+                        .replace("<", "")
+                        .replace(">", "")
+                        .replace("*", "")
+                        .replace("_", "")
+                        .replace("-", "")
+                        .replace("#", "")
+                        .replace(":", ",")
+                        .replace(";", ",")
+                        .trim();
+            }
+            
+            private String cleanLine(String line) {
+                return line.trim();
+            }
+            
+            private void save(String content, String title) throws Exception {
+                Files.writeString(new File(destinyFolder, "(H) " + title + ".txt").toPath(), content, StandardCharsets.UTF_8);
+                WizSwing.showInfo("Saved content on: " + title);
+            }
+            
+        }.start();
     }
 
     @SuppressWarnings("unchecked")
@@ -32,6 +118,7 @@ public class Desk extends javax.swing.JFrame {
         buttonPasteCopy = new javax.swing.JButton();
         buttonOpen = new javax.swing.JButton();
         buttonReload = new javax.swing.JButton();
+        checkAutoContent = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Charvs");
@@ -42,21 +129,27 @@ public class Desk extends javax.swing.JFrame {
         editText.setWrapStyleWord(true);
         scrollText.setViewportView(editText);
 
-        buttonSet.setText("Set");
+        buttonSet.setMnemonic('3');
+        buttonSet.setText("3");
+        buttonSet.setToolTipText("Set Conntent");
         buttonSet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonSetActionPerformed(evt);
             }
         });
 
-        buttonAppend.setText("Append");
+        buttonAppend.setMnemonic('4');
+        buttonAppend.setText("4");
+        buttonAppend.setToolTipText("Appennd Content");
         buttonAppend.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonAppendActionPerformed(evt);
             }
         });
 
-        buttonPaste.setText("Paste");
+        buttonPaste.setMnemonic('5');
+        buttonPaste.setText("5");
+        buttonPaste.setToolTipText("Paste Content");
         buttonPaste.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonPasteActionPerformed(evt);
@@ -65,40 +158,53 @@ public class Desk extends javax.swing.JFrame {
 
         comboChats.setModel(modelChats);
 
-        buttonCopy.setText("Copy");
+        buttonCopy.setMnemonic('6');
+        buttonCopy.setText("6");
+        buttonCopy.setToolTipText("Copy Content");
         buttonCopy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonCopyActionPerformed(evt);
             }
         });
 
-        buttonSetPasteCopy.setText("SPC");
+        buttonSetPasteCopy.setMnemonic('8');
+        buttonSetPasteCopy.setText("8");
+        buttonSetPasteCopy.setToolTipText("Set, Paste and Copy Content");
         buttonSetPasteCopy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonSetPasteCopyActionPerformed(evt);
             }
         });
 
-        buttonPasteCopy.setText("PC");
+        buttonPasteCopy.setMnemonic('7');
+        buttonPasteCopy.setText("7");
+        buttonPasteCopy.setToolTipText("Paste and Copy Content");
         buttonPasteCopy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonPasteCopyActionPerformed(evt);
             }
         });
 
-        buttonOpen.setText("*");
+        buttonOpen.setText("1");
+        buttonOpen.setToolTipText("Open Folder");
         buttonOpen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonOpenActionPerformed(evt);
             }
         });
 
-        buttonReload.setText("#");
+        buttonReload.setMnemonic('2');
+        buttonReload.setText("2");
+        buttonReload.setToolTipText("Reload Folder");
         buttonReload.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonReloadActionPerformed(evt);
             }
         });
+
+        checkAutoContent.setMnemonic('9');
+        checkAutoContent.setText("9");
+        checkAutoContent.setToolTipText("Auto Capture Content");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -107,13 +213,13 @@ public class Desk extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(scrollText, javax.swing.GroupLayout.DEFAULT_SIZE, 653, Short.MAX_VALUE)
+                    .addComponent(scrollText, javax.swing.GroupLayout.DEFAULT_SIZE, 601, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(buttonOpen)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttonReload)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(comboChats, 0, 127, Short.MAX_VALUE)
+                        .addComponent(comboChats, 0, 333, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttonSet)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -125,7 +231,9 @@ public class Desk extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttonPasteCopy)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonSetPasteCopy)))
+                        .addComponent(buttonSetPasteCopy)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(checkAutoContent)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -141,7 +249,8 @@ public class Desk extends javax.swing.JFrame {
                     .addComponent(buttonSetPasteCopy)
                     .addComponent(buttonPasteCopy)
                     .addComponent(buttonOpen)
-                    .addComponent(buttonReload))
+                    .addComponent(buttonReload)
+                    .addComponent(checkAutoContent))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scrollText, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
                 .addContainerGap())
@@ -242,6 +351,7 @@ public class Desk extends javax.swing.JFrame {
     private javax.swing.JButton buttonReload;
     private javax.swing.JButton buttonSet;
     private javax.swing.JButton buttonSetPasteCopy;
+    private javax.swing.JCheckBox checkAutoContent;
     private javax.swing.JComboBox<String> comboChats;
     private javax.swing.JTextArea editText;
     private javax.swing.JScrollPane scrollText;

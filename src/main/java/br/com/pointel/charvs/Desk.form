@@ -27,13 +27,13 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="scrollText" pref="653" max="32767" attributes="0"/>
+                  <Component id="scrollText" pref="601" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="buttonOpen" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="buttonReload" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="comboChats" pref="127" max="32767" attributes="0"/>
+                      <Component id="comboChats" pref="333" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="buttonSet" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -46,6 +46,8 @@
                       <Component id="buttonPasteCopy" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="buttonSetPasteCopy" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="checkAutoContent" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -66,6 +68,7 @@
                   <Component id="buttonPasteCopy" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="buttonOpen" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="buttonReload" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="checkAutoContent" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="scrollText" pref="230" max="32767" attributes="0"/>
@@ -94,7 +97,9 @@
     </Container>
     <Component class="javax.swing.JButton" name="buttonSet">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Set"/>
+        <Property name="mnemonic" type="int" value="51"/>
+        <Property name="text" type="java.lang.String" value="3"/>
+        <Property name="toolTipText" type="java.lang.String" value="Set Conntent"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonSetActionPerformed"/>
@@ -102,7 +107,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="buttonAppend">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Append"/>
+        <Property name="mnemonic" type="int" value="52"/>
+        <Property name="text" type="java.lang.String" value="4"/>
+        <Property name="toolTipText" type="java.lang.String" value="Appennd Content"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonAppendActionPerformed"/>
@@ -110,7 +117,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="buttonPaste">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Paste"/>
+        <Property name="mnemonic" type="int" value="53"/>
+        <Property name="text" type="java.lang.String" value="5"/>
+        <Property name="toolTipText" type="java.lang.String" value="Paste Content"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonPasteActionPerformed"/>
@@ -128,7 +137,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="buttonCopy">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Copy"/>
+        <Property name="mnemonic" type="int" value="54"/>
+        <Property name="text" type="java.lang.String" value="6"/>
+        <Property name="toolTipText" type="java.lang.String" value="Copy Content"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonCopyActionPerformed"/>
@@ -136,7 +147,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="buttonSetPasteCopy">
       <Properties>
-        <Property name="text" type="java.lang.String" value="SPC"/>
+        <Property name="mnemonic" type="int" value="56"/>
+        <Property name="text" type="java.lang.String" value="8"/>
+        <Property name="toolTipText" type="java.lang.String" value="Set, Paste and Copy Content"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonSetPasteCopyActionPerformed"/>
@@ -144,7 +157,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="buttonPasteCopy">
       <Properties>
-        <Property name="text" type="java.lang.String" value="PC"/>
+        <Property name="mnemonic" type="int" value="55"/>
+        <Property name="text" type="java.lang.String" value="7"/>
+        <Property name="toolTipText" type="java.lang.String" value="Paste and Copy Content"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonPasteCopyActionPerformed"/>
@@ -152,7 +167,8 @@
     </Component>
     <Component class="javax.swing.JButton" name="buttonOpen">
       <Properties>
-        <Property name="text" type="java.lang.String" value="*"/>
+        <Property name="text" type="java.lang.String" value="1"/>
+        <Property name="toolTipText" type="java.lang.String" value="Open Folder"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonOpenActionPerformed"/>
@@ -160,11 +176,20 @@
     </Component>
     <Component class="javax.swing.JButton" name="buttonReload">
       <Properties>
-        <Property name="text" type="java.lang.String" value="#"/>
+        <Property name="mnemonic" type="int" value="50"/>
+        <Property name="text" type="java.lang.String" value="2"/>
+        <Property name="toolTipText" type="java.lang.String" value="Reload Folder"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonReloadActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="checkAutoContent">
+      <Properties>
+        <Property name="mnemonic" type="int" value="57"/>
+        <Property name="text" type="java.lang.String" value="9"/>
+        <Property name="toolTipText" type="java.lang.String" value="Auto Capture Content"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

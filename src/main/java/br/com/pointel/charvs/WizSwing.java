@@ -34,9 +34,9 @@ public class WizSwing {
 
     public static void showInfo(String message) {
         if (SwingUtilities.isEventDispatchThread()) {
-            JOptionPane.showMessageDialog(null, message, "Error", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, message, "Info", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            SwingUtilities.invokeLater(() -> JOptionPane.showMessageDialog(null, message, "Error", JOptionPane.INFORMATION_MESSAGE));
+            SwingUtilities.invokeLater(() -> JOptionPane.showMessageDialog(null, message, "Info", JOptionPane.INFORMATION_MESSAGE));
         }
     }
 
