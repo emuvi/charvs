@@ -4,7 +4,6 @@ import com.formdev.flatlaf.FlatDarculaLaf;
 import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.StandardOpenOption;
 import java.util.Objects;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.SwingUtilities;
@@ -18,102 +17,6 @@ public class Desk extends javax.swing.JFrame {
         initComponents();
         loadChats();
         WizSwing.initFrame(this);
-        startAutoCaptureContent();
-    }
-    
-    private void startAutoCaptureContent() {
-        new Thread(){
-            
-            private final File destinyFolder = new File("D:\\emuvi\\OneDrive\\Documentos\\Educação\\AELIN\\ABIN\\Heary");
-            private String lastContent = null;
-            
-            @Override
-            public void run() {
-                while (true) {
-                    try {
-                        WizBase.sleep(1000);
-                        if (checkAutoContent.isSelected()) {
-                            var actualContent = WizSwing.getStringOnClipboard();
-                            if (actualContent == null) {
-                                continue;
-                            }
-                            actualContent = actualContent.trim();
-                            if (actualContent.length() > 900 && !Objects.equals(lastContent, actualContent)) {
-                                lastContent = actualContent;
-                                produce(actualContent);
-                            }
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-            
-            private void produce(String content) throws Exception {
-                var lines = content.split("\\r?\\n");
-                if (lines.length < 3) {
-                    throw new Exception("Actual content has too little lines.");
-                }
-                var title = cleanTitle(lines[0]);
-                lines[0] = title;
-                if (!lines[0].endsWith(".")) {
-                    lines[0] = lines[0] + ".";
-                }
-                for (int i = 1; i < lines.length; i++) {
-                    lines[i] = cleanLine(lines[i]);
-                    if (lines[i].startsWith("#") && !lines[i].endsWith(".")) {
-                        lines[i] = lines[i] + ".";
-                    }
-                }
-                content = String.join("\n", lines);
-                save(content, title);
-            }
-            
-            private String cleanTitle(String title) {
-                title = title.trim();
-                while (!title.isEmpty() && !Character.isAlphabetic(title.charAt(0))) {
-                    title = title.substring(1);
-                    title = title.trim();
-                }
-                while (!title.isEmpty() && !Character.isAlphabetic(title.charAt(title.length() -1))) {
-                    title = title.substring(0, title.length() -1);
-                    title = title.trim();
-                }
-                return title
-                        .replace("\"", "")
-                        .replace("'", "")
-                        .replace("/", "")
-                        .replace("|", "")
-                        .replace("\\", "")
-                        .replace("?", "")
-                        .replace("!", "")
-                        .replace("<", "")
-                        .replace(">", "")
-                        .replace("*", "")
-                        .replace("_", "")
-                        .replace("-", "")
-                        .replace("#", "")
-                        .replace(":", ",")
-                        .replace(";", ",")
-                        .trim();
-            }
-            
-            private String cleanLine(String line) {
-                return line
-                        .replaceAll("\\*+", "*")
-                        .replaceAll("\\#+", "#")
-                        .replaceAll("\\_+", "_")
-                        .replaceAll("\\-+", "-")
-                        .replaceAll("\\++", "+")
-                        .trim();
-            }
-            
-            private void save(String content, String title) throws Exception {
-                Files.writeString(new File(destinyFolder, "(H) " + title + ".txt").toPath(), content, StandardCharsets.UTF_8);
-                SwingUtilities.invokeLater(() -> textStatus.setText("Saved content on: " + title));
-            }
-            
-        }.start();
     }
 
     @SuppressWarnings("unchecked")
@@ -131,8 +34,8 @@ public class Desk extends javax.swing.JFrame {
         buttonPasteCopy = new javax.swing.JButton();
         buttonOpen = new javax.swing.JButton();
         buttonReload = new javax.swing.JButton();
-        checkAutoContent = new javax.swing.JCheckBox();
-        textStatus = new javax.swing.JTextField();
+        fieldStatus = new javax.swing.JTextField();
+        buttonCaptureContent = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Charvs");
@@ -216,13 +119,18 @@ public class Desk extends javax.swing.JFrame {
             }
         });
 
-        checkAutoContent.setMnemonic('9');
-        checkAutoContent.setText("9");
-        checkAutoContent.setToolTipText("Auto Capture Content");
+        fieldStatus.setEditable(false);
+        fieldStatus.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        fieldStatus.setBorder(null);
 
-        textStatus.setEditable(false);
-        textStatus.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        textStatus.setBorder(null);
+        buttonCaptureContent.setMnemonic('9');
+        buttonCaptureContent.setText("9");
+        buttonCaptureContent.setToolTipText("Capture Content");
+        buttonCaptureContent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonCaptureContentActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -231,13 +139,13 @@ public class Desk extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(scrollText, javax.swing.GroupLayout.DEFAULT_SIZE, 520, Short.MAX_VALUE)
+                    .addComponent(scrollText, javax.swing.GroupLayout.DEFAULT_SIZE, 557, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(buttonOpen)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttonReload)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(comboChats, 0, 252, Short.MAX_VALUE)
+                        .addComponent(comboChats, 0, 296, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttonSet)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -251,8 +159,8 @@ public class Desk extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttonSetPasteCopy)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(checkAutoContent))
-                    .addComponent(textStatus))
+                        .addComponent(buttonCaptureContent))
+                    .addComponent(fieldStatus))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -269,11 +177,11 @@ public class Desk extends javax.swing.JFrame {
                     .addComponent(buttonPasteCopy)
                     .addComponent(buttonOpen)
                     .addComponent(buttonReload)
-                    .addComponent(checkAutoContent))
+                    .addComponent(buttonCaptureContent))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scrollText, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(fieldStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -341,6 +249,16 @@ public class Desk extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_buttonOpenActionPerformed
 
+    private void buttonCaptureContentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCaptureContentActionPerformed
+        try {
+            var content = WizSwing.getStringOnClipboard();
+            content = produce(content);
+            editText.setText(content);
+        } catch (Exception e) {
+            WizSwing.showError(e);
+        }
+    }//GEN-LAST:event_buttonCaptureContentActionPerformed
+
     private void loadChats() {
         modelChats.removeAllElements();
         for (var inside : FOLDER_CHATS.listFiles()) {
@@ -350,6 +268,73 @@ public class Desk extends javax.swing.JFrame {
         }
     }
 
+    private String produce(String content) throws Exception {
+        var lines = content.split("\\r?\\n");
+        if (lines.length < 3) {
+            throw new Exception("Actual content has too little lines.");
+        }
+        var title = cleanTitle(lines[0]);
+        lines[0] = title;
+        if (!lines[0].endsWith(".")) {
+            lines[0] = lines[0] + ".";
+        }
+        for (int i = 1; i < lines.length; i++) {
+            lines[i] = cleanLine(lines[i]);
+            if (lines[i].startsWith("#") && !lines[i].endsWith(".")) {
+                lines[i] = lines[i] + ".";
+            }
+        }
+        content = String.join("\n", lines);
+        save(content, title);
+        return content;
+    }
+
+    private String cleanTitle(String title) {
+        title = title.trim();
+        while (!title.isEmpty() && !Character.isAlphabetic(title.charAt(0))) {
+            title = title.substring(1);
+            title = title.trim();
+        }
+        while (!title.isEmpty() && !Character.isAlphabetic(title.charAt(title.length() -1))) {
+            title = title.substring(0, title.length() -1);
+            title = title.trim();
+        }
+        return title
+                .replace("\"", "")
+                .replace("'", "")
+                .replace("/", "")
+                .replace("|", "")
+                .replace("\\", "")
+                .replace("?", "")
+                .replace("!", "")
+                .replace("<", "")
+                .replace(">", "")
+                .replace("*", "")
+                .replace("_", "")
+                .replace("-", "")
+                .replace("#", "")
+                .replace(":", ",")
+                .replace(";", ",")
+                .trim();
+    }
+
+    private String cleanLine(String line) {
+        return line
+                .replaceAll("\\*+", "*")
+                .replaceAll("\\#+", "#")
+                .replaceAll("\\_+", "_")
+                .replaceAll("\\-+", "-")
+                .replaceAll("\\++", "+")
+                .trim();
+    }
+    
+    private final File destinyFolder = new File("D:\\emuvi\\OneDrive\\Documentos\\Educação\\AELIN\\ABIN\\Heary");
+
+    private void save(String content, String title) throws Exception {
+        Files.writeString(new File(destinyFolder, "(H) " + title + ".txt").toPath(), content, StandardCharsets.UTF_8);
+        SwingUtilities.invokeLater(() -> fieldStatus.setText("Saved content on: " + title));
+    }
+    
     public static void start(String args[]) {
         try {
             UIManager.setLookAndFeel(new FlatDarculaLaf());
@@ -365,6 +350,7 @@ public class Desk extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAppend;
+    private javax.swing.JButton buttonCaptureContent;
     private javax.swing.JButton buttonCopy;
     private javax.swing.JButton buttonOpen;
     private javax.swing.JButton buttonPaste;
@@ -372,10 +358,9 @@ public class Desk extends javax.swing.JFrame {
     private javax.swing.JButton buttonReload;
     private javax.swing.JButton buttonSet;
     private javax.swing.JButton buttonSetPasteCopy;
-    private javax.swing.JCheckBox checkAutoContent;
     private javax.swing.JComboBox<String> comboChats;
     private javax.swing.JTextArea editText;
+    private javax.swing.JTextField fieldStatus;
     private javax.swing.JScrollPane scrollText;
-    private javax.swing.JTextField textStatus;
     // End of variables declaration//GEN-END:variables
 }
