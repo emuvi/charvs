@@ -275,7 +275,7 @@ public class Desk extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonCaptureContentActionPerformed
 
     private void buttonRemakeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRemakeActionPerformed
-        if (!"yes".equals(WizSwing.showInput("Do you really want to remake the hear?").toLowerCase())) {
+        if (!"yes".equals(WizSwing.showInput("Do you really want to remake the heart?").toLowerCase())) {
             return;
         }
         try {
