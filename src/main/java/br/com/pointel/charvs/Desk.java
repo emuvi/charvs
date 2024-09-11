@@ -252,8 +252,9 @@ public class Desk extends javax.swing.JFrame {
     private void buttonCaptureContentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCaptureContentActionPerformed
         try {
             var content = WizSwing.getStringOnClipboard();
-            content = produce(content);
+            var title = produce(content);
             editText.setText(content);
+            WizSwing.putStringOnClipboard("[[(H) " + title + "]]");
         } catch (Exception e) {
             WizSwing.showError(e);
         }
@@ -286,7 +287,7 @@ public class Desk extends javax.swing.JFrame {
         }
         var transformed = String.join("\n", lines);
         save(origin, transformed, title);
-        return origin;
+        return title;
     }
 
     private String cleanTitle(String title) {
@@ -310,8 +311,6 @@ public class Desk extends javax.swing.JFrame {
                 .replace("<", "")
                 .replace(">", "")
                 .replace("*", "")
-                .replace("_", "")
-                .replace("-", "")
                 .replace("#", "")
                 .replace(":", ",")
                 .replace(";", ",")
