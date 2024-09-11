@@ -327,11 +327,11 @@ public class Desk extends javax.swing.JFrame {
                 .trim();
     }
     
-    private final File destinyFolder = new File("D:\\emuvi\\OneDrive\\Documentos\\Educação\\AELIN\\ABIN\\Heary");
+    private final File heartFolder = new File("D:\\emuvi\\OneDrive\\Documentos\\Educação\\AELIN\\ABIN\\Heart");
 
     private void save(String origin, String transformed, String title) throws Exception {
-        Files.writeString(new File(destinyFolder, "(H) " + title + ".md").toPath(), origin, StandardCharsets.UTF_8);
-        Files.writeString(new File(destinyFolder, "(H) " + title + ".txt").toPath(), transformed, StandardCharsets.UTF_8);
+        Files.writeString(new File(heartFolder, "(H) " + title + ".md").toPath(), origin, StandardCharsets.UTF_8);
+        Files.writeString(new File(heartFolder, "(H) " + title + ".txt").toPath(), transformed, StandardCharsets.UTF_8);
         SwingUtilities.invokeLater(() -> fieldStatus.setText("Saved content on: " + title));
     }
     
