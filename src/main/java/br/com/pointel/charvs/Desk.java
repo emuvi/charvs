@@ -285,6 +285,7 @@ public class Desk extends javax.swing.JFrame {
                     remakeHeart(file);
                 }
             }
+            WizSwing.showInfo("Finished to remake your heart!");
         } catch (Exception e) {
             WizSwing.showError(e);
         }
