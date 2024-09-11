@@ -27,13 +27,13 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="scrollText" pref="557" max="32767" attributes="0"/>
+                  <Component id="scrollText" pref="549" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="buttonOpen" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="buttonReload" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="comboChats" pref="296" max="32767" attributes="0"/>
+                      <Component id="comboChats" pref="259" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="buttonSet" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -48,6 +48,8 @@
                       <Component id="buttonSetPasteCopy" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="buttonCaptureContent" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="buttonRemake" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="fieldStatus" alignment="0" max="32767" attributes="0"/>
               </Group>
@@ -70,6 +72,7 @@
                   <Component id="buttonOpen" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="buttonReload" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="buttonCaptureContent" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="buttonRemake" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="scrollText" pref="176" max="32767" attributes="0"/>
@@ -200,10 +203,20 @@
       <Properties>
         <Property name="mnemonic" type="int" value="57"/>
         <Property name="text" type="java.lang.String" value="9"/>
-        <Property name="toolTipText" type="java.lang.String" value="Capture Content"/>
+        <Property name="toolTipText" type="java.lang.String" value="Capture Heart"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonCaptureContentActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="buttonRemake">
+      <Properties>
+        <Property name="mnemonic" type="int" value="48"/>
+        <Property name="text" type="java.lang.String" value="0"/>
+        <Property name="toolTipText" type="java.lang.String" value="Ramake Heart"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonRemakeActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

@@ -4,15 +4,15 @@ import com.formdev.flatlaf.FlatDarculaLaf;
 import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.util.Objects;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
+import org.apache.commons.io.FilenameUtils;
 
 public class Desk extends javax.swing.JFrame {
 
     private final DefaultComboBoxModel<String> modelChats = new DefaultComboBoxModel<>();
-    
+
     public Desk() {
         initComponents();
         loadChats();
@@ -36,6 +36,7 @@ public class Desk extends javax.swing.JFrame {
         buttonReload = new javax.swing.JButton();
         fieldStatus = new javax.swing.JTextField();
         buttonCaptureContent = new javax.swing.JButton();
+        buttonRemake = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Charvs");
@@ -125,10 +126,19 @@ public class Desk extends javax.swing.JFrame {
 
         buttonCaptureContent.setMnemonic('9');
         buttonCaptureContent.setText("9");
-        buttonCaptureContent.setToolTipText("Capture Content");
+        buttonCaptureContent.setToolTipText("Capture Heart");
         buttonCaptureContent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonCaptureContentActionPerformed(evt);
+            }
+        });
+
+        buttonRemake.setMnemonic('0');
+        buttonRemake.setText("0");
+        buttonRemake.setToolTipText("Ramake Heart");
+        buttonRemake.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonRemakeActionPerformed(evt);
             }
         });
 
@@ -139,13 +149,13 @@ public class Desk extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(scrollText, javax.swing.GroupLayout.DEFAULT_SIZE, 557, Short.MAX_VALUE)
+                    .addComponent(scrollText, javax.swing.GroupLayout.DEFAULT_SIZE, 549, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(buttonOpen)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttonReload)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(comboChats, 0, 296, Short.MAX_VALUE)
+                        .addComponent(comboChats, 0, 259, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttonSet)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -159,7 +169,9 @@ public class Desk extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttonSetPasteCopy)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonCaptureContent))
+                        .addComponent(buttonCaptureContent)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonRemake))
                     .addComponent(fieldStatus))
                 .addContainerGap())
         );
@@ -177,7 +189,8 @@ public class Desk extends javax.swing.JFrame {
                     .addComponent(buttonPasteCopy)
                     .addComponent(buttonOpen)
                     .addComponent(buttonReload)
-                    .addComponent(buttonCaptureContent))
+                    .addComponent(buttonCaptureContent)
+                    .addComponent(buttonRemake))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scrollText, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -191,7 +204,7 @@ public class Desk extends javax.swing.JFrame {
     private String readSelectedChat() throws Exception {
         return Files.readString(new File(FOLDER_CHATS, comboChats.getSelectedItem().toString()).toPath(), StandardCharsets.UTF_8);
     }
-    
+
     private void buttonSetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSetActionPerformed
         try {
             var chat = readSelectedChat();
@@ -252,13 +265,36 @@ public class Desk extends javax.swing.JFrame {
     private void buttonCaptureContentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCaptureContentActionPerformed
         try {
             var content = WizSwing.getStringOnClipboard();
-            var title = produce(content);
+            var title = produce(content, null);
             editText.setText(content);
             WizSwing.putStringOnClipboard("[[(H) " + title + "]]");
         } catch (Exception e) {
             WizSwing.showError(e);
         }
     }//GEN-LAST:event_buttonCaptureContentActionPerformed
+
+    private void buttonRemakeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRemakeActionPerformed
+        try {
+            for (var file : heartFolder.listFiles()) {
+                if (!file.getName().endsWith(".md")) {
+                    file.delete();
+                }
+            }
+            for (var file : heartFolder.listFiles()) {
+                if (file.getName().endsWith(".md")) {
+                    remakeHeart(file);
+                }
+            }
+        } catch (Exception e) {
+            WizSwing.showError(e);
+        }
+    }//GEN-LAST:event_buttonRemakeActionPerformed
+
+    private void remakeHeart(File file) throws Exception {
+        var origin = Files.readString(file.toPath(), StandardCharsets.UTF_8);
+        var name = FilenameUtils.getBaseName(file.getName());
+        produce(origin, name);
+    }
 
     private void loadChats() {
         modelChats.removeAllElements();
@@ -269,7 +305,7 @@ public class Desk extends javax.swing.JFrame {
         }
     }
 
-    private String produce(String origin) throws Exception {
+    private String produce(String origin, String name) throws Exception {
         var lines = origin.split("\\r?\\n");
         if (lines.length < 3) {
             throw new Exception("Actual content has too little lines.");
@@ -285,22 +321,33 @@ public class Desk extends javax.swing.JFrame {
                 lines[i] = lines[i] + ".";
             }
         }
-        var transformed = String.join("\n", lines);
-        save(origin, transformed, title);
+        var text = "{{Pause=3}}Início.{{Pause=3}}\n\n" 
+                + String.join("\n", lines)
+                + "\n\n{{Pause=3}}Fim.{{Pause=3}}";
+        var fileName = name != null ? name : title;
+        save(origin, text, fileName);
         return title;
+    }
+
+    private boolean isCharTitleBondaryValid(char c) {
+        return Character.isAlphabetic(c) || c == '”' || c == '“' || c == '(' || c == ')';
     }
 
     private String cleanTitle(String title) {
         title = title.trim();
-        while (!title.isEmpty() && !Character.isAlphabetic(title.charAt(0))) {
+        while (!title.isEmpty() && !isCharTitleBondaryValid(title.charAt(0))) {
             title = title.substring(1);
             title = title.trim();
         }
-        while (!title.isEmpty() && !Character.isAlphabetic(title.charAt(title.length() -1))) {
-            title = title.substring(0, title.length() -1);
+        while (!title.isEmpty() && !isCharTitleBondaryValid(title.charAt(title.length() - 1))) {
+            title = title.substring(0, title.length() - 1);
             title = title.trim();
         }
         return title
+                .replace("{", "(")
+                .replace("}", ")")
+                .replace("[", "(")
+                .replace("]", ")")
                 .replace("\"", "”")
                 .replace("'", "”")
                 .replace("/", "")
@@ -326,15 +373,19 @@ public class Desk extends javax.swing.JFrame {
                 .replaceAll("\\++", "+")
                 .trim();
     }
-    
+
     private final File heartFolder = new File("D:\\emuvi\\OneDrive\\Documentos\\Educação\\AELIN\\ABIN\\Heart");
 
-    private void save(String origin, String transformed, String title) throws Exception {
-        Files.writeString(new File(heartFolder, "(H) " + title + ".md").toPath(), origin, StandardCharsets.UTF_8);
-        Files.writeString(new File(heartFolder, "(H) " + title + ".txt").toPath(), transformed, StandardCharsets.UTF_8);
+    private void save(String origin, String text, String fileName) throws Exception {
+        var title = fileName;
+        if (!fileName.startsWith("(H) ")) {
+            fileName = "(H) " + fileName;
+        }
+        Files.writeString(new File(heartFolder, fileName + ".md").toPath(), origin, StandardCharsets.UTF_8);
+        Files.writeString(new File(heartFolder, fileName + ".txt").toPath(), text, StandardCharsets.UTF_8);
         SwingUtilities.invokeLater(() -> fieldStatus.setText("Saved content on: " + title));
     }
-    
+
     public static void start(String args[]) {
         try {
             UIManager.setLookAndFeel(new FlatDarculaLaf());
@@ -345,7 +396,7 @@ public class Desk extends javax.swing.JFrame {
             new Desk().setVisible(true);
         });
     }
-    
+
     private static final File FOLDER_CHATS = new File("chats");
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -356,6 +407,7 @@ public class Desk extends javax.swing.JFrame {
     private javax.swing.JButton buttonPaste;
     private javax.swing.JButton buttonPasteCopy;
     private javax.swing.JButton buttonReload;
+    private javax.swing.JButton buttonRemake;
     private javax.swing.JButton buttonSet;
     private javax.swing.JButton buttonSetPasteCopy;
     private javax.swing.JComboBox<String> comboChats;
