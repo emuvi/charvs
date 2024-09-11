@@ -1,6 +1,7 @@
 package br.com.pointel.charvs;
 
 import com.formdev.flatlaf.FlatDarculaLaf;
+import com.formdev.flatlaf.FlatLightLaf;
 import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -274,6 +275,9 @@ public class Desk extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonCaptureContentActionPerformed
 
     private void buttonRemakeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRemakeActionPerformed
+        if (!"yes".equals(WizSwing.showInput("Do you really want to remake the hear?").toLowerCase())) {
+            return;
+        }
         try {
             for (var file : heartFolder.listFiles()) {
                 if (!file.getName().endsWith(".md")) {
@@ -389,7 +393,7 @@ public class Desk extends javax.swing.JFrame {
 
     public static void start(String args[]) {
         try {
-            UIManager.setLookAndFeel(new FlatDarculaLaf());
+            UIManager.setLookAndFeel(new FlatLightLaf());
         } catch (Exception ex) {
             ex.printStackTrace();
         }
