@@ -301,8 +301,8 @@ public class Desk extends javax.swing.JFrame {
             title = title.trim();
         }
         return title
-                .replace("\"", "")
-                .replace("'", "")
+                .replace("\"", "”")
+                .replace("'", "”")
                 .replace("/", "")
                 .replace("|", "")
                 .replace("\\", "")
