@@ -2,6 +2,7 @@ package br.com.pointel.charvs;
 
 import com.formdev.flatlaf.FlatDarculaLaf;
 import com.formdev.flatlaf.FlatLightLaf;
+import java.awt.event.InputEvent;
 import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -252,12 +253,24 @@ public class Desk extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonPasteCopyActionPerformed
 
     private void buttonReloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonReloadActionPerformed
-        loadChats();
+        try {
+            if ((evt.getModifiers() & InputEvent.ALT_DOWN_MASK) != 0) {
+                loadChats();
+            } else {
+                comboChats.setSelectedIndex(1);
+            }
+        } catch (Exception e) {
+            WizSwing.showError(e);
+        }
     }//GEN-LAST:event_buttonReloadActionPerformed
 
     private void buttonOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOpenActionPerformed
         try {
-            WizSwing.open(FOLDER_CHATS);
+            if ((evt.getModifiers() & InputEvent.ALT_DOWN_MASK) != 0) {
+                WizSwing.open(FOLDER_CHATS);
+            } else {
+                comboChats.setSelectedIndex(0);
+            }
         } catch (Exception e) {
             WizSwing.showError(e);
         }
