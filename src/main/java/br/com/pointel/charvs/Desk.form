@@ -33,7 +33,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="buttonReload" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="comboChats" pref="259" max="32767" attributes="0"/>
+                      <Component id="comboChats" pref="230" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="buttonSet" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -50,6 +50,8 @@
                       <Component id="buttonCaptureContent" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="buttonRemake" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="butttonRemakeRandom" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="fieldStatus" alignment="0" max="32767" attributes="0"/>
               </Group>
@@ -73,6 +75,7 @@
                   <Component id="buttonReload" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="buttonCaptureContent" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="buttonRemake" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="butttonRemakeRandom" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="scrollText" pref="176" max="32767" attributes="0"/>
@@ -217,6 +220,16 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonRemakeActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="butttonRemakeRandom">
+      <Properties>
+        <Property name="mnemonic" type="int" value="35"/>
+        <Property name="text" type="java.lang.String" value="#"/>
+        <Property name="toolTipText" type="java.lang.String" value="Ramake Random Heart"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="butttonRemakeRandomActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

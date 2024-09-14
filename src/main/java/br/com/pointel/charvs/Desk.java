@@ -39,6 +39,7 @@ public class Desk extends javax.swing.JFrame {
         fieldStatus = new javax.swing.JTextField();
         buttonCaptureContent = new javax.swing.JButton();
         buttonRemake = new javax.swing.JButton();
+        butttonRemakeRandom = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Charvs");
@@ -144,6 +145,15 @@ public class Desk extends javax.swing.JFrame {
             }
         });
 
+        butttonRemakeRandom.setMnemonic('#');
+        butttonRemakeRandom.setText("#");
+        butttonRemakeRandom.setToolTipText("Ramake Random Heart");
+        butttonRemakeRandom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                butttonRemakeRandomActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -157,7 +167,7 @@ public class Desk extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttonReload)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(comboChats, 0, 259, Short.MAX_VALUE)
+                        .addComponent(comboChats, 0, 230, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttonSet)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -173,7 +183,9 @@ public class Desk extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttonCaptureContent)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonRemake))
+                        .addComponent(buttonRemake)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(butttonRemakeRandom))
                     .addComponent(fieldStatus))
                 .addContainerGap())
         );
@@ -192,7 +204,8 @@ public class Desk extends javax.swing.JFrame {
                     .addComponent(buttonOpen)
                     .addComponent(buttonReload)
                     .addComponent(buttonCaptureContent)
-                    .addComponent(buttonRemake))
+                    .addComponent(buttonRemake)
+                    .addComponent(butttonRemakeRandom))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scrollText, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -279,7 +292,7 @@ public class Desk extends javax.swing.JFrame {
     private void buttonCaptureContentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCaptureContentActionPerformed
         try {
             var content = WizSwing.getStringOnClipboard();
-            var title = produce(content, null);
+            var title = produce(content, null, null);
             editText.setText(content);
             WizSwing.putStringOnClipboard("[[(H) " + title + "]]");
         } catch (Exception e) {
@@ -299,7 +312,7 @@ public class Desk extends javax.swing.JFrame {
             }
             for (var file : heartFolder.listFiles()) {
                 if (file.getName().endsWith(".md")) {
-                    remakeHeart(file);
+                    remakeHeart(file, false);
                 }
             }
             WizSwing.showInfo("Finished to remake your heart!");
@@ -308,10 +321,32 @@ public class Desk extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_buttonRemakeActionPerformed
 
-    private void remakeHeart(File file) throws Exception {
+    private void butttonRemakeRandomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butttonRemakeRandomActionPerformed
+        if (!"yes".equals(WizSwing.showInput("Do you really want to remake the heart?").toLowerCase())) {
+            return;
+        }
+        try {
+            for (var file : heartFolder.listFiles()) {
+                if (!file.getName().endsWith(".md")) {
+                    file.delete();
+                }
+            }
+            for (var file : heartFolder.listFiles()) {
+                if (file.getName().endsWith(".md")) {
+                    remakeHeart(file, true);
+                }
+            }
+            WizSwing.showInfo("Finished to remake your heart!");
+        } catch (Exception e) {
+            WizSwing.showError(e);
+        }        
+    }//GEN-LAST:event_butttonRemakeRandomActionPerformed
+
+    private void remakeHeart(File file, boolean random) throws Exception {
         var origin = Files.readString(file.toPath(), StandardCharsets.UTF_8);
-        var name = FilenameUtils.getBaseName(file.getName());
-        produce(origin, name);
+        var nameMark = FilenameUtils.getBaseName(file.getName());
+        var nameText = random ? WizChars.generateRandomNumberString(18) : nameMark;
+        produce(origin, nameMark, nameText);
     }
 
     private void loadChats() {
@@ -323,7 +358,7 @@ public class Desk extends javax.swing.JFrame {
         }
     }
 
-    private String produce(String origin, String name) throws Exception {
+    private String produce(String origin, String nameMark, String nameText) throws Exception {
         var lines = origin.split("\\r?\\n");
         if (lines.length < 3) {
             throw new Exception("Actual content has too little lines.");
@@ -342,8 +377,13 @@ public class Desk extends javax.swing.JFrame {
         var text = "{{Pause=3}}Início.{{Pause=3}}\n\n" 
                 + String.join("\n", lines)
                 + "\n\n{{Pause=3}}Fim.{{Pause=3}}";
-        var fileName = name != null ? name : title;
-        save(origin, text, fileName);
+        if (nameMark == null) {
+            nameMark = title;
+        }
+        if (nameText == null) {
+            nameText = nameMark;
+        }
+        save(origin, text, nameMark, nameText);
         return title;
     }
 
@@ -394,13 +434,16 @@ public class Desk extends javax.swing.JFrame {
 
     private final File heartFolder = new File("D:\\emuvi\\OneDrive\\Documentos\\Educação\\AELIN\\ABIN\\Heart");
 
-    private void save(String origin, String text, String fileName) throws Exception {
-        var title = fileName;
-        if (!fileName.startsWith("(H) ")) {
-            fileName = "(H) " + fileName;
+    private void save(String origin, String text, String nameMark, String nameText) throws Exception {
+        var title = nameMark;
+        if (!nameMark.startsWith("(H) ")) {
+            if (nameMark.equals(nameText)) {
+                nameText = "(H) " + nameText;
+            }
+            nameMark = "(H) " + nameMark;
         }
-        Files.writeString(new File(heartFolder, fileName + ".md").toPath(), origin, StandardCharsets.UTF_8);
-        Files.writeString(new File(heartFolder, fileName + ".txt").toPath(), text, StandardCharsets.UTF_8);
+        Files.writeString(new File(heartFolder, nameMark + ".md").toPath(), origin, StandardCharsets.UTF_8);
+        Files.writeString(new File(heartFolder, nameText + ".txt").toPath(), text, StandardCharsets.UTF_8);
         SwingUtilities.invokeLater(() -> fieldStatus.setText("Saved content on: " + title));
     }
 
@@ -428,6 +471,7 @@ public class Desk extends javax.swing.JFrame {
     private javax.swing.JButton buttonRemake;
     private javax.swing.JButton buttonSet;
     private javax.swing.JButton buttonSetPasteCopy;
+    private javax.swing.JButton butttonRemakeRandom;
     private javax.swing.JComboBox<String> comboChats;
     private javax.swing.JTextArea editText;
     private javax.swing.JTextField fieldStatus;

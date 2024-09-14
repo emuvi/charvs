@@ -3,6 +3,7 @@ package br.com.pointel.charvs;
 import java.text.Normalizer;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.regex.Pattern;
@@ -15,6 +16,16 @@ import org.apache.commons.lang3.tuple.Pair;
  */
 public class WizChars {
 
+    public static String generateRandomNumberString(int length) {
+        var random = new Random();
+        var randomNumberString = new StringBuilder();
+        for (int i = 0; i < length; i++) {
+            int randomDigit = random.nextInt(10);
+            randomNumberString.append(randomDigit);
+        }        
+        return randomNumberString.toString();
+    }
+    
     public static String makeParameterName(String ofTitle) {
         return ofTitle.replace(" ", "_").toUpperCase();
     }
