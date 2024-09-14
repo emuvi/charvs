@@ -27,13 +27,13 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="scrollText" pref="549" max="32767" attributes="0"/>
+                  <Component id="scrollText" pref="466" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="buttonOpen" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="buttonReload" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="comboChats" pref="230" max="32767" attributes="0"/>
+                      <Component id="comboChats" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="buttonSet" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -50,10 +50,12 @@
                       <Component id="buttonCaptureContent" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="buttonRemake" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="butttonRemakeRandom" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="fieldStatus" alignment="0" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="fieldStatus" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="checkRandom" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -75,12 +77,14 @@
                   <Component id="buttonReload" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="buttonCaptureContent" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="buttonRemake" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="butttonRemakeRandom" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="scrollText" pref="176" max="32767" attributes="0"/>
+              <Component id="scrollText" pref="172" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="fieldStatus" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="fieldStatus" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="checkRandom" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -222,15 +226,11 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonRemakeActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="butttonRemakeRandom">
+    <Component class="javax.swing.JCheckBox" name="checkRandom">
       <Properties>
-        <Property name="mnemonic" type="int" value="35"/>
-        <Property name="text" type="java.lang.String" value="#"/>
-        <Property name="toolTipText" type="java.lang.String" value="Ramake Random Heart"/>
+        <Property name="selected" type="boolean" value="true"/>
+        <Property name="text" type="java.lang.String" value="Random"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="butttonRemakeRandomActionPerformed"/>
-      </Events>
     </Component>
   </SubComponents>
 </Form>

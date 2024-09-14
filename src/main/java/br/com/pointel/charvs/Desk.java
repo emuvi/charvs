@@ -39,7 +39,7 @@ public class Desk extends javax.swing.JFrame {
         fieldStatus = new javax.swing.JTextField();
         buttonCaptureContent = new javax.swing.JButton();
         buttonRemake = new javax.swing.JButton();
-        butttonRemakeRandom = new javax.swing.JButton();
+        checkRandom = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Charvs");
@@ -145,14 +145,8 @@ public class Desk extends javax.swing.JFrame {
             }
         });
 
-        butttonRemakeRandom.setMnemonic('#');
-        butttonRemakeRandom.setText("#");
-        butttonRemakeRandom.setToolTipText("Ramake Random Heart");
-        butttonRemakeRandom.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                butttonRemakeRandomActionPerformed(evt);
-            }
-        });
+        checkRandom.setSelected(true);
+        checkRandom.setText("Random");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -161,13 +155,13 @@ public class Desk extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(scrollText, javax.swing.GroupLayout.DEFAULT_SIZE, 549, Short.MAX_VALUE)
+                    .addComponent(scrollText, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(buttonOpen)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttonReload)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(comboChats, 0, 230, Short.MAX_VALUE)
+                        .addComponent(comboChats, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttonSet)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -183,10 +177,11 @@ public class Desk extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttonCaptureContent)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonRemake)
+                        .addComponent(buttonRemake))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(fieldStatus)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(butttonRemakeRandom))
-                    .addComponent(fieldStatus))
+                        .addComponent(checkRandom)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -204,12 +199,13 @@ public class Desk extends javax.swing.JFrame {
                     .addComponent(buttonOpen)
                     .addComponent(buttonReload)
                     .addComponent(buttonCaptureContent)
-                    .addComponent(buttonRemake)
-                    .addComponent(butttonRemakeRandom))
+                    .addComponent(buttonRemake))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrollText, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                .addComponent(scrollText, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(fieldStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(fieldStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(checkRandom))
                 .addContainerGap())
         );
 
@@ -292,7 +288,8 @@ public class Desk extends javax.swing.JFrame {
     private void buttonCaptureContentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCaptureContentActionPerformed
         try {
             var content = WizSwing.getStringOnClipboard();
-            var title = produce(content, null, null);
+            var nameText = checkRandom.isSelected() ? WizChars.generateRandomNumberString(18) : null;
+            var title = produce(content, null, nameText);
             editText.setText(content);
             WizSwing.putStringOnClipboard("[[(H) " + title + "]]");
         } catch (Exception e) {
@@ -312,7 +309,7 @@ public class Desk extends javax.swing.JFrame {
             }
             for (var file : heartFolder.listFiles()) {
                 if (file.getName().endsWith(".md")) {
-                    remakeHeart(file, false);
+                    remakeHeart(file, checkRandom.isSelected());
                 }
             }
             WizSwing.showInfo("Finished to remake your heart!");
@@ -320,27 +317,6 @@ public class Desk extends javax.swing.JFrame {
             WizSwing.showError(e);
         }
     }//GEN-LAST:event_buttonRemakeActionPerformed
-
-    private void butttonRemakeRandomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butttonRemakeRandomActionPerformed
-        if (!"yes".equals(WizSwing.showInput("Do you really want to remake the heart?").toLowerCase())) {
-            return;
-        }
-        try {
-            for (var file : heartFolder.listFiles()) {
-                if (!file.getName().endsWith(".md")) {
-                    file.delete();
-                }
-            }
-            for (var file : heartFolder.listFiles()) {
-                if (file.getName().endsWith(".md")) {
-                    remakeHeart(file, true);
-                }
-            }
-            WizSwing.showInfo("Finished to remake your heart!");
-        } catch (Exception e) {
-            WizSwing.showError(e);
-        }        
-    }//GEN-LAST:event_butttonRemakeRandomActionPerformed
 
     private void remakeHeart(File file, boolean random) throws Exception {
         var origin = Files.readString(file.toPath(), StandardCharsets.UTF_8);
@@ -471,7 +447,7 @@ public class Desk extends javax.swing.JFrame {
     private javax.swing.JButton buttonRemake;
     private javax.swing.JButton buttonSet;
     private javax.swing.JButton buttonSetPasteCopy;
-    private javax.swing.JButton butttonRemakeRandom;
+    private javax.swing.JCheckBox checkRandom;
     private javax.swing.JComboBox<String> comboChats;
     private javax.swing.JTextArea editText;
     private javax.swing.JTextField fieldStatus;
