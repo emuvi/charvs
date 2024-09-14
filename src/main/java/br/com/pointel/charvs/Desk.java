@@ -348,7 +348,7 @@ public class Desk extends javax.swing.JFrame {
     }
 
     private boolean isCharTitleBondaryValid(char c) {
-        return Character.isAlphabetic(c) || c == '”' || c == '“' || c == '(' || c == ')';
+        return Character.isAlphabetic(c) || Character.isDigit(c) || c == '”' || c == '“' || c == '(' || c == ')';
     }
 
     private String cleanTitle(String title) {
