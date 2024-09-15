@@ -113,7 +113,7 @@
                           <Component id="buttonRemake" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="scrollText" pref="151" max="32767" attributes="0"/>
+                      <Component id="scrollText" pref="92" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="fieldStatus" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -284,18 +284,14 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="editFileName" alignment="0" max="32767" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="buttonSpaceAppend" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="buttonNewParagraph" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="buttonNewTitle" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="checkAlwaysOnTop" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="0" pref="133" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="checkAlwaysOnTop" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace pref="32" max="32767" attributes="0"/>
+                              <Component id="buttonNewTitle" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="buttonNewParagraph" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="buttonSpaceAppend" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -309,13 +305,12 @@
                       <Component id="editFileName" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="buttonSpaceAppend" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="buttonNewParagraph" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="buttonNewTitle" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="buttonNewParagraph" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="buttonSpaceAppend" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="checkAlwaysOnTop" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="checkAlwaysOnTop" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="135" max="32767" attributes="0"/>
+                      <EmptySpace pref="102" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
