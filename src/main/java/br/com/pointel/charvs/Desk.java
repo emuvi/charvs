@@ -12,6 +12,8 @@ import javax.swing.UIManager;
 import org.apache.commons.io.FilenameUtils;
 
 public class Desk extends javax.swing.JFrame {
+    
+    private static final File HEART_FOLDER = new File("D:\\emuvi\\OneDrive\\Documentos\\Educação\\AELIN\\ABIN\\Heart");
 
     private final DefaultComboBoxModel<String> modelChats = new DefaultComboBoxModel<>();
 
@@ -25,21 +27,28 @@ public class Desk extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel1 = new javax.swing.JPanel();
         scrollText = new javax.swing.JScrollPane();
         editText = new javax.swing.JTextArea();
+        buttonCaptureContent = new javax.swing.JButton();
+        comboChats = new javax.swing.JComboBox<>();
+        checkRandom = new javax.swing.JCheckBox();
+        buttonCopy = new javax.swing.JButton();
+        fieldStatus = new javax.swing.JTextField();
+        buttonReload = new javax.swing.JButton();
+        buttonSetPasteCopy = new javax.swing.JButton();
+        buttonOpen = new javax.swing.JButton();
+        buttonRemake = new javax.swing.JButton();
         buttonSet = new javax.swing.JButton();
+        buttonPasteCopy = new javax.swing.JButton();
         buttonAppend = new javax.swing.JButton();
         buttonPaste = new javax.swing.JButton();
-        comboChats = new javax.swing.JComboBox<>();
-        buttonCopy = new javax.swing.JButton();
-        buttonSetPasteCopy = new javax.swing.JButton();
-        buttonPasteCopy = new javax.swing.JButton();
-        buttonOpen = new javax.swing.JButton();
-        buttonReload = new javax.swing.JButton();
-        fieldStatus = new javax.swing.JTextField();
-        buttonCaptureContent = new javax.swing.JButton();
-        buttonRemake = new javax.swing.JButton();
-        checkRandom = new javax.swing.JCheckBox();
+        jPanel2 = new javax.swing.JPanel();
+        buttonSpaceAppend = new javax.swing.JButton();
+        editFileName = new javax.swing.JTextField();
+        buttonNewParagraph = new javax.swing.JButton();
+        buttonNewTitle = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Charvs");
@@ -50,12 +59,83 @@ public class Desk extends javax.swing.JFrame {
         editText.setWrapStyleWord(true);
         scrollText.setViewportView(editText);
 
+        buttonCaptureContent.setMnemonic('9');
+        buttonCaptureContent.setText("9");
+        buttonCaptureContent.setToolTipText("Capture Heart");
+        buttonCaptureContent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonCaptureContentActionPerformed(evt);
+            }
+        });
+
+        comboChats.setModel(modelChats);
+
+        checkRandom.setSelected(true);
+        checkRandom.setText("Random");
+
+        buttonCopy.setMnemonic('6');
+        buttonCopy.setText("6");
+        buttonCopy.setToolTipText("Copy Content");
+        buttonCopy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonCopyActionPerformed(evt);
+            }
+        });
+
+        fieldStatus.setEditable(false);
+        fieldStatus.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        fieldStatus.setBorder(null);
+
+        buttonReload.setMnemonic('2');
+        buttonReload.setText("2");
+        buttonReload.setToolTipText("Reload Folder");
+        buttonReload.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonReloadActionPerformed(evt);
+            }
+        });
+
+        buttonSetPasteCopy.setMnemonic('8');
+        buttonSetPasteCopy.setText("8");
+        buttonSetPasteCopy.setToolTipText("Set, Paste and Copy Content");
+        buttonSetPasteCopy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonSetPasteCopyActionPerformed(evt);
+            }
+        });
+
+        buttonOpen.setText("1");
+        buttonOpen.setToolTipText("Open Folder");
+        buttonOpen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonOpenActionPerformed(evt);
+            }
+        });
+
+        buttonRemake.setMnemonic('0');
+        buttonRemake.setText("0");
+        buttonRemake.setToolTipText("Ramake Heart");
+        buttonRemake.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonRemakeActionPerformed(evt);
+            }
+        });
+
         buttonSet.setMnemonic('3');
         buttonSet.setText("3");
         buttonSet.setToolTipText("Set Conntent");
         buttonSet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonSetActionPerformed(evt);
+            }
+        });
+
+        buttonPasteCopy.setMnemonic('7');
+        buttonPasteCopy.setText("7");
+        buttonPasteCopy.setToolTipText("Paste and Copy Content");
+        buttonPasteCopy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonPasteCopyActionPerformed(evt);
             }
         });
 
@@ -77,86 +157,15 @@ public class Desk extends javax.swing.JFrame {
             }
         });
 
-        comboChats.setModel(modelChats);
-
-        buttonCopy.setMnemonic('6');
-        buttonCopy.setText("6");
-        buttonCopy.setToolTipText("Copy Content");
-        buttonCopy.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonCopyActionPerformed(evt);
-            }
-        });
-
-        buttonSetPasteCopy.setMnemonic('8');
-        buttonSetPasteCopy.setText("8");
-        buttonSetPasteCopy.setToolTipText("Set, Paste and Copy Content");
-        buttonSetPasteCopy.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonSetPasteCopyActionPerformed(evt);
-            }
-        });
-
-        buttonPasteCopy.setMnemonic('7');
-        buttonPasteCopy.setText("7");
-        buttonPasteCopy.setToolTipText("Paste and Copy Content");
-        buttonPasteCopy.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonPasteCopyActionPerformed(evt);
-            }
-        });
-
-        buttonOpen.setText("1");
-        buttonOpen.setToolTipText("Open Folder");
-        buttonOpen.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonOpenActionPerformed(evt);
-            }
-        });
-
-        buttonReload.setMnemonic('2');
-        buttonReload.setText("2");
-        buttonReload.setToolTipText("Reload Folder");
-        buttonReload.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonReloadActionPerformed(evt);
-            }
-        });
-
-        fieldStatus.setEditable(false);
-        fieldStatus.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        fieldStatus.setBorder(null);
-
-        buttonCaptureContent.setMnemonic('9');
-        buttonCaptureContent.setText("9");
-        buttonCaptureContent.setToolTipText("Capture Heart");
-        buttonCaptureContent.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonCaptureContentActionPerformed(evt);
-            }
-        });
-
-        buttonRemake.setMnemonic('0');
-        buttonRemake.setText("0");
-        buttonRemake.setToolTipText("Ramake Heart");
-        buttonRemake.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonRemakeActionPerformed(evt);
-            }
-        });
-
-        checkRandom.setSelected(true);
-        checkRandom.setText("Random");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(scrollText, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(scrollText, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(buttonOpen)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttonReload)
@@ -178,17 +187,17 @@ public class Desk extends javax.swing.JFrame {
                         .addComponent(buttonCaptureContent)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttonRemake))
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(fieldStatus)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(checkRandom)))
                 .addContainerGap())
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(comboChats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonSet)
                     .addComponent(buttonAppend)
@@ -201,11 +210,83 @@ public class Desk extends javax.swing.JFrame {
                     .addComponent(buttonCaptureContent)
                     .addComponent(buttonRemake))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrollText, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
+                .addComponent(scrollText, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(fieldStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(checkRandom))
+                .addContainerGap())
+        );
+
+        jTabbedPane1.addTab("tab1", jPanel1);
+
+        buttonSpaceAppend.setText("Space Appennd");
+        buttonSpaceAppend.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonSpaceAppendActionPerformed(evt);
+            }
+        });
+
+        buttonNewParagraph.setText("New Paragraph");
+        buttonNewParagraph.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonNewParagraphActionPerformed(evt);
+            }
+        });
+
+        buttonNewTitle.setText("New Title");
+        buttonNewTitle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonNewTitleActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(editFileName)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(buttonSpaceAppend)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonNewParagraph)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonNewTitle)
+                        .addGap(0, 133, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(editFileName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buttonSpaceAppend)
+                    .addComponent(buttonNewParagraph)
+                    .addComponent(buttonNewTitle))
+                .addContainerGap(161, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("tab2", jPanel2);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTabbedPane1)
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -302,12 +383,12 @@ public class Desk extends javax.swing.JFrame {
             return;
         }
         try {
-            for (var file : heartFolder.listFiles()) {
+            for (var file : HEART_FOLDER.listFiles()) {
                 if (!file.getName().endsWith(".md")) {
                     file.delete();
                 }
             }
-            for (var file : heartFolder.listFiles()) {
+            for (var file : HEART_FOLDER.listFiles()) {
                 if (file.getName().endsWith(".md")) {
                     remakeHeart(file, checkRandom.isSelected());
                 }
@@ -317,6 +398,39 @@ public class Desk extends javax.swing.JFrame {
             WizSwing.showError(e);
         }
     }//GEN-LAST:event_buttonRemakeActionPerformed
+
+    private void buttonSpaceAppendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSpaceAppendActionPerformed
+        try {
+            var file = new File(HEART_FOLDER, editFileName.getText() + ".md");
+            var source = Files.readString(file.toPath(), StandardCharsets.UTF_8).trim();
+            source = source + " " + WizSwing.getStringOnClipboard().trim();
+            Files.writeString(file.toPath(), source, StandardCharsets.UTF_8);
+        } catch (Exception e) {
+            WizSwing.showError(e);
+        }
+    }//GEN-LAST:event_buttonSpaceAppendActionPerformed
+
+    private void buttonNewParagraphActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonNewParagraphActionPerformed
+        try {
+            var file = new File(HEART_FOLDER, editFileName.getText() + ".md");
+            var source = Files.readString(file.toPath(), StandardCharsets.UTF_8).trim();
+            source = source + "\n\n" + WizSwing.getStringOnClipboard().trim();
+            Files.writeString(file.toPath(), source, StandardCharsets.UTF_8);
+        } catch (Exception e) {
+            WizSwing.showError(e);
+        }
+    }//GEN-LAST:event_buttonNewParagraphActionPerformed
+
+    private void buttonNewTitleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonNewTitleActionPerformed
+        try {
+            var file = new File(HEART_FOLDER, editFileName.getText() + ".md");
+            var source = Files.readString(file.toPath(), StandardCharsets.UTF_8).trim();
+            source = source + "\n\n### " + WizSwing.getStringOnClipboard().trim();
+            Files.writeString(file.toPath(), source, StandardCharsets.UTF_8);
+        } catch (Exception e) {
+            WizSwing.showError(e);
+        }
+    }//GEN-LAST:event_buttonNewTitleActionPerformed
 
     private void remakeHeart(File file, boolean random) throws Exception {
         var origin = Files.readString(file.toPath(), StandardCharsets.UTF_8);
@@ -408,8 +522,6 @@ public class Desk extends javax.swing.JFrame {
                 .trim();
     }
 
-    private final File heartFolder = new File("D:\\emuvi\\OneDrive\\Documentos\\Educação\\AELIN\\ABIN\\Heart");
-
     private void save(String origin, String text, String nameMark, String nameText) throws Exception {
         var title = nameMark;
         if (!nameMark.startsWith("(H) ")) {
@@ -418,8 +530,8 @@ public class Desk extends javax.swing.JFrame {
             }
             nameMark = "(H) " + nameMark;
         }
-        Files.writeString(new File(heartFolder, nameMark + ".md").toPath(), origin, StandardCharsets.UTF_8);
-        Files.writeString(new File(heartFolder, nameText + ".txt").toPath(), text, StandardCharsets.UTF_8);
+        Files.writeString(new File(HEART_FOLDER, nameMark + ".md").toPath(), origin, StandardCharsets.UTF_8);
+        Files.writeString(new File(HEART_FOLDER, nameText + ".txt").toPath(), text, StandardCharsets.UTF_8);
         SwingUtilities.invokeLater(() -> fieldStatus.setText("Saved content on: " + title));
     }
 
@@ -440,6 +552,8 @@ public class Desk extends javax.swing.JFrame {
     private javax.swing.JButton buttonAppend;
     private javax.swing.JButton buttonCaptureContent;
     private javax.swing.JButton buttonCopy;
+    private javax.swing.JButton buttonNewParagraph;
+    private javax.swing.JButton buttonNewTitle;
     private javax.swing.JButton buttonOpen;
     private javax.swing.JButton buttonPaste;
     private javax.swing.JButton buttonPasteCopy;
@@ -447,10 +561,15 @@ public class Desk extends javax.swing.JFrame {
     private javax.swing.JButton buttonRemake;
     private javax.swing.JButton buttonSet;
     private javax.swing.JButton buttonSetPasteCopy;
+    private javax.swing.JButton buttonSpaceAppend;
     private javax.swing.JCheckBox checkRandom;
     private javax.swing.JComboBox<String> comboChats;
+    private javax.swing.JTextField editFileName;
     private javax.swing.JTextArea editText;
     private javax.swing.JTextField fieldStatus;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JScrollPane scrollText;
     // End of variables declaration//GEN-END:variables
 }
