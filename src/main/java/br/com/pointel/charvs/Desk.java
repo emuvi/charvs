@@ -49,6 +49,7 @@ public class Desk extends javax.swing.JFrame {
         editFileName = new javax.swing.JTextField();
         buttonNewParagraph = new javax.swing.JButton();
         buttonNewTitle = new javax.swing.JButton();
+        checkAlwaysOnTop = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Charvs");
@@ -241,6 +242,13 @@ public class Desk extends javax.swing.JFrame {
             }
         });
 
+        checkAlwaysOnTop.setText("Always on Top");
+        checkAlwaysOnTop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkAlwaysOnTopActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -250,11 +258,14 @@ public class Desk extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(editFileName)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(buttonSpaceAppend)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonNewParagraph)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonNewTitle)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(buttonSpaceAppend)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(buttonNewParagraph)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(buttonNewTitle))
+                            .addComponent(checkAlwaysOnTop))
                         .addGap(0, 133, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -268,7 +279,9 @@ public class Desk extends javax.swing.JFrame {
                     .addComponent(buttonSpaceAppend)
                     .addComponent(buttonNewParagraph)
                     .addComponent(buttonNewTitle))
-                .addContainerGap(161, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(checkAlwaysOnTop)
+                .addContainerGap(135, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("tab2", jPanel2);
@@ -286,7 +299,7 @@ public class Desk extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1)
                 .addContainerGap())
         );
 
@@ -432,6 +445,10 @@ public class Desk extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_buttonNewTitleActionPerformed
 
+    private void checkAlwaysOnTopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkAlwaysOnTopActionPerformed
+        setAlwaysOnTop(checkAlwaysOnTop.isSelected());
+    }//GEN-LAST:event_checkAlwaysOnTopActionPerformed
+
     private void remakeHeart(File file, boolean random) throws Exception {
         var origin = Files.readString(file.toPath(), StandardCharsets.UTF_8);
         var nameMark = FilenameUtils.getBaseName(file.getName());
@@ -562,6 +579,7 @@ public class Desk extends javax.swing.JFrame {
     private javax.swing.JButton buttonSet;
     private javax.swing.JButton buttonSetPasteCopy;
     private javax.swing.JButton buttonSpaceAppend;
+    private javax.swing.JCheckBox checkAlwaysOnTop;
     private javax.swing.JCheckBox checkRandom;
     private javax.swing.JComboBox<String> comboChats;
     private javax.swing.JTextField editFileName;
