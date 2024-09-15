@@ -257,14 +257,16 @@ public class Desk extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(editFileName)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(checkAlwaysOnTop)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                        .addComponent(buttonNewTitle)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonNewParagraph)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonSpaceAppend)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 133, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(buttonNewTitle)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(buttonNewParagraph)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(buttonSpaceAppend))
+                            .addComponent(checkAlwaysOnTop, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -276,9 +278,10 @@ public class Desk extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonNewTitle)
                     .addComponent(buttonNewParagraph)
-                    .addComponent(buttonSpaceAppend)
-                    .addComponent(checkAlwaysOnTop))
-                .addContainerGap(102, Short.MAX_VALUE))
+                    .addComponent(buttonSpaceAppend))
+                .addGap(18, 18, 18)
+                .addComponent(checkAlwaysOnTop)
+                .addContainerGap(64, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("tab2", jPanel2);
