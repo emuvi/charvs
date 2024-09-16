@@ -81,6 +81,7 @@ public class Desk extends javax.swing.JFrame {
         buttonNewParagraph = new javax.swing.JButton();
         buttonNewTitle = new javax.swing.JButton();
         checkAlwaysOnTop = new javax.swing.JCheckBox();
+        buttonUndo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Charvs");
@@ -280,6 +281,13 @@ public class Desk extends javax.swing.JFrame {
             }
         });
 
+        buttonUndo.setText("Undo");
+        buttonUndo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonUndoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -290,14 +298,17 @@ public class Desk extends javax.swing.JFrame {
                     .addComponent(editFileName)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGap(0, 133, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                 .addComponent(buttonNewTitle)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(buttonNewParagraph)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(buttonSpaceAppend))
-                            .addComponent(checkAlwaysOnTop, javax.swing.GroupLayout.Alignment.TRAILING))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(buttonUndo)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(checkAlwaysOnTop)))))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -311,8 +322,10 @@ public class Desk extends javax.swing.JFrame {
                     .addComponent(buttonNewParagraph)
                     .addComponent(buttonSpaceAppend))
                 .addGap(18, 18, 18)
-                .addComponent(checkAlwaysOnTop)
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(checkAlwaysOnTop)
+                    .addComponent(buttonUndo))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("tab2", jPanel2);
@@ -447,6 +460,8 @@ public class Desk extends javax.swing.JFrame {
         try {
             var file = new File(editFileName.getText());
             var source = Files.readString(file.toPath(), StandardCharsets.UTF_8).trim();
+            lastFile = file;
+            lastSource = source;
             source = source + " " + WizSwing.getStringOnClipboard().trim();
             Files.writeString(file.toPath(), source, StandardCharsets.UTF_8);
         } catch (Exception e) {
@@ -458,6 +473,8 @@ public class Desk extends javax.swing.JFrame {
         try {
             var file = new File(editFileName.getText());
             var source = Files.readString(file.toPath(), StandardCharsets.UTF_8).trim();
+            lastFile = file;
+            lastSource = source;
             source = source + "\n\n" + WizSwing.getStringOnClipboard().trim();
             Files.writeString(file.toPath(), source, StandardCharsets.UTF_8);
         } catch (Exception e) {
@@ -465,10 +482,15 @@ public class Desk extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_buttonNewParagraphActionPerformed
 
+    private File lastFile;
+    private String lastSource;
+    
     private void buttonNewTitleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonNewTitleActionPerformed
         try {
             var file = new File(editFileName.getText());
             var source = Files.readString(file.toPath(), StandardCharsets.UTF_8).trim();
+            lastFile = file;
+            lastSource = source;
             source = source + "\n\n### " + WizSwing.getStringOnClipboard().trim();
             Files.writeString(file.toPath(), source, StandardCharsets.UTF_8);
         } catch (Exception e) {
@@ -479,6 +501,14 @@ public class Desk extends javax.swing.JFrame {
     private void checkAlwaysOnTopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkAlwaysOnTopActionPerformed
         setAlwaysOnTop(checkAlwaysOnTop.isSelected());
     }//GEN-LAST:event_checkAlwaysOnTopActionPerformed
+
+    private void buttonUndoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUndoActionPerformed
+        try {
+            Files.writeString(lastFile.toPath(), lastSource, StandardCharsets.UTF_8);
+        } catch (Exception e) {
+            WizSwing.showError(e);
+        }
+    }//GEN-LAST:event_buttonUndoActionPerformed
 
     private void remakeHeart(File file, boolean random) throws Exception {
         var origin = Files.readString(file.toPath(), StandardCharsets.UTF_8);
@@ -610,6 +640,7 @@ public class Desk extends javax.swing.JFrame {
     private javax.swing.JButton buttonSet;
     private javax.swing.JButton buttonSetPasteCopy;
     private javax.swing.JButton buttonSpaceAppend;
+    private javax.swing.JButton buttonUndo;
     private javax.swing.JCheckBox checkAlwaysOnTop;
     private javax.swing.JCheckBox checkRandom;
     private javax.swing.JComboBox<String> comboChats;
