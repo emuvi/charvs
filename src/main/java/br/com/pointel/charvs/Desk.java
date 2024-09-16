@@ -2,6 +2,11 @@ package br.com.pointel.charvs;
 
 import com.formdev.flatlaf.FlatDarculaLaf;
 import com.formdev.flatlaf.FlatLightLaf;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.dnd.DnDConstants;
+import java.awt.dnd.DropTarget;
+import java.awt.dnd.DropTargetAdapter;
+import java.awt.dnd.DropTargetDropEvent;
 import java.awt.event.InputEvent;
 import java.io.File;
 import java.nio.charset.StandardCharsets;
@@ -12,15 +17,41 @@ import javax.swing.UIManager;
 import org.apache.commons.io.FilenameUtils;
 
 public class Desk extends javax.swing.JFrame {
-    
+
     private static final File HEART_FOLDER = new File("D:\\emuvi\\OneDrive\\Documentos\\Educação\\AELIN\\ABIN\\Heart");
 
     private final DefaultComboBoxModel<String> modelChats = new DefaultComboBoxModel<>();
 
     public Desk() {
         initComponents();
+        initDrop();
         loadChats();
         WizSwing.initFrame(this);
+    }
+
+    private void initDrop() {
+        new DropTarget(editFileName, DnDConstants.ACTION_COPY, new DropTargetAdapter() {
+            @Override
+            public void drop(DropTargetDropEvent e) {
+                try {
+                    e.acceptDrop(DnDConstants.ACTION_COPY);
+                    DataFlavor[] flavors = e.getCurrentDataFlavors();
+                    for (DataFlavor flavor : flavors) {
+                        if (flavor.isFlavorJavaFileListType()) {
+                            java.util.List<File> files = (java.util.List<File>) e.getTransferable().getTransferData(flavor);
+                            if (!files.isEmpty()) {
+                                editFileName.setText(files.get(0).getAbsolutePath());
+                            }
+                            break;
+                        }
+                    }
+                    e.dropComplete(true);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    e.dropComplete(false);
+                }
+            }
+        });
     }
 
     @SuppressWarnings("unchecked")
@@ -414,7 +445,7 @@ public class Desk extends javax.swing.JFrame {
 
     private void buttonSpaceAppendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSpaceAppendActionPerformed
         try {
-            var file = new File(HEART_FOLDER, editFileName.getText() + ".md");
+            var file = new File(editFileName.getText());
             var source = Files.readString(file.toPath(), StandardCharsets.UTF_8).trim();
             source = source + " " + WizSwing.getStringOnClipboard().trim();
             Files.writeString(file.toPath(), source, StandardCharsets.UTF_8);
@@ -425,7 +456,7 @@ public class Desk extends javax.swing.JFrame {
 
     private void buttonNewParagraphActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonNewParagraphActionPerformed
         try {
-            var file = new File(HEART_FOLDER, editFileName.getText() + ".md");
+            var file = new File(editFileName.getText());
             var source = Files.readString(file.toPath(), StandardCharsets.UTF_8).trim();
             source = source + "\n\n" + WizSwing.getStringOnClipboard().trim();
             Files.writeString(file.toPath(), source, StandardCharsets.UTF_8);
@@ -436,7 +467,7 @@ public class Desk extends javax.swing.JFrame {
 
     private void buttonNewTitleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonNewTitleActionPerformed
         try {
-            var file = new File(HEART_FOLDER, editFileName.getText() + ".md");
+            var file = new File(editFileName.getText());
             var source = Files.readString(file.toPath(), StandardCharsets.UTF_8).trim();
             source = source + "\n\n### " + WizSwing.getStringOnClipboard().trim();
             Files.writeString(file.toPath(), source, StandardCharsets.UTF_8);
@@ -481,7 +512,7 @@ public class Desk extends javax.swing.JFrame {
                 lines[i] = lines[i] + ".";
             }
         }
-        var text = "{{Pause=3}}Início.{{Pause=3}}\n\n" 
+        var text = "{{Pause=3}}Início.{{Pause=3}}\n\n"
                 + String.join("\n", lines)
                 + "\n\n{{Pause=3}}Fim.{{Pause=3}}";
         if (nameMark == null) {
