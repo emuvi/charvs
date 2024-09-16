@@ -83,6 +83,8 @@ public class Desk extends javax.swing.JFrame {
         checkAlwaysOnTop = new javax.swing.JCheckBox();
         buttonUndo = new javax.swing.JButton();
         buttonNewQuest = new javax.swing.JButton();
+        editTab2Text = new javax.swing.JTextField();
+        buttonTab2Copy = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Charvs");
@@ -296,6 +298,13 @@ public class Desk extends javax.swing.JFrame {
             }
         });
 
+        buttonTab2Copy.setText("Copy");
+        buttonTab2Copy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonTab2CopyActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -314,9 +323,14 @@ public class Desk extends javax.swing.JFrame {
                                 .addComponent(buttonNewParagraph)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(buttonSpaceAppend))
-                            .addComponent(buttonUndo)
                             .addComponent(checkAlwaysOnTop))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(buttonUndo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(editTab2Text)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonTab2Copy)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -331,7 +345,10 @@ public class Desk extends javax.swing.JFrame {
                     .addComponent(buttonSpaceAppend)
                     .addComponent(buttonNewQuest))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(buttonUndo)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buttonUndo)
+                    .addComponent(editTab2Text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonTab2Copy))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(checkAlwaysOnTop)
                 .addContainerGap(35, Short.MAX_VALUE))
@@ -532,6 +549,14 @@ public class Desk extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_buttonNewQuestActionPerformed
 
+    private void buttonTab2CopyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTab2CopyActionPerformed
+        try {
+            WizSwing.putStringOnClipboard(editTab2Text.getText());
+        } catch (Exception e) {
+            WizSwing.showError(e);
+        }
+    }//GEN-LAST:event_buttonTab2CopyActionPerformed
+
     private void remakeHeart(File file, boolean random) throws Exception {
         var origin = Files.readString(file.toPath(), StandardCharsets.UTF_8);
         var nameMark = FilenameUtils.getBaseName(file.getName());
@@ -663,11 +688,13 @@ public class Desk extends javax.swing.JFrame {
     private javax.swing.JButton buttonSet;
     private javax.swing.JButton buttonSetPasteCopy;
     private javax.swing.JButton buttonSpaceAppend;
+    private javax.swing.JButton buttonTab2Copy;
     private javax.swing.JButton buttonUndo;
     private javax.swing.JCheckBox checkAlwaysOnTop;
     private javax.swing.JCheckBox checkRandom;
     private javax.swing.JComboBox<String> comboChats;
     private javax.swing.JTextField editFileName;
+    private javax.swing.JTextField editTab2Text;
     private javax.swing.JTextArea editText;
     private javax.swing.JTextField fieldStatus;
     private javax.swing.JPanel jPanel1;
