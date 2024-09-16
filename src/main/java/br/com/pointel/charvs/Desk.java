@@ -357,7 +357,7 @@ public class Desk extends javax.swing.JFrame {
 
     private void buttonReloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonReloadActionPerformed
         try {
-            if ((evt.getModifiers() & InputEvent.ALT_DOWN_MASK) != 0) {
+            if ((evt.getModifiers() & InputEvent.ALT_MASK) != 0) {
                 loadChats();
             } else {
                 comboChats.setSelectedIndex(1);
@@ -369,7 +369,7 @@ public class Desk extends javax.swing.JFrame {
 
     private void buttonOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOpenActionPerformed
         try {
-            if ((evt.getModifiers() & InputEvent.ALT_DOWN_MASK) != 0) {
+            if ((evt.getModifiers() & InputEvent.ALT_MASK) != 0) {
                 WizSwing.open(FOLDER_CHATS);
             } else {
                 comboChats.setSelectedIndex(0);
