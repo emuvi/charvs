@@ -400,7 +400,15 @@ public class Desk extends javax.swing.JFrame {
 
     private void buttonPasteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPasteActionPerformed
         try {
-            editText.append("\n\n" + WizSwing.getStringOnClipboard());
+            var actual = editText.getText();
+            var onClipboard = WizSwing.getStringOnClipboard();
+            if (actual.contains("<<INSERT HERE>>")) {
+                actual = actual.replace("<<INSERT HERE>>", onClipboard);
+                editText.setText(actual);
+            } else {
+                editText.append("\n\n" + onClipboard);
+            }
+            
         } catch (Exception ex) {
             WizSwing.showError(ex);
         }
