@@ -482,6 +482,33 @@ public class Desk extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_buttonRemakeActionPerformed
 
+    private String cleanSource(String source) {
+        var lines = source.split("\\r?\\n");
+        var lastChar = '\0';
+        var result = new StringBuilder();
+        for (var line : lines) {
+            line = line.replaceAll("\\s+", " ");
+            line = line.trim();
+            if (line.isEmpty() && lastChar == '\0') {
+                continue;
+            }
+            if (line.isEmpty()) {
+                result.append("\n");
+                lastChar = '\0';
+            } else {
+                var firstChar = line.charAt(0);
+                if (Character.isLowerCase(firstChar) && Character.isLowerCase(lastChar)) {
+                    result.append(" ");
+                } else {
+                    result.append("\n");
+                }
+                result.append(line);
+                lastChar = line.charAt(line.length() -1);
+            }
+        }
+        return result.toString().trim();
+    }
+    
     private void buttonSpaceAppendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSpaceAppendActionPerformed
         try {
             var file = new File(editFileName.getText());
@@ -489,7 +516,7 @@ public class Desk extends javax.swing.JFrame {
             lastFile = file;
             lastSource = source;
             source = source + " " + WizSwing.getStringOnClipboard().trim();
-            Files.writeString(file.toPath(), source, StandardCharsets.UTF_8);
+            Files.writeString(file.toPath(), cleanSource(source), StandardCharsets.UTF_8);
         } catch (Exception e) {
             WizSwing.showError(e);
         }
@@ -502,14 +529,11 @@ public class Desk extends javax.swing.JFrame {
             lastFile = file;
             lastSource = source;
             source = source + "\n\n" + WizSwing.getStringOnClipboard().trim();
-            Files.writeString(file.toPath(), source, StandardCharsets.UTF_8);
+            Files.writeString(file.toPath(), cleanSource(source), StandardCharsets.UTF_8);
         } catch (Exception e) {
             WizSwing.showError(e);
         }
     }//GEN-LAST:event_buttonNewParagraphActionPerformed
-
-    private File lastFile;
-    private String lastSource;
 
     private void buttonNewTitleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonNewTitleActionPerformed
         try {
@@ -518,16 +542,19 @@ public class Desk extends javax.swing.JFrame {
             lastFile = file;
             lastSource = source;
             source = source + "\n\n### " + WizSwing.getStringOnClipboard().trim();
-            Files.writeString(file.toPath(), source, StandardCharsets.UTF_8);
+            Files.writeString(file.toPath(), cleanSource(source), StandardCharsets.UTF_8);
         } catch (Exception e) {
             WizSwing.showError(e);
         }
     }//GEN-LAST:event_buttonNewTitleActionPerformed
-
+    
     private void checkAlwaysOnTopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkAlwaysOnTopActionPerformed
         setAlwaysOnTop(checkAlwaysOnTop.isSelected());
     }//GEN-LAST:event_checkAlwaysOnTopActionPerformed
 
+    private File lastFile;
+    private String lastSource;
+    
     private void buttonUndoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUndoActionPerformed
         try {
             Files.writeString(lastFile.toPath(), lastSource, StandardCharsets.UTF_8);
@@ -543,7 +570,7 @@ public class Desk extends javax.swing.JFrame {
             lastFile = file;
             lastSource = source;
             source = source + "\n\n---\n\n" + WizSwing.getStringOnClipboard().trim();
-            Files.writeString(file.toPath(), source, StandardCharsets.UTF_8);
+            Files.writeString(file.toPath(), cleanSource(source), StandardCharsets.UTF_8);
         } catch (Exception e) {
             WizSwing.showError(e);
         }
