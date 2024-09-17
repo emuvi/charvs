@@ -15,13 +15,20 @@ import org.apache.commons.lang3.tuple.Pair;
  * @author emuvi
  */
 public class WizChars {
+    
+    private static final String SIMPLE_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXZY";
 
-    public static String generateRandomNumberString(int length) {
+    public static String generateRandomString(int length) {
         var random = new Random();
         var randomNumberString = new StringBuilder();
         for (int i = 0; i < length; i++) {
-            int randomDigit = random.nextInt(10);
-            randomNumberString.append(randomDigit);
+            if (random.nextBoolean()) {
+                int randomDigit = random.nextInt(10);
+                randomNumberString.append(randomDigit);
+            } else {
+                char randomChar = SIMPLE_CHARS.charAt(random.nextInt(SIMPLE_CHARS.length()));
+                randomNumberString.append(randomChar);
+            }
         }        
         return randomNumberString.toString();
     }

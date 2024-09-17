@@ -452,7 +452,7 @@ public class Desk extends javax.swing.JFrame {
     private void buttonCaptureContentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCaptureContentActionPerformed
         try {
             var content = WizSwing.getStringOnClipboard();
-            var nameText = checkRandom.isSelected() ? WizChars.generateRandomNumberString(18) : null;
+            var nameText = checkRandom.isSelected() ? WizChars.generateRandomString(18) : null;
             var title = produce(content, null, nameText);
             editText.setText(content);
             WizSwing.putStringOnClipboard("[[(H) " + title + "]]");
@@ -560,7 +560,7 @@ public class Desk extends javax.swing.JFrame {
     private void remakeHeart(File file, boolean random) throws Exception {
         var origin = Files.readString(file.toPath(), StandardCharsets.UTF_8);
         var nameMark = FilenameUtils.getBaseName(file.getName());
-        var nameText = random ? WizChars.generateRandomNumberString(18) : nameMark;
+        var nameText = random ? WizChars.generateRandomString(18) : nameMark;
         produce(origin, nameMark, nameText);
     }
 
