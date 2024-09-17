@@ -570,6 +570,9 @@ public class Desk extends javax.swing.JFrame {
             lastFile = file;
             lastSource = source;
             source = source + "\n\n---\n\n" + WizSwing.getStringOnClipboard().trim();
+            if (!source.endsWith("Responder")) {
+                source = source + "\n\nResponder";
+            }
             Files.writeString(file.toPath(), cleanSource(source), StandardCharsets.UTF_8);
         } catch (Exception e) {
             WizSwing.showError(e);
