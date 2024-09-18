@@ -304,7 +304,9 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="editTab2Text" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="buttonTab2Copy" min="-2" max="-2" attributes="0"/>
+                              <Component id="buttonCopyText" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="buttonCopyGroup" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -327,7 +329,8 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="buttonUndo" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="editTab2Text" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="buttonTab2Copy" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="buttonCopyText" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="buttonCopyGroup" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="checkAlwaysOnTop" min="-2" max="-2" attributes="0"/>
@@ -389,13 +392,18 @@
             </Component>
             <Component class="javax.swing.JTextField" name="editTab2Text">
             </Component>
-            <Component class="javax.swing.JButton" name="buttonTab2Copy">
+            <Component class="javax.swing.JButton" name="buttonCopyText">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Copy"/>
+                <Property name="text" type="java.lang.String" value="Copy Text"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonTab2CopyActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonCopyTextActionPerformed"/>
               </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="buttonCopyGroup">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Copy Group"/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>
