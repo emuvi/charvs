@@ -307,6 +307,11 @@ public class Desk extends javax.swing.JFrame {
         });
 
         buttonCopyGroup.setText("Copy Group");
+        buttonCopyGroup.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonCopyGroupActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -616,6 +621,14 @@ public class Desk extends javax.swing.JFrame {
             WizSwing.showError(e);
         }
     }//GEN-LAST:event_buttonCopyTextActionPerformed
+
+    private void buttonCopyGroupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCopyGroupActionPerformed
+        try {
+            WizSwing.putStringOnClipboard(sourceCopyGroup);
+        } catch (Exception e) {
+            WizSwing.showError(e);
+        }
+    }//GEN-LAST:event_buttonCopyGroupActionPerformed
 
     private void remakeHeart(File file, boolean random) throws Exception {
         var origin = Files.readString(file.toPath(), StandardCharsets.UTF_8);
