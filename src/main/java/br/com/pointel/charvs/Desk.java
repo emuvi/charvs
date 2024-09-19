@@ -446,7 +446,9 @@ public class Desk extends javax.swing.JFrame {
 
     private void buttonReloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonReloadActionPerformed
         try {
-            if ((evt.getModifiers() & InputEvent.ALT_MASK) != 0) {
+            if ((evt.getModifiers() & InputEvent.CTRL_MASK) != 0) {
+                openChat();
+            } else if ((evt.getModifiers() & InputEvent.ALT_MASK) != 0) {
                 loadChats();
             } else {
                 comboChats.setSelectedIndex(1);
@@ -645,6 +647,11 @@ public class Desk extends javax.swing.JFrame {
             }
         }
     }
+    private void openChat() throws Exception {
+        var selected = new File(FOLDER_CHATS, comboChats.getSelectedItem().toString());
+        WizSwing.open(selected);
+    }
+    
 
     private String produce(String origin, String nameMark, String nameText) throws Exception {
         var lines = origin.split("\\r?\\n");
