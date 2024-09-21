@@ -642,7 +642,7 @@ public class Desk extends javax.swing.JFrame {
 
     private void buttonCopyGroupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCopyGroupActionPerformed
         try {
-            WizSwing.putStringOnClipboard(sourceCopyGroup);
+            WizSwing.putStringOnClipboard(sourceCopyGroup.trim());
         } catch (Exception e) {
             WizSwing.showError(e);
         }
@@ -650,7 +650,7 @@ public class Desk extends javax.swing.JFrame {
 
     private void buttonnCopySubGroupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonnCopySubGroupActionPerformed
         try {
-            WizSwing.putStringOnClipboard(sourceCopySubGroup);
+            WizSwing.putStringOnClipboard(sourceCopySubGroup.trim());
         } catch (Exception e) {
             WizSwing.showError(e);
         }
