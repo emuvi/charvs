@@ -293,6 +293,8 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="buttonNewParagraph" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="editAppend" min="-2" pref="40" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
                                       <Component id="buttonSpaceAppend" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="checkAlwaysOnTop" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -326,6 +328,7 @@
                           <Component id="buttonNewParagraph" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="buttonSpaceAppend" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="buttonNewQuest" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="editAppend" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -345,7 +348,7 @@
           <SubComponents>
             <Component class="javax.swing.JButton" name="buttonSpaceAppend">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Space Appennd"/>
+                <Property name="text" type="java.lang.String" value="Appennd"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonSpaceAppendActionPerformed"/>
@@ -418,6 +421,11 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonnCopySubGroupActionPerformed"/>
               </Events>
+            </Component>
+            <Component class="javax.swing.JTextField" name="editAppend">
+              <Properties>
+                <Property name="text" type="java.lang.String" value=" "/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>

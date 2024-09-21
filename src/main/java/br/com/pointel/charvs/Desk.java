@@ -87,6 +87,7 @@ public class Desk extends javax.swing.JFrame {
         buttonCopyText = new javax.swing.JButton();
         buttonCopyGroup = new javax.swing.JButton();
         buttonnCopySubGroup = new javax.swing.JButton();
+        editAppend = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Charvs");
@@ -258,7 +259,7 @@ public class Desk extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("tab1", jPanel1);
 
-        buttonSpaceAppend.setText("Space Appennd");
+        buttonSpaceAppend.setText("Appennd");
         buttonSpaceAppend.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonSpaceAppendActionPerformed(evt);
@@ -321,6 +322,8 @@ public class Desk extends javax.swing.JFrame {
             }
         });
 
+        editAppend.setText(" ");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -337,6 +340,8 @@ public class Desk extends javax.swing.JFrame {
                                 .addComponent(buttonNewTitle)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(buttonNewParagraph)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(editAppend, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(buttonSpaceAppend))
                             .addComponent(checkAlwaysOnTop))
@@ -363,7 +368,8 @@ public class Desk extends javax.swing.JFrame {
                     .addComponent(buttonNewTitle)
                     .addComponent(buttonNewParagraph)
                     .addComponent(buttonSpaceAppend)
-                    .addComponent(buttonNewQuest))
+                    .addComponent(buttonNewQuest)
+                    .addComponent(editAppend, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonUndo)
@@ -547,7 +553,7 @@ public class Desk extends javax.swing.JFrame {
             var source = Files.readString(file.toPath(), StandardCharsets.UTF_8).trim();
             lastFile = file;
             lastSource = source;
-            var fromClipboard = " " + WizSwing.getStringOnClipboard().trim();
+            var fromClipboard = editAppend.getText() + WizSwing.getStringOnClipboard().trim();
             sourceCopyGroup += fromClipboard;
             sourceCopySubGroup += fromClipboard;
             source += fromClipboard;
@@ -799,6 +805,7 @@ public class Desk extends javax.swing.JFrame {
     private javax.swing.JCheckBox checkAlwaysOnTop;
     private javax.swing.JCheckBox checkRandom;
     private javax.swing.JComboBox<String> comboChats;
+    private javax.swing.JTextField editAppend;
     private javax.swing.JTextField editFileName;
     private javax.swing.JTextField editTab2Text;
     private javax.swing.JTextArea editText;
