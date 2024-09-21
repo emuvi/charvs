@@ -18,8 +18,6 @@ import org.apache.commons.io.FilenameUtils;
 
 public class Desk extends javax.swing.JFrame {
 
-    private static final File HEART_FOLDER = new File("D:\\emuvi\\OneDrive\\Documentos\\Educação\\AELIN\\ABIN\\Heart");
-
     private final DefaultComboBoxModel<String> modelChats = new DefaultComboBoxModel<>();
 
     public Desk() {
@@ -88,6 +86,7 @@ public class Desk extends javax.swing.JFrame {
         buttonCopyGroup = new javax.swing.JButton();
         buttonnCopySubGroup = new javax.swing.JButton();
         editAppend = new javax.swing.JTextField();
+        editHeartFolder = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Charvs");
@@ -249,7 +248,7 @@ public class Desk extends javax.swing.JFrame {
                     .addComponent(buttonCaptureContent)
                     .addComponent(buttonRemake))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrollText)
+                .addComponent(scrollText, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(fieldStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -324,6 +323,8 @@ public class Desk extends javax.swing.JFrame {
 
         editAppend.setText(" ");
 
+        editHeartFolder.setText("D:\\emuvi\\OneDrive\\Documentos\\Educação\\AELIN\\ABIN\\Heart");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -332,20 +333,22 @@ public class Desk extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(editFileName)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(buttonNewQuest)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(buttonNewTitle)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(buttonNewParagraph)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(editAppend, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(buttonSpaceAppend))
-                            .addComponent(checkAlwaysOnTop))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addComponent(buttonNewQuest)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(buttonNewTitle)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(buttonNewParagraph)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(editAppend, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(buttonSpaceAppend)
+                            .addGap(0, 0, Short.MAX_VALUE))
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addComponent(checkAlwaysOnTop)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(editHeartFolder, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(buttonUndo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -378,8 +381,10 @@ public class Desk extends javax.swing.JFrame {
                     .addComponent(buttonCopyGroup)
                     .addComponent(buttonnCopySubGroup))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(checkAlwaysOnTop)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(checkAlwaysOnTop)
+                    .addComponent(editHeartFolder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("tab2", jPanel2);
@@ -504,12 +509,12 @@ public class Desk extends javax.swing.JFrame {
             return;
         }
         try {
-            for (var file : HEART_FOLDER.listFiles()) {
+            for (var file : new File(editHeartFolder.getText()).listFiles()) {
                 if (!file.getName().endsWith(".md")) {
                     file.delete();
                 }
             }
-            for (var file : HEART_FOLDER.listFiles()) {
+            for (var file : new File(editHeartFolder.getText()).listFiles()) {
                 if (file.getName().endsWith(".md")) {
                     remakeHeart(file, checkRandom.isSelected());
                 }
@@ -765,8 +770,8 @@ public class Desk extends javax.swing.JFrame {
             }
             nameMark = "(H) " + nameMark;
         }
-        Files.writeString(new File(HEART_FOLDER, nameMark + ".md").toPath(), origin, StandardCharsets.UTF_8);
-        Files.writeString(new File(HEART_FOLDER, nameText + ".txt").toPath(), text, StandardCharsets.UTF_8);
+        Files.writeString(new File(new File(editHeartFolder.getText()), nameMark + ".md").toPath(), origin, StandardCharsets.UTF_8);
+        Files.writeString(new File(new File(editHeartFolder.getText()), nameText + ".txt").toPath(), text, StandardCharsets.UTF_8);
         SwingUtilities.invokeLater(() -> fieldStatus.setText("Saved content on: " + title));
     }
 
@@ -807,6 +812,7 @@ public class Desk extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> comboChats;
     private javax.swing.JTextField editAppend;
     private javax.swing.JTextField editFileName;
+    private javax.swing.JTextField editHeartFolder;
     private javax.swing.JTextField editTab2Text;
     private javax.swing.JTextArea editText;
     private javax.swing.JTextField fieldStatus;
