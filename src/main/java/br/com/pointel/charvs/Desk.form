@@ -307,6 +307,8 @@
                               <Component id="buttonCopyText" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="buttonCopyGroup" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="buttonnCopySubGroup" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -331,6 +333,7 @@
                           <Component id="editTab2Text" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="buttonCopyText" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="buttonCopyGroup" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="buttonnCopySubGroup" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="checkAlwaysOnTop" min="-2" max="-2" attributes="0"/>
@@ -402,10 +405,18 @@
             </Component>
             <Component class="javax.swing.JButton" name="buttonCopyGroup">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Copy Group"/>
+                <Property name="text" type="java.lang.String" value="Group"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonCopyGroupActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="buttonnCopySubGroup">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="SubGroup"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonnCopySubGroupActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

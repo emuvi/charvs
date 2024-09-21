@@ -86,6 +86,7 @@ public class Desk extends javax.swing.JFrame {
         editTab2Text = new javax.swing.JTextField();
         buttonCopyText = new javax.swing.JButton();
         buttonCopyGroup = new javax.swing.JButton();
+        buttonnCopySubGroup = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Charvs");
@@ -306,10 +307,17 @@ public class Desk extends javax.swing.JFrame {
             }
         });
 
-        buttonCopyGroup.setText("Copy Group");
+        buttonCopyGroup.setText("Group");
         buttonCopyGroup.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonCopyGroupActionPerformed(evt);
+            }
+        });
+
+        buttonnCopySubGroup.setText("SubGroup");
+        buttonnCopySubGroup.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonnCopySubGroupActionPerformed(evt);
             }
         });
 
@@ -340,7 +348,9 @@ public class Desk extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttonCopyText)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonCopyGroup)))
+                        .addComponent(buttonCopyGroup)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonnCopySubGroup)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -359,7 +369,8 @@ public class Desk extends javax.swing.JFrame {
                     .addComponent(buttonUndo)
                     .addComponent(editTab2Text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonCopyText)
-                    .addComponent(buttonCopyGroup))
+                    .addComponent(buttonCopyGroup)
+                    .addComponent(buttonnCopySubGroup))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(checkAlwaysOnTop)
                 .addContainerGap(35, Short.MAX_VALUE))
@@ -538,6 +549,7 @@ public class Desk extends javax.swing.JFrame {
             lastSource = source;
             var fromClipboard = " " + WizSwing.getStringOnClipboard().trim();
             sourceCopyGroup += fromClipboard;
+            sourceCopySubGroup += fromClipboard;
             source += fromClipboard;
             Files.writeString(file.toPath(), cleanSource(source), StandardCharsets.UTF_8);
         } catch (Exception e) {
@@ -553,6 +565,7 @@ public class Desk extends javax.swing.JFrame {
             lastSource = source;
             var fromClipboard = "\n\n" + WizSwing.getStringOnClipboard().trim();
             sourceCopyGroup += fromClipboard;
+            sourceCopySubGroup = fromClipboard;
             source += fromClipboard;
             Files.writeString(file.toPath(), cleanSource(source), StandardCharsets.UTF_8);
         } catch (Exception e) {
@@ -571,6 +584,7 @@ public class Desk extends javax.swing.JFrame {
                 fromClipBoard = "### " + fromClipBoard;
             }
             sourceCopyGroup = fromClipBoard;
+            sourceCopySubGroup = fromClipBoard;
             source = source + "\n\n" + fromClipBoard;
             Files.writeString(file.toPath(), cleanSource(source), StandardCharsets.UTF_8);
         } catch (Exception e) {
@@ -594,6 +608,7 @@ public class Desk extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonUndoActionPerformed
 
     private String sourceCopyGroup = "";
+    private String sourceCopySubGroup = "";
     
     private void buttonNewQuestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonNewQuestActionPerformed
         try {
@@ -606,6 +621,7 @@ public class Desk extends javax.swing.JFrame {
                 fromClipboard += "\n\nResponder";
             }
             sourceCopyGroup = fromClipboard;
+            sourceCopySubGroup = fromClipboard;
             if (!source.isEmpty()) {
                 source += "\n\n---\n\n";
             }
@@ -631,6 +647,14 @@ public class Desk extends javax.swing.JFrame {
             WizSwing.showError(e);
         }
     }//GEN-LAST:event_buttonCopyGroupActionPerformed
+
+    private void buttonnCopySubGroupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonnCopySubGroupActionPerformed
+        try {
+            WizSwing.putStringOnClipboard(sourceCopySubGroup);
+        } catch (Exception e) {
+            WizSwing.showError(e);
+        }
+    }//GEN-LAST:event_buttonnCopySubGroupActionPerformed
 
     private void remakeHeart(File file, boolean random) throws Exception {
         var origin = Files.readString(file.toPath(), StandardCharsets.UTF_8);
@@ -771,6 +795,7 @@ public class Desk extends javax.swing.JFrame {
     private javax.swing.JButton buttonSetPasteCopy;
     private javax.swing.JButton buttonSpaceAppend;
     private javax.swing.JButton buttonUndo;
+    private javax.swing.JButton buttonnCopySubGroup;
     private javax.swing.JCheckBox checkAlwaysOnTop;
     private javax.swing.JCheckBox checkRandom;
     private javax.swing.JComboBox<String> comboChats;
