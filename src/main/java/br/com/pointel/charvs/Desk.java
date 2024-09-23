@@ -770,7 +770,13 @@ public class Desk extends javax.swing.JFrame {
             }
             nameMark = "(H) " + nameMark;
         }
-        Files.writeString(new File(new File(editHeartFolder.getText()), nameMark + ".md").toPath(), origin, StandardCharsets.UTF_8);
+        var sourceFile = new File(new File(editHeartFolder.getText()), nameMark + ".md");
+        if (sourceFile.exists()) {
+            if (!WizSwing.showConfirm("Already exists, continue?")) {
+                return;
+            }
+        }
+        Files.writeString(sourceFile.toPath(), origin, StandardCharsets.UTF_8);
         Files.writeString(new File(new File(editHeartFolder.getText()), nameText + ".txt").toPath(), text, StandardCharsets.UTF_8);
         SwingUtilities.invokeLater(() -> fieldStatus.setText("Saved content on: " + title));
     }
