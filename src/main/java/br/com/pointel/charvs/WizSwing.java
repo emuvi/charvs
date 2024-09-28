@@ -171,8 +171,8 @@ public class WizSwing {
     
     private static void setAllCompontentsFont(Component component, Font fonte) {
         component.setFont(fonte);
-        if (component instanceof Container) {
-            for (Component filho : ((Container) component).getComponents()) {
+        if (component instanceof Container container) {
+            for (Component filho : container.getComponents()) {
                 setAllCompontentsFont(filho, fonte);
             }
         }
