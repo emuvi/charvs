@@ -496,7 +496,7 @@ public class Desk extends javax.swing.JFrame {
         try {
             var content = WizSwing.getStringOnClipboard();
             var nameText = checkRandom.isSelected() ? WizChars.generateRandomString(18) : null;
-            var title = produce(content, null, nameText);
+            var title = produce(content, null, nameText, true);
             editText.setText(content);
             WizSwing.putStringOnClipboard("[[(H) " + title + "]]");
         } catch (Exception e) {
@@ -671,7 +671,7 @@ public class Desk extends javax.swing.JFrame {
         var origin = Files.readString(file.toPath(), StandardCharsets.UTF_8);
         var nameMark = FilenameUtils.getBaseName(file.getName());
         var nameText = random ? WizChars.generateRandomString(18) : nameMark;
-        produce(origin, nameMark, nameText);
+        produce(origin, nameMark, nameText, false);
     }
 
     private void loadChats() {
@@ -688,7 +688,19 @@ public class Desk extends javax.swing.JFrame {
     }
     
 
-    private String produce(String origin, String nameMark, String nameText) throws Exception {
+    private String produce(String origin, String nameMark, String nameText, boolean checkAlreadyExists) throws Exception {
+        origin = origin.replaceAll("\\【.*\\†.*\\】", "");
+        var begin = "{{Voice=Acapela Marcia22 (Brazilian Portuguese)/}}{{Pause=3}}Início.{{Pause=3}}\n\n";
+        var end = "\n\n{{Pause=3}}Fim.{{Pause=3}}";
+        if (origin.contains("%% Body in English %%")) {
+            origin = origin.replace("%% Body in English %%", "");
+            begin = "{{Voice=Acapela Ryan22/}}{{Pause=3}}Begin.{{Pause=3}}\n\n";
+            end = "\n\n{{Pause=3}}End.{{Pause=3}}";
+        } else if (origin.contains("%% Body in Spanish %%")) {
+            origin = origin.replace("%% Body in Spanish %%", "");
+            begin = "{{Voice=Acapela Antonio22 (Spanish)/}}{{Pause=3}}Empiezo.{{Pause=3}}\n\n";
+            end = "\n\n{{Pause=3}}Fin.Pause=3}}";
+        }
         var lines = origin.split("\\r?\\n");
         if (lines.length < 3) {
             throw new Exception("Actual content has too little lines.");
@@ -704,16 +716,14 @@ public class Desk extends javax.swing.JFrame {
                 lines[i] = lines[i] + ".";
             }
         }
-        var text = "{{Pause=3}}Início.{{Pause=3}}\n\n"
-                + String.join("\n", lines)
-                + "\n\n{{Pause=3}}Fim.{{Pause=3}}";
+        var text = begin + String.join("\n", lines) + end;
         if (nameMark == null) {
             nameMark = title;
         }
         if (nameText == null) {
             nameText = nameMark;
         }
-        save(origin, text, nameMark, nameText);
+        save(origin, text, nameMark, nameText, checkAlreadyExists);
         return title;
     }
 
@@ -762,7 +772,7 @@ public class Desk extends javax.swing.JFrame {
                 .trim();
     }
 
-    private void save(String origin, String text, String nameMark, String nameText) throws Exception {
+    private void save(String origin, String text, String nameMark, String nameText, boolean checkAlreadyExists) throws Exception {
         var title = nameMark;
         if (!nameMark.startsWith("(H) ")) {
             if (nameMark.equals(nameText)) {
@@ -771,7 +781,7 @@ public class Desk extends javax.swing.JFrame {
             nameMark = "(H) " + nameMark;
         }
         var sourceFile = new File(new File(editHeartFolder.getText()), nameMark + ".md");
-        if (sourceFile.exists()) {
+        if (sourceFile.exists() && checkAlreadyExists) {
             if (!WizSwing.showConfirm("Already exists, continue?")) {
                 return;
             }
