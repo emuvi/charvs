@@ -81,12 +81,13 @@ public class Desk extends javax.swing.JFrame {
         checkAlwaysOnTop = new javax.swing.JCheckBox();
         buttonUndo = new javax.swing.JButton();
         buttonNewQuest = new javax.swing.JButton();
-        editTab2Text = new javax.swing.JTextField();
+        editAuxText = new javax.swing.JTextField();
         buttonCopyText = new javax.swing.JButton();
         buttonCopyGroup = new javax.swing.JButton();
         buttonnCopySubGroup = new javax.swing.JButton();
         editAppend = new javax.swing.JTextField();
         editHeartFolder = new javax.swing.JTextField();
+        checkAutoAddAtEnd = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Charvs");
@@ -300,7 +301,7 @@ public class Desk extends javax.swing.JFrame {
             }
         });
 
-        buttonCopyText.setText("Copy Text");
+        buttonCopyText.setText("Copy");
         buttonCopyText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonCopyTextActionPerformed(evt);
@@ -325,6 +326,8 @@ public class Desk extends javax.swing.JFrame {
 
         editHeartFolder.setText("D:\\emuvi\\OneDrive\\Documentos\\Educação\\AELIN\\ABIN\\Heart");
 
+        checkAutoAddAtEnd.setToolTipText("Automatic add t the end.");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -333,26 +336,27 @@ public class Desk extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(editFileName)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addComponent(buttonNewQuest)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(buttonNewTitle)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(buttonNewParagraph)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(editAppend, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(buttonSpaceAppend)
-                            .addGap(0, 0, Short.MAX_VALUE))
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addComponent(checkAlwaysOnTop)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(editHeartFolder, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(buttonNewQuest)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonNewTitle)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonNewParagraph)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(editAppend, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonSpaceAppend)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(checkAlwaysOnTop)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(editHeartFolder, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(buttonUndo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(editTab2Text)
+                        .addComponent(editAuxText)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(checkAutoAddAtEnd)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttonCopyText)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -376,10 +380,11 @@ public class Desk extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonUndo)
-                    .addComponent(editTab2Text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(editAuxText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonCopyText)
                     .addComponent(buttonCopyGroup)
-                    .addComponent(buttonnCopySubGroup))
+                    .addComponent(buttonnCopySubGroup)
+                    .addComponent(checkAutoAddAtEnd))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(checkAlwaysOnTop)
@@ -645,7 +650,7 @@ public class Desk extends javax.swing.JFrame {
 
     private void buttonCopyTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCopyTextActionPerformed
         try {
-            WizSwing.putStringOnClipboard(editTab2Text.getText());
+            WizSwing.putStringOnClipboard(editAuxText.getText());
         } catch (Exception e) {
             WizSwing.showError(e);
         }
@@ -717,6 +722,9 @@ public class Desk extends javax.swing.JFrame {
             }
         }
         var text = begin + String.join("\n", lines) + end;
+        if (checkAutoAddAtEnd.isSelected()) {
+            text = text + "\n\n" + editAuxText.getText();
+        }
         if (nameMark == null) {
             nameMark = title;
         }
@@ -824,12 +832,13 @@ public class Desk extends javax.swing.JFrame {
     private javax.swing.JButton buttonUndo;
     private javax.swing.JButton buttonnCopySubGroup;
     private javax.swing.JCheckBox checkAlwaysOnTop;
+    private javax.swing.JCheckBox checkAutoAddAtEnd;
     private javax.swing.JCheckBox checkRandom;
     private javax.swing.JComboBox<String> comboChats;
     private javax.swing.JTextField editAppend;
+    private javax.swing.JTextField editAuxText;
     private javax.swing.JTextField editFileName;
     private javax.swing.JTextField editHeartFolder;
-    private javax.swing.JTextField editTab2Text;
     private javax.swing.JTextArea editText;
     private javax.swing.JTextField fieldStatus;
     private javax.swing.JPanel jPanel1;

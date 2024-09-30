@@ -304,7 +304,9 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="buttonUndo" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="editTab2Text" max="32767" attributes="0"/>
+                              <Component id="editAuxText" max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="checkAutoAddAtEnd" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="buttonCopyText" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
@@ -333,10 +335,11 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="buttonUndo" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="editTab2Text" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="editAuxText" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="buttonCopyText" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="buttonCopyGroup" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="buttonnCopySubGroup" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="checkAutoAddAtEnd" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -399,11 +402,11 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonNewQuestActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JTextField" name="editTab2Text">
+            <Component class="javax.swing.JTextField" name="editAuxText">
             </Component>
             <Component class="javax.swing.JButton" name="buttonCopyText">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Copy Text"/>
+                <Property name="text" type="java.lang.String" value="Copy"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonCopyTextActionPerformed"/>
@@ -433,6 +436,11 @@
             <Component class="javax.swing.JTextField" name="editHeartFolder">
               <Properties>
                 <Property name="text" type="java.lang.String" value="D:\u005cemuvi\u005cOneDrive\u005cDocumentos\u005cEduca&#xe7;&#xe3;o\u005cAELIN\u005cABIN\u005cHeart" containsInvalidXMLChars="true"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JCheckBox" name="checkAutoAddAtEnd">
+              <Properties>
+                <Property name="toolTipText" type="java.lang.String" value="Automatic add t the end."/>
               </Properties>
             </Component>
           </SubComponents>
