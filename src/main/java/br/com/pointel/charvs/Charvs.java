@@ -7,7 +7,7 @@ package br.com.pointel.charvs;
 public class Charvs {
 
     public static void main(String[] args) {
-        Desk.start(args);
+        CharvsDesk.start(args);
     }
     
 }

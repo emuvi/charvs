@@ -16,11 +16,11 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import org.apache.commons.io.FilenameUtils;
 
-public class Desk extends javax.swing.JFrame {
+public class CharvsDesk extends javax.swing.JFrame {
 
     private final DefaultComboBoxModel<String> modelChats = new DefaultComboBoxModel<>();
 
-    public Desk() {
+    public CharvsDesk() {
         initComponents();
         initDrop();
         loadChats();
@@ -806,7 +806,7 @@ public class Desk extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         java.awt.EventQueue.invokeLater(() -> {
-            new Desk().setVisible(true);
+            new CharvsDesk().setVisible(true);
         });
     }
 
