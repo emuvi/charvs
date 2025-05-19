@@ -32,6 +32,8 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="labelStatus" max="32767" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="buttonAppend" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="buttonInsert" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
@@ -67,7 +69,10 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                  <Component id="buttonInsert" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="buttonInsert" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="buttonAppend" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <Component id="checkOnTop" alignment="0" max="32767" attributes="0"/>
                   <Component id="labelStatus" alignment="0" max="32767" attributes="0"/>
               </Group>
@@ -189,6 +194,14 @@
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="labelStatus">
+    </Component>
+    <Component class="javax.swing.JButton" name="buttonAppend">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Append"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonAppendActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

@@ -9,6 +9,8 @@ import javax.swing.DefaultComboBoxModel;
 public class CharvsDesk extends javax.swing.JFrame {
 
     private final DefaultComboBoxModel<String> modelOrigin = new DefaultComboBoxModel<>();
+    
+    private String buffer = "";
 
     public CharvsDesk() {
         initComponents();
@@ -32,6 +34,7 @@ public class CharvsDesk extends javax.swing.JFrame {
         buttonDestinyOpen = new javax.swing.JButton();
         buttonSave = new javax.swing.JButton();
         labelStatus = new javax.swing.JLabel();
+        buttonAppend = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Charvs");
@@ -105,6 +108,13 @@ public class CharvsDesk extends javax.swing.JFrame {
             }
         });
 
+        buttonAppend.setText("Append");
+        buttonAppend.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAppendActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -117,6 +127,8 @@ public class CharvsDesk extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(labelStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
+                        .addComponent(buttonAppend)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(buttonInsert))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(buttonOriginSelect)
@@ -145,7 +157,9 @@ public class CharvsDesk extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(buttonInsert)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(buttonInsert)
+                        .addComponent(buttonAppend))
                     .addComponent(checkOnTop, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(labelStatus, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -257,10 +271,22 @@ public class CharvsDesk extends javax.swing.JFrame {
             }
             WizDesk.putStringOnClipboard(origin);
             labelStatus.setText("Inserted");
+            buffer = "";
         } catch (Exception e) {
             WizDesk.showError(e);
         }
     }//GEN-LAST:event_buttonInsertActionPerformed
+
+    private void buttonAppendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAppendActionPerformed
+        try {
+            var body = WizDesk.getStringFromClipboard();
+            buffer = buffer.trim() + "\n\n" + body.trim();
+            WizDesk.putStringOnClipboard(buffer);
+            labelStatus.setText("Appended");
+        } catch (Exception e) {
+            WizDesk.showError(e);
+        }
+    }//GEN-LAST:event_buttonAppendActionPerformed
 
     private String cleanTitle(String title) {
         title = title.trim();
@@ -294,6 +320,7 @@ public class CharvsDesk extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buttonAppend;
     private javax.swing.JButton buttonDestinyOpen;
     private javax.swing.JButton buttonDestinySelect;
     private javax.swing.JButton buttonInsert;
