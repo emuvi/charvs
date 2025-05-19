@@ -31,6 +31,7 @@ public class CharvsDesk extends javax.swing.JFrame {
         fieldDestiny = new javax.swing.JTextField();
         buttonDestinyOpen = new javax.swing.JButton();
         buttonSave = new javax.swing.JButton();
+        labelStatus = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Charvs");
@@ -113,7 +114,9 @@ public class CharvsDesk extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(checkOnTop)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(labelStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addComponent(buttonInsert))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(buttonOriginSelect)
@@ -141,9 +144,10 @@ public class CharvsDesk extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(buttonInsert)
-                    .addComponent(checkOnTop))
+                    .addComponent(checkOnTop, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(labelStatus, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonLoad)
@@ -195,6 +199,7 @@ public class CharvsDesk extends javax.swing.JFrame {
             var folder = new File(fieldDestiny.getText());
             var file = new File(folder, title + ".txt");
             Files.writeString(file.toPath(), text);
+            labelStatus.setText("Saved");
         } catch (Exception e) {
             WizDesk.showError(e);
         }
@@ -223,6 +228,7 @@ public class CharvsDesk extends javax.swing.JFrame {
             var file = new File(folder, comboOrigin.getSelectedItem().toString());
             var origin = Files.readString(file.toPath());
             WizDesk.putStringOnClipboard(origin);
+            labelStatus.setText("Loaded");
         } catch (Exception e) {
             WizDesk.showError(e);
         }
@@ -250,6 +256,7 @@ public class CharvsDesk extends javax.swing.JFrame {
                 origin = origin + "\n\n" + body;
             }
             WizDesk.putStringOnClipboard(origin);
+            labelStatus.setText("Inserted");
         } catch (Exception e) {
             WizDesk.showError(e);
         }
@@ -299,5 +306,6 @@ public class CharvsDesk extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> comboOrigin;
     private javax.swing.JTextField fieldDestiny;
     private javax.swing.JTextField fieldOrigin;
+    private javax.swing.JLabel labelStatus;
     // End of variables declaration//GEN-END:variables
 }
