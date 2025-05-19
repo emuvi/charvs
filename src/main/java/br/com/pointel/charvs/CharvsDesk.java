@@ -214,6 +214,7 @@ public class CharvsDesk extends javax.swing.JFrame {
             var file = new File(folder, title + ".txt");
             Files.writeString(file.toPath(), text);
             labelStatus.setText("Saved");
+            buffer = "";
         } catch (Exception e) {
             WizDesk.showError(e);
         }
@@ -243,6 +244,7 @@ public class CharvsDesk extends javax.swing.JFrame {
             var origin = Files.readString(file.toPath());
             WizDesk.putStringOnClipboard(origin);
             labelStatus.setText("Loaded");
+            buffer = "";
         } catch (Exception e) {
             WizDesk.showError(e);
         }
