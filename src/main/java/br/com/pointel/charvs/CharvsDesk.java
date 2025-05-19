@@ -244,7 +244,11 @@ public class CharvsDesk extends javax.swing.JFrame {
             var folder = new File(fieldOrigin.getText());
             var file = new File(folder, comboOrigin.getSelectedItem().toString());
             var origin = Files.readString(file.toPath());
-            origin = origin.replace("<INSERT>", body);
+            if (origin.contains("<INSERT>")) {
+                origin = origin.replace("<INSERT>", body);
+            } else {
+                origin = origin + "\n\n" + body;
+            }
             WizDesk.putStringOnClipboard(origin);
         } catch (Exception e) {
             WizDesk.showError(e);
