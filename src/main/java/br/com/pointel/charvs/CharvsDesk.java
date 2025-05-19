@@ -199,7 +199,7 @@ public class CharvsDesk extends javax.swing.JFrame {
             var folder = new File(fieldDestiny.getText());
             var file = new File(folder, title + ".txt");
             Files.writeString(file.toPath(), text);
-            labelStatus.setText("Saved: " + file.getName());
+            labelStatus.setText("Saved");
         } catch (Exception e) {
             WizDesk.showError(e);
         }
@@ -228,7 +228,7 @@ public class CharvsDesk extends javax.swing.JFrame {
             var file = new File(folder, comboOrigin.getSelectedItem().toString());
             var origin = Files.readString(file.toPath());
             WizDesk.putStringOnClipboard(origin);
-            labelStatus.setText("Loaded: " + file.getName());
+            labelStatus.setText("Loaded");
         } catch (Exception e) {
             WizDesk.showError(e);
         }
@@ -256,7 +256,7 @@ public class CharvsDesk extends javax.swing.JFrame {
                 origin = origin + "\n\n" + body;
             }
             WizDesk.putStringOnClipboard(origin);
-            labelStatus.setText("Inserted: " + file.getName());
+            labelStatus.setText("Inserted");
         } catch (Exception e) {
             WizDesk.showError(e);
         }
