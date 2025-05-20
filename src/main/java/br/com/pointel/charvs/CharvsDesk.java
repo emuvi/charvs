@@ -10,7 +10,8 @@ public class CharvsDesk extends javax.swing.JFrame {
 
     private final DefaultComboBoxModel<String> modelOrigin = new DefaultComboBoxModel<>();
     
-    private String buffer = "";
+    private String bufferBody = "";
+    private Integer bufferSize = 0;
 
     public CharvsDesk() {
         initComponents();
@@ -214,7 +215,8 @@ public class CharvsDesk extends javax.swing.JFrame {
             var file = new File(folder, title + ".txt");
             Files.writeString(file.toPath(), text);
             labelStatus.setText("Saved");
-            buffer = "";
+            bufferBody = "";
+            bufferSize = 0;
         } catch (Exception e) {
             WizDesk.showError(e);
         }
@@ -244,7 +246,8 @@ public class CharvsDesk extends javax.swing.JFrame {
             var origin = Files.readString(file.toPath());
             WizDesk.putStringOnClipboard(origin);
             labelStatus.setText("Loaded");
-            buffer = "";
+            bufferBody = "";
+            bufferSize = 0;
         } catch (Exception e) {
             WizDesk.showError(e);
         }
@@ -273,7 +276,8 @@ public class CharvsDesk extends javax.swing.JFrame {
             }
             WizDesk.putStringOnClipboard(origin);
             labelStatus.setText("Inserted");
-            buffer = "";
+            bufferBody = "";
+            bufferSize = 0;
         } catch (Exception e) {
             WizDesk.showError(e);
         }
@@ -282,9 +286,10 @@ public class CharvsDesk extends javax.swing.JFrame {
     private void buttonAppendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAppendActionPerformed
         try {
             var body = WizDesk.getStringFromClipboard();
-            buffer = buffer.trim() + "\n\n" + body.trim();
-            WizDesk.putStringOnClipboard(buffer);
-            labelStatus.setText("Appended");
+            bufferBody = (bufferBody.trim() + "\n\n" + body.trim()).trim();
+            bufferSize++;
+            WizDesk.putStringOnClipboard(bufferBody);
+            labelStatus.setText("Appended " + bufferSize);
         } catch (Exception e) {
             WizDesk.showError(e);
         }
