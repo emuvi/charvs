@@ -1,21 +1,40 @@
 package br.com.pointel.charvs;
 
+import br.com.pointel.jarch.mage.WizBase;
 import br.com.pointel.jarch.mage.WizChars;
 import br.com.pointel.jarch.mage.WizDesk;
 import java.io.File;
 import java.nio.file.Files;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.SwingUtilities;
 
 public class CharvsDesk extends javax.swing.JFrame {
 
     private final DefaultComboBoxModel<String> modelOrigin = new DefaultComboBoxModel<>();
-    
+
     private String bufferBody = "";
     private Integer bufferSize = 0;
+    private String originLast = "";
+    private String originActual = "";
+    private File savedLast = null;
 
     public CharvsDesk() {
         initComponents();
         WizDesk.initFrame(this);
+        initUpdater();
+    }
+
+    private void initUpdater() {
+        new Thread("Updater") {
+            @Override
+            public void run() {
+                WizBase.sleep(1000);
+                SwingUtilities.invokeLater(() -> {
+                    checkOnTop.setSelected(isAlwaysOnTop());
+                    buttonOriginUpdateActionPerformed(null);
+                });
+            }
+        }.start();
     }
 
     @SuppressWarnings("unchecked")
@@ -36,6 +55,8 @@ public class CharvsDesk extends javax.swing.JFrame {
         buttonSave = new javax.swing.JButton();
         labelStatus = new javax.swing.JLabel();
         buttonAppend = new javax.swing.JButton();
+        buttonSaveOpen = new javax.swing.JButton();
+        buttonSwitch = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Charvs");
@@ -63,7 +84,7 @@ public class CharvsDesk extends javax.swing.JFrame {
 
         fieldOrigin.setName("Origin"); // NOI18N
 
-        buttonOriginOpen.setText("Open");
+        buttonOriginOpen.setText("*");
         buttonOriginOpen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonOriginOpenActionPerformed(evt);
@@ -85,6 +106,11 @@ public class CharvsDesk extends javax.swing.JFrame {
         });
 
         comboOrigin.setModel(modelOrigin);
+        comboOrigin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboOriginActionPerformed(evt);
+            }
+        });
 
         buttonDestinySelect.setText("Select");
         buttonDestinySelect.addActionListener(new java.awt.event.ActionListener() {
@@ -95,7 +121,7 @@ public class CharvsDesk extends javax.swing.JFrame {
 
         fieldDestiny.setName("Destiny"); // NOI18N
 
-        buttonDestinyOpen.setText("Open");
+        buttonDestinyOpen.setText("*");
         buttonDestinyOpen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonDestinyOpenActionPerformed(evt);
@@ -113,6 +139,20 @@ public class CharvsDesk extends javax.swing.JFrame {
         buttonAppend.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonAppendActionPerformed(evt);
+            }
+        });
+
+        buttonSaveOpen.setText("*");
+        buttonSaveOpen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonSaveOpenActionPerformed(evt);
+            }
+        });
+
+        buttonSwitch.setText("%");
+        buttonSwitch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonSwitchActionPerformed(evt);
             }
         });
 
@@ -134,23 +174,27 @@ public class CharvsDesk extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(buttonOriginSelect)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(fieldOrigin, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttonOriginOpen)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(fieldOrigin)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttonLoad))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(buttonOriginUpdate)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(comboOrigin, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(comboOrigin, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonSwitch))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(buttonDestinySelect)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(fieldDestiny)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttonDestinyOpen)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonSave)))
+                        .addComponent(fieldDestiny, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonSave)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonSaveOpen)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -172,13 +216,15 @@ public class CharvsDesk extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonOriginUpdate)
-                    .addComponent(comboOrigin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(comboOrigin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonSwitch))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonDestinySelect)
                     .addComponent(fieldDestiny, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonSave)
-                    .addComponent(buttonDestinyOpen))
+                    .addComponent(buttonDestinyOpen)
+                    .addComponent(buttonSaveOpen))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -254,8 +300,11 @@ public class CharvsDesk extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonLoadActionPerformed
 
     private void buttonOriginUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOriginUpdateActionPerformed
-        var folder = new File(fieldOrigin.getText());
         modelOrigin.removeAllElements();
+        var folder = new File(fieldOrigin.getText());
+        if (!folder.exists()) {
+            return;
+        }
         for (var inside : folder.listFiles()) {
             if (inside.getName().toLowerCase().endsWith(".txt")) {
                 modelOrigin.addElement(inside.getName());
@@ -295,6 +344,23 @@ public class CharvsDesk extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_buttonAppendActionPerformed
 
+    private void buttonSaveOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSaveOpenActionPerformed
+        try {
+            WizDesk.open(savedLast);
+        } catch (Exception e) {
+            WizDesk.showError(e);
+        }
+    }//GEN-LAST:event_buttonSaveOpenActionPerformed
+
+    private void comboOriginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboOriginActionPerformed
+        originLast = originActual;
+        originActual = comboOrigin.getSelectedItem().toString();
+    }//GEN-LAST:event_comboOriginActionPerformed
+
+    private void buttonSwitchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSwitchActionPerformed
+        comboOrigin.setSelectedItem(originLast);
+    }//GEN-LAST:event_buttonSwitchActionPerformed
+
     private String cleanTitle(String title) {
         title = title.trim();
         return title
@@ -317,7 +383,7 @@ public class CharvsDesk extends javax.swing.JFrame {
                 .replace(";", ",")
                 .trim();
     }
-    
+
     private String cleanCitation(String text) {
         return text.replaceAll("\\[cite\\:(\\s|\\d|\\,)+\\]", "");
     }
@@ -336,6 +402,8 @@ public class CharvsDesk extends javax.swing.JFrame {
     private javax.swing.JButton buttonOriginSelect;
     private javax.swing.JButton buttonOriginUpdate;
     private javax.swing.JButton buttonSave;
+    private javax.swing.JButton buttonSaveOpen;
+    private javax.swing.JButton buttonSwitch;
     private javax.swing.JCheckBox checkOnTop;
     private javax.swing.JComboBox<String> comboOrigin;
     private javax.swing.JTextField fieldDestiny;
