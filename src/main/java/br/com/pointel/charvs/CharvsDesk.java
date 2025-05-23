@@ -263,6 +263,7 @@ public class CharvsDesk extends javax.swing.JFrame {
             labelStatus.setText("Saved");
             bufferBody = "";
             bufferSize = 0;
+            savedLast = file;
         } catch (Exception e) {
             WizDesk.showError(e);
         }
