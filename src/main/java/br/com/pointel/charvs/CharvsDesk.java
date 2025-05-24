@@ -94,7 +94,7 @@ public class CharvsDesk extends javax.swing.JFrame {
             }
         });
 
-        buttonOriginSelect.setText("Select");
+        buttonOriginSelect.setText("Origin");
         buttonOriginSelect.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonOriginSelectActionPerformed(evt);
@@ -166,7 +166,7 @@ public class CharvsDesk extends javax.swing.JFrame {
             }
         });
 
-        buttonDestinySelect.setText("Select");
+        buttonDestinySelect.setText("Destiny");
         buttonDestinySelect.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonDestinySelectActionPerformed(evt);
