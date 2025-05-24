@@ -47,10 +47,11 @@ public class CharvsDesk extends javax.swing.JFrame {
         buttonAppend = new javax.swing.JButton();
         buttonInsert = new javax.swing.JButton();
         buttonOriginSelect = new javax.swing.JButton();
-        buttonOriginOpen = new javax.swing.JButton();
+        buttonOriginFolder = new javax.swing.JButton();
         fieldOrigin = new javax.swing.JTextField();
         buttonLoad = new javax.swing.JButton();
         buttonOriginUpdate = new javax.swing.JButton();
+        buttonOriginFile = new javax.swing.JButton();
         comboOrigin = new javax.swing.JComboBox<>();
         buttonOriginFirst = new javax.swing.JButton();
         buttonOriginPrior = new javax.swing.JButton();
@@ -100,10 +101,10 @@ public class CharvsDesk extends javax.swing.JFrame {
             }
         });
 
-        buttonOriginOpen.setText("*");
-        buttonOriginOpen.addActionListener(new java.awt.event.ActionListener() {
+        buttonOriginFolder.setText("*");
+        buttonOriginFolder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonOriginOpenActionPerformed(evt);
+                buttonOriginFolderActionPerformed(evt);
             }
         });
 
@@ -120,6 +121,13 @@ public class CharvsDesk extends javax.swing.JFrame {
         buttonOriginUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonOriginUpdateActionPerformed(evt);
+            }
+        });
+
+        buttonOriginFile.setText("*");
+        buttonOriginFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonOriginFileActionPerformed(evt);
             }
         });
 
@@ -208,13 +216,15 @@ public class CharvsDesk extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(buttonOriginSelect)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonOriginOpen)
+                        .addComponent(buttonOriginFolder)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(fieldOrigin)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttonLoad))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(buttonOriginUpdate)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonOriginFile)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(comboOrigin, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -250,7 +260,7 @@ public class CharvsDesk extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonOriginSelect)
-                    .addComponent(buttonOriginOpen)
+                    .addComponent(buttonOriginFolder)
                     .addComponent(buttonLoad)
                     .addComponent(fieldOrigin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -260,7 +270,8 @@ public class CharvsDesk extends javax.swing.JFrame {
                     .addComponent(buttonOriginNext)
                     .addComponent(buttonOriginPrior)
                     .addComponent(buttonOriginFirst)
-                    .addComponent(comboOrigin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(comboOrigin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonOriginFile))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonDestinySelect)
@@ -317,14 +328,14 @@ public class CharvsDesk extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_buttonOriginSelectActionPerformed
 
-    private void buttonOriginOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOriginOpenActionPerformed
+    private void buttonOriginFolderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOriginFolderActionPerformed
         try {
             var selected = new File(fieldOrigin.getText());
             WizDesk.open(selected);
         } catch (Exception e) {
             WizDesk.showError(e);
         }
-    }//GEN-LAST:event_buttonOriginOpenActionPerformed
+    }//GEN-LAST:event_buttonOriginFolderActionPerformed
 
     private void buttonLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoadActionPerformed
         try {
@@ -442,6 +453,16 @@ public class CharvsDesk extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_buttonGearsActionPerformed
 
+    private void buttonOriginFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOriginFileActionPerformed
+        try {
+            var folder = new File(fieldOrigin.getText());
+            var file = new File(folder, comboOrigin.getSelectedItem().toString());
+            WizDesk.open(file);
+        } catch (Exception e) {
+            WizDesk.showError(e);
+        }
+    }//GEN-LAST:event_buttonOriginFileActionPerformed
+
     private String cleanTitle(String title) {
         title = title.trim();
         return title
@@ -481,9 +502,10 @@ public class CharvsDesk extends javax.swing.JFrame {
     private javax.swing.JButton buttonGears;
     private javax.swing.JButton buttonInsert;
     private javax.swing.JButton buttonLoad;
+    private javax.swing.JButton buttonOriginFile;
     private javax.swing.JButton buttonOriginFirst;
+    private javax.swing.JButton buttonOriginFolder;
     private javax.swing.JButton buttonOriginNext;
-    private javax.swing.JButton buttonOriginOpen;
     private javax.swing.JButton buttonOriginPrior;
     private javax.swing.JButton buttonOriginSelect;
     private javax.swing.JButton buttonOriginSwitch;

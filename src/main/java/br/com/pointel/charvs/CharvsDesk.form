@@ -41,7 +41,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="buttonOriginSelect" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="buttonOriginOpen" min="-2" max="-2" attributes="0"/>
+                      <Component id="buttonOriginFolder" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="fieldOrigin" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -49,6 +49,8 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="buttonOriginUpdate" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="buttonOriginFile" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="comboOrigin" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -90,7 +92,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="buttonOriginSelect" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="buttonOriginOpen" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="buttonOriginFolder" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="buttonLoad" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="fieldOrigin" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -102,6 +104,7 @@
                   <Component id="buttonOriginPrior" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="buttonOriginFirst" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="comboOrigin" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="buttonOriginFile" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -159,12 +162,12 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonOriginSelectActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="buttonOriginOpen">
+    <Component class="javax.swing.JButton" name="buttonOriginFolder">
       <Properties>
         <Property name="text" type="java.lang.String" value="*"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonOriginOpenActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonOriginFolderActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="fieldOrigin">
@@ -186,6 +189,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonOriginUpdateActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="buttonOriginFile">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="*"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonOriginFileActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JComboBox" name="comboOrigin">
