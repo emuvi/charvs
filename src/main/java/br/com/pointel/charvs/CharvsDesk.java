@@ -435,7 +435,7 @@ public class CharvsDesk extends javax.swing.JFrame {
     private void buttonAppendCleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAppendCleanActionPerformed
         bufferBody = "";
         bufferSize = 0;
-        labelStatus.setText("Cleaned");
+        labelStatus.setText("Appended " + bufferSize);
     }//GEN-LAST:event_buttonAppendCleanActionPerformed
 
     private void buttonGearsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGearsActionPerformed
