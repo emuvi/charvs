@@ -50,14 +50,20 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="comboOrigin" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="buttonSwitch" min="-2" max="-2" attributes="0"/>
+                      <Component id="buttonOriginFirst" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="buttonOriginPrior" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="buttonOriginNext" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="buttonOriginSwitch" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
                       <Component id="buttonDestinySelect" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="buttonDestinyOpen" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="fieldDestiny" pref="148" max="32767" attributes="0"/>
+                      <Component id="fieldDestiny" pref="250" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="buttonSave" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -91,7 +97,10 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="buttonOriginUpdate" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="comboOrigin" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="buttonSwitch" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="buttonOriginSwitch" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="buttonOriginNext" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="buttonOriginPrior" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="buttonOriginFirst" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -115,6 +124,16 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="checkOnTopActionPerformed"/>
       </Events>
     </Component>
+    <Component class="javax.swing.JLabel" name="labelStatus">
+    </Component>
+    <Component class="javax.swing.JButton" name="buttonAppend">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Append"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonAppendActionPerformed"/>
+      </Events>
+    </Component>
     <Component class="javax.swing.JButton" name="buttonInsert">
       <Properties>
         <Property name="text" type="java.lang.String" value="Insert"/>
@@ -131,11 +150,6 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonOriginSelectActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="fieldOrigin">
-      <Properties>
-        <Property name="name" type="java.lang.String" value="Origin" noResource="true"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JButton" name="buttonOriginOpen">
       <Properties>
         <Property name="text" type="java.lang.String" value="*"/>
@@ -143,6 +157,11 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonOriginOpenActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="fieldOrigin">
+      <Properties>
+        <Property name="name" type="java.lang.String" value="Origin" noResource="true"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="buttonLoad">
       <Properties>
@@ -173,6 +192,38 @@
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
+    <Component class="javax.swing.JButton" name="buttonOriginFirst">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="^"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonOriginFirstActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="buttonOriginPrior">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&lt;"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonOriginPriorActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="buttonOriginNext">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&gt;"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonOriginNextActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="buttonOriginSwitch">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="%"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonOriginSwitchActionPerformed"/>
+      </Events>
+    </Component>
     <Component class="javax.swing.JButton" name="buttonDestinySelect">
       <Properties>
         <Property name="text" type="java.lang.String" value="Select"/>
@@ -180,11 +231,6 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonDestinySelectActionPerformed"/>
       </Events>
-    </Component>
-    <Component class="javax.swing.JTextField" name="fieldDestiny">
-      <Properties>
-        <Property name="name" type="java.lang.String" value="Destiny" noResource="true"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="buttonDestinyOpen">
       <Properties>
@@ -194,6 +240,11 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonDestinyOpenActionPerformed"/>
       </Events>
     </Component>
+    <Component class="javax.swing.JTextField" name="fieldDestiny">
+      <Properties>
+        <Property name="name" type="java.lang.String" value="Destiny" noResource="true"/>
+      </Properties>
+    </Component>
     <Component class="javax.swing.JButton" name="buttonSave">
       <Properties>
         <Property name="text" type="java.lang.String" value="Save"/>
@@ -202,30 +253,12 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonSaveActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="labelStatus">
-    </Component>
-    <Component class="javax.swing.JButton" name="buttonAppend">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Append"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonAppendActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JButton" name="buttonSaveOpen">
       <Properties>
         <Property name="text" type="java.lang.String" value="*"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonSaveOpenActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="buttonSwitch">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="%"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonSwitchActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

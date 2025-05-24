@@ -42,21 +42,24 @@ public class CharvsDesk extends javax.swing.JFrame {
     private void initComponents() {
 
         checkOnTop = new javax.swing.JCheckBox();
+        labelStatus = new javax.swing.JLabel();
+        buttonAppend = new javax.swing.JButton();
         buttonInsert = new javax.swing.JButton();
         buttonOriginSelect = new javax.swing.JButton();
-        fieldOrigin = new javax.swing.JTextField();
         buttonOriginOpen = new javax.swing.JButton();
+        fieldOrigin = new javax.swing.JTextField();
         buttonLoad = new javax.swing.JButton();
         buttonOriginUpdate = new javax.swing.JButton();
         comboOrigin = new javax.swing.JComboBox<>();
+        buttonOriginFirst = new javax.swing.JButton();
+        buttonOriginPrior = new javax.swing.JButton();
+        buttonOriginNext = new javax.swing.JButton();
+        buttonOriginSwitch = new javax.swing.JButton();
         buttonDestinySelect = new javax.swing.JButton();
-        fieldDestiny = new javax.swing.JTextField();
         buttonDestinyOpen = new javax.swing.JButton();
+        fieldDestiny = new javax.swing.JTextField();
         buttonSave = new javax.swing.JButton();
-        labelStatus = new javax.swing.JLabel();
-        buttonAppend = new javax.swing.JButton();
         buttonSaveOpen = new javax.swing.JButton();
-        buttonSwitch = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Charvs");
@@ -65,6 +68,13 @@ public class CharvsDesk extends javax.swing.JFrame {
         checkOnTop.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 checkOnTopActionPerformed(evt);
+            }
+        });
+
+        buttonAppend.setText("Append");
+        buttonAppend.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAppendActionPerformed(evt);
             }
         });
 
@@ -82,14 +92,14 @@ public class CharvsDesk extends javax.swing.JFrame {
             }
         });
 
-        fieldOrigin.setName("Origin"); // NOI18N
-
         buttonOriginOpen.setText("*");
         buttonOriginOpen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonOriginOpenActionPerformed(evt);
             }
         });
+
+        fieldOrigin.setName("Origin"); // NOI18N
 
         buttonLoad.setText("Load");
         buttonLoad.addActionListener(new java.awt.event.ActionListener() {
@@ -112,14 +122,40 @@ public class CharvsDesk extends javax.swing.JFrame {
             }
         });
 
+        buttonOriginFirst.setText("^");
+        buttonOriginFirst.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonOriginFirstActionPerformed(evt);
+            }
+        });
+
+        buttonOriginPrior.setText("<");
+        buttonOriginPrior.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonOriginPriorActionPerformed(evt);
+            }
+        });
+
+        buttonOriginNext.setText(">");
+        buttonOriginNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonOriginNextActionPerformed(evt);
+            }
+        });
+
+        buttonOriginSwitch.setText("%");
+        buttonOriginSwitch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonOriginSwitchActionPerformed(evt);
+            }
+        });
+
         buttonDestinySelect.setText("Select");
         buttonDestinySelect.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonDestinySelectActionPerformed(evt);
             }
         });
-
-        fieldDestiny.setName("Destiny"); // NOI18N
 
         buttonDestinyOpen.setText("*");
         buttonDestinyOpen.addActionListener(new java.awt.event.ActionListener() {
@@ -128,6 +164,8 @@ public class CharvsDesk extends javax.swing.JFrame {
             }
         });
 
+        fieldDestiny.setName("Destiny"); // NOI18N
+
         buttonSave.setText("Save");
         buttonSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -135,24 +173,10 @@ public class CharvsDesk extends javax.swing.JFrame {
             }
         });
 
-        buttonAppend.setText("Append");
-        buttonAppend.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonAppendActionPerformed(evt);
-            }
-        });
-
         buttonSaveOpen.setText("*");
         buttonSaveOpen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonSaveOpenActionPerformed(evt);
-            }
-        });
-
-        buttonSwitch.setText("%");
-        buttonSwitch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonSwitchActionPerformed(evt);
             }
         });
 
@@ -184,13 +208,19 @@ public class CharvsDesk extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(comboOrigin, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonSwitch))
-                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(buttonOriginFirst)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonOriginPrior)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonOriginNext)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonOriginSwitch))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(buttonDestinySelect)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttonDestinyOpen)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(fieldDestiny, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+                        .addComponent(fieldDestiny, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttonSave)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -217,7 +247,10 @@ public class CharvsDesk extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonOriginUpdate)
                     .addComponent(comboOrigin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonSwitch))
+                    .addComponent(buttonOriginSwitch)
+                    .addComponent(buttonOriginNext)
+                    .addComponent(buttonOriginPrior)
+                    .addComponent(buttonOriginFirst))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonDestinySelect)
@@ -355,13 +388,43 @@ public class CharvsDesk extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonSaveOpenActionPerformed
 
     private void comboOriginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboOriginActionPerformed
-        originLast = originActual;
-        originActual = comboOrigin.getSelectedItem().toString();
+        if (comboOrigin.getSelectedItem() != null) {
+            originLast = originActual;
+            originActual = comboOrigin.getSelectedItem().toString();
+        }
     }//GEN-LAST:event_comboOriginActionPerformed
 
-    private void buttonSwitchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSwitchActionPerformed
-        comboOrigin.setSelectedItem(originLast);
-    }//GEN-LAST:event_buttonSwitchActionPerformed
+    private void buttonOriginSwitchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOriginSwitchActionPerformed
+        try {
+            comboOrigin.setSelectedItem(originLast);
+        } catch (Exception e) {
+            WizDesk.showError(e);
+        }
+    }//GEN-LAST:event_buttonOriginSwitchActionPerformed
+
+    private void buttonOriginFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOriginFirstActionPerformed
+        try {
+            comboOrigin.setSelectedIndex(0);
+        } catch (Exception e) {
+            WizDesk.showError(e);
+        }
+    }//GEN-LAST:event_buttonOriginFirstActionPerformed
+
+    private void buttonOriginPriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOriginPriorActionPerformed
+        try {
+            comboOrigin.setSelectedIndex(comboOrigin.getSelectedIndex() - 1);
+        } catch (Exception e) {
+            WizDesk.showError(e);
+        }
+    }//GEN-LAST:event_buttonOriginPriorActionPerformed
+
+    private void buttonOriginNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOriginNextActionPerformed
+        try {
+            comboOrigin.setSelectedIndex(comboOrigin.getSelectedIndex() + 1);
+        } catch (Exception e) {
+            WizDesk.showError(e);
+        }
+    }//GEN-LAST:event_buttonOriginNextActionPerformed
 
     private String cleanTitle(String title) {
         title = title.trim();
@@ -400,12 +463,15 @@ public class CharvsDesk extends javax.swing.JFrame {
     private javax.swing.JButton buttonDestinySelect;
     private javax.swing.JButton buttonInsert;
     private javax.swing.JButton buttonLoad;
+    private javax.swing.JButton buttonOriginFirst;
+    private javax.swing.JButton buttonOriginNext;
     private javax.swing.JButton buttonOriginOpen;
+    private javax.swing.JButton buttonOriginPrior;
     private javax.swing.JButton buttonOriginSelect;
+    private javax.swing.JButton buttonOriginSwitch;
     private javax.swing.JButton buttonOriginUpdate;
     private javax.swing.JButton buttonSave;
     private javax.swing.JButton buttonSaveOpen;
-    private javax.swing.JButton buttonSwitch;
     private javax.swing.JCheckBox checkOnTop;
     private javax.swing.JComboBox<String> comboOrigin;
     private javax.swing.JTextField fieldDestiny;
