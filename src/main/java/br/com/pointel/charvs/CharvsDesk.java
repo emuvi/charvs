@@ -116,7 +116,7 @@ public class CharvsDesk extends javax.swing.JFrame {
             }
         });
 
-        buttonOriginUpdate.setText("Update");
+        buttonOriginUpdate.setText("~");
         buttonOriginUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonOriginUpdateActionPerformed(evt);
