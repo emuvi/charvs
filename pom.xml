@@ -38,6 +38,12 @@
     </dependencies>
     
     <build>
+        <resources>
+            <resource>
+                <directory>res</directory>
+                <filtering>false</filtering>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

@@ -1,5 +1,3 @@
 dist/
-pack/
 target/
-prompts/
-*.ini
+props.ini

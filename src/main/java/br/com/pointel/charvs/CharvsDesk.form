@@ -27,16 +27,18 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="checkOnTop" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="buttonGears" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="labelStatus" max="32767" attributes="0"/>
+                      <Component id="labelStatus" pref="171" max="32767" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="buttonAppendClean" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="buttonAppend" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="buttonInsert" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="1" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <Component id="buttonOriginSelect" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="buttonOriginOpen" min="-2" max="-2" attributes="0"/>
@@ -58,12 +60,12 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="buttonOriginSwitch" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="1" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <Component id="buttonDestinySelect" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="buttonDestinyOpen" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="fieldDestiny" pref="250" max="32767" attributes="0"/>
+                      <Component id="fieldDestiny" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="buttonSave" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -78,53 +80,60 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="buttonInsert" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="buttonAppend" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Component id="checkOnTop" alignment="0" max="32767" attributes="0"/>
-                  <Component id="labelStatus" alignment="0" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="buttonInsert" alignment="3" max="32767" attributes="0"/>
+                  <Component id="buttonAppend" alignment="3" max="32767" attributes="0"/>
+                  <Component id="buttonAppendClean" alignment="3" max="32767" attributes="0"/>
+                  <Component id="buttonGears" alignment="3" max="32767" attributes="0"/>
+                  <Component id="labelStatus" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="buttonLoad" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="buttonOriginOpen" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="fieldOrigin" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="buttonOriginSelect" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="buttonOriginOpen" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="buttonLoad" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="fieldOrigin" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="buttonOriginUpdate" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="comboOrigin" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="buttonOriginSwitch" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="buttonOriginNext" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="buttonOriginPrior" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="buttonOriginFirst" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="comboOrigin" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="buttonDestinySelect" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="fieldDestiny" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="buttonSave" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="buttonDestinyOpen" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="buttonSaveOpen" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="buttonSave" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="fieldDestiny" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JCheckBox" name="checkOnTop">
+    <Component class="javax.swing.JButton" name="buttonGears">
       <Properties>
-        <Property name="text" type="java.lang.String" value="On Top"/>
+        <Property name="text" type="java.lang.String" value="Gears"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="checkOnTopActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonGearsActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="labelStatus">
+    </Component>
+    <Component class="javax.swing.JButton" name="buttonAppendClean">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="|"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonAppendCleanActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="buttonAppend">
       <Properties>
