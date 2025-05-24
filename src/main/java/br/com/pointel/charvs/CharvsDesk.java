@@ -259,8 +259,9 @@ public class CharvsDesk extends javax.swing.JFrame {
             var title = cleanTitle(lines[0]);
             var folder = new File(fieldDestiny.getText());
             var file = new File(folder, title + ".txt");
+            var exists = file.exists();
             Files.writeString(file.toPath(), text);
-            labelStatus.setText("Saved");
+            labelStatus.setText(exists ? "Overwritten" : "Saved");
             bufferBody = "";
             bufferSize = 0;
             savedLast = file;
