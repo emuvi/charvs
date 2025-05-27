@@ -5,12 +5,19 @@ import br.com.pointel.jarch.mage.WizChars;
 import br.com.pointel.jarch.mage.WizDesk;
 import java.io.File;
 import java.nio.file.Files;
+import java.util.Objects;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.SwingUtilities;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class CharvsDesk extends javax.swing.JFrame {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(CharvsDesk.class);
+
     private final DefaultComboBoxModel<String> modelOrigin = new DefaultComboBoxModel<>();
+    
+    private volatile Gears gears = new Gears();
 
     private String bufferBody = "";
     private Integer bufferSize = 0;
@@ -19,24 +26,63 @@ public class CharvsDesk extends javax.swing.JFrame {
     private File savedLast = null;
 
     public CharvsDesk() {
-        initComponents();
-        initUpdater();
-        setIconImage(WizDesk.getLogo());
-        WizDesk.initFrame(this);
+        initDesk();
     }
 
-    private void initUpdater() {
-        new Thread("Updater") {
+        private void initDesk() {
+            initComponents();
+            setIconImage(WizDesk.getLogo());
+            WizDesk.initFrame(this);
+            initWatcher();
+        }
+
+    private void initWatcher() {
+        new Thread("Watcher") {
             @Override
             public void run() {
                 WizBase.sleep(1000);
                 SwingUtilities.invokeLater(() -> {
                     buttonOriginUpdateActionPerformed(null);
                 });
+                while (isDisplayable()) {
+                    WizBase.sleep(1000);
+                    try {
+                        watch();
+                    } catch (Exception e) {
+                        LOGGER.error("Error on watcher.", e);
+                    }
+                }
             }
         }.start();
     }
 
+    private void watch() throws Exception {
+        if (gears.isToRequestFocusOnClipboardChange()) {
+            requestFocusOnClipboarChange();
+        }
+    }
+    
+    private void requestFocusOnClipboarChange() {
+        try {
+            if (checkClipboardChange()) {
+                requestFocus();
+            }
+        } catch (Exception e) {
+            LOGGER.error("Error on request focus on clipboard change.", e);
+        }
+    }
+    
+    private String lastClipboard = null;
+    
+    private boolean checkClipboardChange() throws Exception {
+        var actualClipboard = WizDesk.getStringFromClipboard();
+        if (!Objects.equals(actualClipboard, lastClipboard)) {
+            lastClipboard = actualClipboard;
+            return true;
+        }
+        return false;
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
