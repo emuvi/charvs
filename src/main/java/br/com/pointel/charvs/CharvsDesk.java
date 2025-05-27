@@ -65,7 +65,7 @@ public class CharvsDesk extends javax.swing.JFrame {
     private void requestFocusOnClipboarChange() {
         try {
             if (checkClipboardChange()) {
-                requestFocus();
+                requestFocusInWindow();
             }
         } catch (Exception e) {
             LOGGER.error("Error on request focus on clipboard change.", e);
