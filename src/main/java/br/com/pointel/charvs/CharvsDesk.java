@@ -65,9 +65,12 @@ public class CharvsDesk extends javax.swing.JFrame {
     private void requestFocusOnClipboarChange() {
         try {
             if (checkClipboardChange()) {
+                var isAlwaysOnTop = isAlwaysOnTop();
                 requestFocusInWindow();
                 requestFocus();
                 toFront();
+                setAlwaysOnTop(true);
+                setAlwaysOnTop(isAlwaysOnTop);
             }
         } catch (Exception e) {
             LOGGER.error("Error on request focus on clipboard change.", e);
