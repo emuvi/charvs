@@ -94,8 +94,8 @@ public class CharvsDesk extends javax.swing.JFrame {
 
         buttonGears = new javax.swing.JButton();
         labelStatus = new javax.swing.JLabel();
-        buttonAppendClean = new javax.swing.JButton();
-        buttonAppend = new javax.swing.JButton();
+        buttonBufferClean = new javax.swing.JButton();
+        buttonBufferAppend = new javax.swing.JButton();
         buttonInsert = new javax.swing.JButton();
         buttonOriginSelect = new javax.swing.JButton();
         buttonOriginFolder = new javax.swing.JButton();
@@ -124,17 +124,17 @@ public class CharvsDesk extends javax.swing.JFrame {
             }
         });
 
-        buttonAppendClean.setText("|");
-        buttonAppendClean.addActionListener(new java.awt.event.ActionListener() {
+        buttonBufferClean.setText("U");
+        buttonBufferClean.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonAppendCleanActionPerformed(evt);
+                buttonBufferCleanActionPerformed(evt);
             }
         });
 
-        buttonAppend.setText("Append");
-        buttonAppend.addActionListener(new java.awt.event.ActionListener() {
+        buttonBufferAppend.setText("Append");
+        buttonBufferAppend.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonAppendActionPerformed(evt);
+                buttonBufferAppendActionPerformed(evt);
             }
         });
 
@@ -259,9 +259,9 @@ public class CharvsDesk extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(labelStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
-                        .addComponent(buttonAppendClean)
+                        .addComponent(buttonBufferClean)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonAppend)
+                        .addComponent(buttonBufferAppend)
                         .addGap(18, 18, 18)
                         .addComponent(buttonInsert))
                     .addGroup(layout.createSequentialGroup()
@@ -304,8 +304,8 @@ public class CharvsDesk extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonInsert, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(buttonAppend, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(buttonAppendClean, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(buttonBufferAppend, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(buttonBufferClean, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(buttonGears, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(labelStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -435,7 +435,7 @@ public class CharvsDesk extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_buttonInsertActionPerformed
 
-    private void buttonAppendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAppendActionPerformed
+    private void buttonBufferAppendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBufferAppendActionPerformed
         try {
             var body = WizDesk.getStringFromClipboard();
             bufferBody = (bufferBody.trim() + "\n\n" + body.trim()).trim();
@@ -445,7 +445,7 @@ public class CharvsDesk extends javax.swing.JFrame {
         } catch (Exception e) {
             WizDesk.showError(e);
         }
-    }//GEN-LAST:event_buttonAppendActionPerformed
+    }//GEN-LAST:event_buttonBufferAppendActionPerformed
 
     private void buttonSaveOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSaveOpenActionPerformed
         try {
@@ -494,11 +494,11 @@ public class CharvsDesk extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_buttonOriginNextActionPerformed
 
-    private void buttonAppendCleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAppendCleanActionPerformed
+    private void buttonBufferCleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBufferCleanActionPerformed
         bufferBody = "";
         bufferSize = 0;
         labelStatus.setText("Appended " + bufferSize);
-    }//GEN-LAST:event_buttonAppendCleanActionPerformed
+    }//GEN-LAST:event_buttonBufferCleanActionPerformed
 
     private void buttonGearsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGearsActionPerformed
         // TODO add your handling code here:
@@ -546,8 +546,8 @@ public class CharvsDesk extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton buttonAppend;
-    private javax.swing.JButton buttonAppendClean;
+    private javax.swing.JButton buttonBufferAppend;
+    private javax.swing.JButton buttonBufferClean;
     private javax.swing.JButton buttonDestinyOpen;
     private javax.swing.JButton buttonDestinySelect;
     private javax.swing.JButton buttonGears;

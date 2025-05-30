@@ -32,9 +32,9 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="labelStatus" pref="171" max="32767" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="buttonAppendClean" min="-2" max="-2" attributes="0"/>
+                      <Component id="buttonBufferClean" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="buttonAppend" min="-2" max="-2" attributes="0"/>
+                      <Component id="buttonBufferAppend" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="buttonInsert" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -84,8 +84,8 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="buttonInsert" alignment="3" max="32767" attributes="0"/>
-                  <Component id="buttonAppend" alignment="3" max="32767" attributes="0"/>
-                  <Component id="buttonAppendClean" alignment="3" max="32767" attributes="0"/>
+                  <Component id="buttonBufferAppend" alignment="3" max="32767" attributes="0"/>
+                  <Component id="buttonBufferClean" alignment="3" max="32767" attributes="0"/>
                   <Component id="buttonGears" alignment="3" max="32767" attributes="0"/>
                   <Component id="labelStatus" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
               </Group>
@@ -130,20 +130,20 @@
     </Component>
     <Component class="javax.swing.JLabel" name="labelStatus">
     </Component>
-    <Component class="javax.swing.JButton" name="buttonAppendClean">
+    <Component class="javax.swing.JButton" name="buttonBufferClean">
       <Properties>
-        <Property name="text" type="java.lang.String" value="|"/>
+        <Property name="text" type="java.lang.String" value="U"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonAppendCleanActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonBufferCleanActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="buttonAppend">
+    <Component class="javax.swing.JButton" name="buttonBufferAppend">
       <Properties>
         <Property name="text" type="java.lang.String" value="Append"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonAppendActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonBufferAppendActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="buttonInsert">
