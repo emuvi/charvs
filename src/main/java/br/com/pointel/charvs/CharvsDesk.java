@@ -3,8 +3,10 @@ package br.com.pointel.charvs;
 import br.com.pointel.jarch.mage.WizBase;
 import br.com.pointel.jarch.mage.WizChars;
 import br.com.pointel.jarch.mage.WizDesk;
+import java.util.List;
 import java.io.File;
 import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.Objects;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.SwingUtilities;
@@ -12,30 +14,34 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class CharvsDesk extends javax.swing.JFrame {
-
+    
     private static final Logger LOGGER = LoggerFactory.getLogger(CharvsDesk.class);
-
+    
     private final DefaultComboBoxModel<String> modelOrigin = new DefaultComboBoxModel<>();
     
-    private volatile Gears gears = new Gears();
-
+    private final List<Gear> gears = new ArrayList<>();
+    
+    private final ActionFrameToFront actionFrameToFront;
+    
     private String bufferBody = "";
     private Integer bufferSize = 0;
     private String originLast = "";
     private String originActual = "";
     private File savedLast = null;
-
+    
     public CharvsDesk() {
         initDesk();
+        actionFrameToFront = new ActionFrameToFront(this);
+        gears.add(new Gear(Event.ON_CLIPBOARD_CHANGE, actionFrameToFront));
     }
-
-        private void initDesk() {
-            initComponents();
-            setIconImage(WizDesk.getLogo());
-            WizDesk.initFrame(this);
-            initWatcher();
-        }
-
+    
+    private void initDesk() {
+        initComponents();
+        setIconImage(WizDesk.getLogo());
+        WizDesk.initFrame(this);
+        initWatcher();
+    }
+    
     private void initWatcher() {
         new Thread("Watcher") {
             @Override
@@ -55,34 +61,29 @@ public class CharvsDesk extends javax.swing.JFrame {
             }
         }.start();
     }
-
+    
     private void watch() throws Exception {
-        if (gears.isToRequestFocusOnClipboardChange()) {
-            requestFocusOnClipboarChange();
-        }
+        watchClipboardChange();
     }
     
-    private void requestFocusOnClipboarChange() {
+    private void watchClipboardChange() {
         try {
             if (checkClipboardChange()) {
-                var isAlwaysOnTop = isAlwaysOnTop();
-                requestFocusInWindow();
-                requestFocus();
-                toFront();
-                setAlwaysOnTop(true);
-                setAlwaysOnTop(isAlwaysOnTop);
+                gears.stream()
+                        .filter(g -> Event.ON_CLIPBOARD_CHANGE.equals(g.getEvent()))
+                        .forEach(g -> g.getAction().execute());
             }
         } catch (Exception e) {
-            LOGGER.error("Error on request focus on clipboard change.", e);
+            LOGGER.error("Error on watch clipboard change.", e);
         }
     }
     
-    private String lastClipboard = null;
+    private volatile String clipboardBuffer = null;
     
     private boolean checkClipboardChange() throws Exception {
         var actualClipboard = WizDesk.getStringFromClipboard();
-        if (!Objects.equals(actualClipboard, lastClipboard)) {
-            lastClipboard = actualClipboard;
+        if (!Objects.equals(actualClipboard, clipboardBuffer)) {
+            clipboardBuffer = actualClipboard;
             return true;
         }
         return false;
@@ -513,7 +514,7 @@ public class CharvsDesk extends javax.swing.JFrame {
             WizDesk.showError(e);
         }
     }//GEN-LAST:event_buttonOriginFileActionPerformed
-
+    
     private String cleanTitle(String title) {
         title = title.trim();
         return title
@@ -536,11 +537,11 @@ public class CharvsDesk extends javax.swing.JFrame {
                 .replace(";", ",")
                 .trim();
     }
-
+    
     private String cleanCitation(String text) {
         return text.replaceAll("\\[cite\\:(\\s|\\d|\\,)+\\]", "");
     }
-
+    
     public static void start(String args[]) {
         WizDesk.start("Charvs", () -> new CharvsDesk().setVisible(true));
     }
