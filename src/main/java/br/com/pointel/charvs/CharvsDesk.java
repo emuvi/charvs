@@ -421,7 +421,7 @@ public class CharvsDesk extends javax.swing.JFrame {
             if (origin.contains("< INSERT >")) {
                 origin = origin.replace("< INSERT >", body);
             } else {
-                origin = origin + "\n\n" + body;
+                throw new Exception("Did not found the < INSERT > tag.");
             }
             WizDesk.putStringOnClipboard(origin);
             labelStatus.setText("Inserted");
