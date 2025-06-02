@@ -99,6 +99,7 @@ public class CharvsDesk extends javax.swing.JFrame {
         buttonGears = new javax.swing.JButton();
         checkGears = new javax.swing.JCheckBox();
         labelStatus = new javax.swing.JLabel();
+        buttonLogs = new javax.swing.JButton();
         buttonBufferClean = new javax.swing.JButton();
         buttonBufferAppend = new javax.swing.JButton();
         buttonInsert = new javax.swing.JButton();
@@ -123,15 +124,21 @@ public class CharvsDesk extends javax.swing.JFrame {
         setTitle("Charvs");
 
         buttonGears.setText("G");
+        buttonGears.setToolTipText("Gears");
         buttonGears.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonGearsActionPerformed(evt);
             }
         });
 
+        checkGears.setToolTipText("Active Gears");
         checkGears.setName("RunGears"); // NOI18N
 
+        buttonLogs.setText("L");
+        buttonLogs.setToolTipText("Logs");
+
         buttonBufferClean.setText("U");
+        buttonBufferClean.setToolTipText("Clear Buffer");
         buttonBufferClean.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonBufferCleanActionPerformed(evt);
@@ -160,6 +167,7 @@ public class CharvsDesk extends javax.swing.JFrame {
         });
 
         buttonOriginFolder.setText("*");
+        buttonOriginFolder.setToolTipText("Open Origin Folder");
         buttonOriginFolder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonOriginFolderActionPerformed(evt);
@@ -176,6 +184,7 @@ public class CharvsDesk extends javax.swing.JFrame {
         });
 
         buttonOriginUpdate.setText("~");
+        buttonOriginUpdate.setToolTipText("Update Origin Files");
         buttonOriginUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonOriginUpdateActionPerformed(evt);
@@ -183,6 +192,7 @@ public class CharvsDesk extends javax.swing.JFrame {
         });
 
         buttonOriginFile.setText("*");
+        buttonOriginFile.setToolTipText("Open Origin File");
         buttonOriginFile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonOriginFileActionPerformed(evt);
@@ -197,6 +207,7 @@ public class CharvsDesk extends javax.swing.JFrame {
         });
 
         buttonOriginFirst.setText("^");
+        buttonOriginFirst.setToolTipText("Select First Origin File");
         buttonOriginFirst.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonOriginFirstActionPerformed(evt);
@@ -204,6 +215,7 @@ public class CharvsDesk extends javax.swing.JFrame {
         });
 
         buttonOriginPrior.setText("<");
+        buttonOriginPrior.setToolTipText("Select Prior Origin File");
         buttonOriginPrior.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonOriginPriorActionPerformed(evt);
@@ -211,6 +223,7 @@ public class CharvsDesk extends javax.swing.JFrame {
         });
 
         buttonOriginNext.setText(">");
+        buttonOriginNext.setToolTipText("Select Next Origin File");
         buttonOriginNext.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonOriginNextActionPerformed(evt);
@@ -218,6 +231,7 @@ public class CharvsDesk extends javax.swing.JFrame {
         });
 
         buttonOriginSwitch.setText("%");
+        buttonOriginSwitch.setToolTipText("Switch Between Origin Files");
         buttonOriginSwitch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonOriginSwitchActionPerformed(evt);
@@ -232,6 +246,7 @@ public class CharvsDesk extends javax.swing.JFrame {
         });
 
         buttonDestinyOpen.setText("*");
+        buttonDestinyOpen.setToolTipText("Open Destiny Folder");
         buttonDestinyOpen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonDestinyOpenActionPerformed(evt);
@@ -248,6 +263,7 @@ public class CharvsDesk extends javax.swing.JFrame {
         });
 
         buttonSaveOpen.setText("*");
+        buttonSaveOpen.setToolTipText("Open Last Saved File");
         buttonSaveOpen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonSaveOpenActionPerformed(evt);
@@ -266,7 +282,9 @@ public class CharvsDesk extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(checkGears)
                         .addGap(18, 18, 18)
-                        .addComponent(labelStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
+                        .addComponent(labelStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonLogs)
                         .addGap(18, 18, 18)
                         .addComponent(buttonBufferClean)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -317,7 +335,8 @@ public class CharvsDesk extends javax.swing.JFrame {
                     .addComponent(buttonBufferClean, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(buttonGears, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(labelStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(checkGears))
+                    .addComponent(checkGears)
+                    .addComponent(buttonLogs))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonOriginSelect)
@@ -563,6 +582,7 @@ public class CharvsDesk extends javax.swing.JFrame {
     private javax.swing.JButton buttonGears;
     private javax.swing.JButton buttonInsert;
     private javax.swing.JButton buttonLoad;
+    private javax.swing.JButton buttonLogs;
     private javax.swing.JButton buttonOriginFile;
     private javax.swing.JButton buttonOriginFirst;
     private javax.swing.JButton buttonOriginFolder;

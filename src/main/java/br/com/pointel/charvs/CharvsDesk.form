@@ -32,7 +32,9 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="checkGears" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="labelStatus" pref="195" max="32767" attributes="0"/>
+                      <Component id="labelStatus" pref="166" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="buttonLogs" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="buttonBufferClean" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -91,6 +93,7 @@
                   <Component id="buttonGears" alignment="3" max="32767" attributes="0"/>
                   <Component id="labelStatus" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
                   <Component id="checkGears" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="buttonLogs" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -126,6 +129,7 @@
     <Component class="javax.swing.JButton" name="buttonGears">
       <Properties>
         <Property name="text" type="java.lang.String" value="G"/>
+        <Property name="toolTipText" type="java.lang.String" value="Gears"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonGearsActionPerformed"/>
@@ -133,14 +137,22 @@
     </Component>
     <Component class="javax.swing.JCheckBox" name="checkGears">
       <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="Active Gears"/>
         <Property name="name" type="java.lang.String" value="RunGears" noResource="true"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="labelStatus">
     </Component>
+    <Component class="javax.swing.JButton" name="buttonLogs">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="L"/>
+        <Property name="toolTipText" type="java.lang.String" value="Logs"/>
+      </Properties>
+    </Component>
     <Component class="javax.swing.JButton" name="buttonBufferClean">
       <Properties>
         <Property name="text" type="java.lang.String" value="U"/>
+        <Property name="toolTipText" type="java.lang.String" value="Clear Buffer"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonBufferCleanActionPerformed"/>
@@ -173,6 +185,7 @@
     <Component class="javax.swing.JButton" name="buttonOriginFolder">
       <Properties>
         <Property name="text" type="java.lang.String" value="*"/>
+        <Property name="toolTipText" type="java.lang.String" value="Open Origin Folder"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonOriginFolderActionPerformed"/>
@@ -194,6 +207,7 @@
     <Component class="javax.swing.JButton" name="buttonOriginUpdate">
       <Properties>
         <Property name="text" type="java.lang.String" value="~"/>
+        <Property name="toolTipText" type="java.lang.String" value="Update Origin Files"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonOriginUpdateActionPerformed"/>
@@ -202,6 +216,7 @@
     <Component class="javax.swing.JButton" name="buttonOriginFile">
       <Properties>
         <Property name="text" type="java.lang.String" value="*"/>
+        <Property name="toolTipText" type="java.lang.String" value="Open Origin File"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonOriginFileActionPerformed"/>
@@ -223,6 +238,7 @@
     <Component class="javax.swing.JButton" name="buttonOriginFirst">
       <Properties>
         <Property name="text" type="java.lang.String" value="^"/>
+        <Property name="toolTipText" type="java.lang.String" value="Select First Origin File"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonOriginFirstActionPerformed"/>
@@ -231,6 +247,7 @@
     <Component class="javax.swing.JButton" name="buttonOriginPrior">
       <Properties>
         <Property name="text" type="java.lang.String" value="&lt;"/>
+        <Property name="toolTipText" type="java.lang.String" value="Select Prior Origin File"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonOriginPriorActionPerformed"/>
@@ -239,6 +256,7 @@
     <Component class="javax.swing.JButton" name="buttonOriginNext">
       <Properties>
         <Property name="text" type="java.lang.String" value="&gt;"/>
+        <Property name="toolTipText" type="java.lang.String" value="Select Next Origin File"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonOriginNextActionPerformed"/>
@@ -247,6 +265,7 @@
     <Component class="javax.swing.JButton" name="buttonOriginSwitch">
       <Properties>
         <Property name="text" type="java.lang.String" value="%"/>
+        <Property name="toolTipText" type="java.lang.String" value="Switch Between Origin Files"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonOriginSwitchActionPerformed"/>
@@ -263,6 +282,7 @@
     <Component class="javax.swing.JButton" name="buttonDestinyOpen">
       <Properties>
         <Property name="text" type="java.lang.String" value="*"/>
+        <Property name="toolTipText" type="java.lang.String" value="Open Destiny Folder"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonDestinyOpenActionPerformed"/>
@@ -284,6 +304,7 @@
     <Component class="javax.swing.JButton" name="buttonSaveOpen">
       <Properties>
         <Property name="text" type="java.lang.String" value="*"/>
+        <Property name="toolTipText" type="java.lang.String" value="Open Last Saved File"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonSaveOpenActionPerformed"/>
