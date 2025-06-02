@@ -29,8 +29,10 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Component id="buttonGears" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="checkGears" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="labelStatus" pref="171" max="32767" attributes="0"/>
+                      <Component id="labelStatus" pref="195" max="32767" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="buttonBufferClean" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -88,6 +90,7 @@
                   <Component id="buttonBufferClean" alignment="3" max="32767" attributes="0"/>
                   <Component id="buttonGears" alignment="3" max="32767" attributes="0"/>
                   <Component id="labelStatus" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
+                  <Component id="checkGears" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -122,11 +125,16 @@
   <SubComponents>
     <Component class="javax.swing.JButton" name="buttonGears">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Gears"/>
+        <Property name="text" type="java.lang.String" value="G"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonGearsActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="checkGears">
+      <Properties>
+        <Property name="name" type="java.lang.String" value="RunGears" noResource="true"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="labelStatus">
     </Component>

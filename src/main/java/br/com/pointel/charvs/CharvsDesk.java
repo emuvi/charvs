@@ -52,6 +52,9 @@ public class CharvsDesk extends javax.swing.JFrame {
                 });
                 while (isDisplayable()) {
                     WizBase.sleep(1000);
+                    if (!checkGears.isSelected()) {
+                        continue;
+                    }
                     try {
                         watch();
                     } catch (Exception e) {
@@ -94,6 +97,7 @@ public class CharvsDesk extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGears = new javax.swing.JButton();
+        checkGears = new javax.swing.JCheckBox();
         labelStatus = new javax.swing.JLabel();
         buttonBufferClean = new javax.swing.JButton();
         buttonBufferAppend = new javax.swing.JButton();
@@ -118,12 +122,14 @@ public class CharvsDesk extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Charvs");
 
-        buttonGears.setText("Gears");
+        buttonGears.setText("G");
         buttonGears.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonGearsActionPerformed(evt);
             }
         });
+
+        checkGears.setName("RunGears"); // NOI18N
 
         buttonBufferClean.setText("U");
         buttonBufferClean.addActionListener(new java.awt.event.ActionListener() {
@@ -257,8 +263,10 @@ public class CharvsDesk extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(buttonGears)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(checkGears)
                         .addGap(18, 18, 18)
-                        .addComponent(labelStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
+                        .addComponent(labelStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addComponent(buttonBufferClean)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -308,7 +316,8 @@ public class CharvsDesk extends javax.swing.JFrame {
                     .addComponent(buttonBufferAppend, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(buttonBufferClean, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(buttonGears, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(labelStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(labelStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(checkGears))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonOriginSelect)
@@ -564,6 +573,7 @@ public class CharvsDesk extends javax.swing.JFrame {
     private javax.swing.JButton buttonOriginUpdate;
     private javax.swing.JButton buttonSave;
     private javax.swing.JButton buttonSaveOpen;
+    private javax.swing.JCheckBox checkGears;
     private javax.swing.JComboBox<String> comboOrigin;
     private javax.swing.JTextField fieldDestiny;
     private javax.swing.JTextField fieldOrigin;
