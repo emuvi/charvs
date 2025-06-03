@@ -3,12 +3,18 @@ package br.com.pointel.charvs;
 import br.com.pointel.jarch.mage.WizBase;
 import br.com.pointel.jarch.mage.WizChars;
 import br.com.pointel.jarch.mage.WizDesk;
+import java.awt.event.ActionEvent;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 import java.util.List;
 import java.io.File;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Objects;
+import javax.swing.AbstractAction;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComponent;
+import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,9 +43,35 @@ public class CharvsDesk extends javax.swing.JFrame {
     
     private void initDesk() {
         initComponents();
+        initShortcuts();
         setIconImage(WizDesk.getLogo());
         WizDesk.initFrame(this);
         initWatcher();
+    }
+    
+    private void initShortcuts() {
+        var loadActionKey = "LoadActionKey";
+        var keyCtrlC = KeyStroke.getKeyStroke(KeyEvent.VK_C, InputEvent.CTRL_DOWN_MASK);
+        var loadAction = new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                buttonLoadActionPerformed(e);
+            }
+        };
+        var keyCtrlV = KeyStroke.getKeyStroke(KeyEvent.VK_V, InputEvent.CTRL_DOWN_MASK);
+        var saveActionKey = "SaveActionKey";
+        var saveAction = new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                buttonSaveActionPerformed(e);
+            }
+        };
+        var inputMap = getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+        var actionMap = getRootPane().getActionMap();
+        inputMap.put(keyCtrlC, loadActionKey);
+        actionMap.put(loadActionKey, loadAction);
+        inputMap.put(keyCtrlV, saveActionKey);
+        actionMap.put(saveActionKey, saveAction);
     }
     
     private void initWatcher() {
