@@ -82,6 +82,14 @@ public class CharvsDesk extends javax.swing.JFrame {
                 buttonInsertActionPerformed(e);
             }
         };
+        var keyCtrlW = KeyStroke.getKeyStroke(KeyEvent.VK_W, InputEvent.CTRL_DOWN_MASK);
+        var switchActionKey = "SwitchActionKey";
+        var switchAction = new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                buttonOriginSwitchActionPerformed(e);
+            }
+        };
         var inputMap = getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
         var actionMap = getRootPane().getActionMap();
         inputMap.put(keyCtrlC, loadActionKey);
@@ -92,6 +100,8 @@ public class CharvsDesk extends javax.swing.JFrame {
         actionMap.put(appendActionKey, appendAction);
         inputMap.put(keyCtrlE, insertActionKey);
         actionMap.put(insertActionKey, insertAction);
+        inputMap.put(keyCtrlW, switchActionKey);
+        actionMap.put(switchActionKey, switchAction);
     }
     
     private void initWatcher() {
