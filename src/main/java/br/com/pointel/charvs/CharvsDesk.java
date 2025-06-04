@@ -25,6 +25,7 @@ public class CharvsDesk extends javax.swing.JFrame {
     
     private final DefaultComboBoxModel<String> modelOrigin = new DefaultComboBoxModel<>();
     
+    private final Setup setup = new Setup();
     private final List<Gear> gears = new ArrayList<>();
     
     private final ActionFrameToFront actionFrameToFront;
@@ -451,6 +452,11 @@ public class CharvsDesk extends javax.swing.JFrame {
             var title = cleanTitle(lines[0]);
             var folder = new File(fieldDestiny.getText());
             var file = new File(folder, title + ".txt");
+            var index = 1;
+            while (file.exists() && !setup.onSaveOverwritten) {
+                index++;
+                file = new File(folder, title + " (" + index + ").txt");
+            }
             var exists = file.exists();
             Files.writeString(file.toPath(), text);
             labelStatus.setText(exists ? "Overwritten" : "Saved");
