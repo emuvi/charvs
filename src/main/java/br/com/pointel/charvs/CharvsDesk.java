@@ -26,7 +26,7 @@ public class CharvsDesk extends javax.swing.JFrame {
     private final DefaultComboBoxModel<String> modelOrigin = new DefaultComboBoxModel<>();
     
     private final Setup setup = new Setup();
-    private final List<Gear> gears = new ArrayList<>();
+    private final Gears gears = new Gears();
     
     private final ActOnClipboardNewTextDoFrameToFront actOnClipboardNewTextDoFrameToFront;
     
@@ -138,9 +138,8 @@ public class CharvsDesk extends javax.swing.JFrame {
     
     private void watchClipboardText() throws Exception {
         if (checkClipboardNewText()) {
-            gears.stream()
-                    .filter(g -> Event.ON_CLIPBOARD_NEW_TEXT.equals(g.getEvent()))
-                    .forEach(g -> g.getAction().execute(clipboardText));
+            gears.filterAct(Event.ON_CLIPBOARD_NEW_TEXT, 
+                    g -> g.getAction().execute(clipboardText));
         }
     }
     
