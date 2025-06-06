@@ -17,6 +17,7 @@ public class Gear {
             for (var actOnClazzs : Arrays.asList(event.getActOnClazzs())) {
                 if (action.getClass().equals(actOnClazzs)) {
                     found = true;
+                    break;
                 }
             }
             if (!found) {
