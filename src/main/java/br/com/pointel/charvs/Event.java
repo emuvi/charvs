@@ -45,7 +45,8 @@ public enum Event {
     ON_AFTER_DESTINY_OPEN(On.class),
     ON_BEFORE_DESTINY_OPEN(On.class),
     ON_AFTER_DESTINY_FILE_SAVE(OnAfterDestinyFileSave.class),
-    ON_BEFORE_DESTINY_FILE_SAVE(OnBeforeDestinyFileSave.class),
+    ON_BEFORE_DESTINY_FILE_SAVE(OnBeforeDestinyFileSave.class,
+            ActOnBeforeDestinyFileSaveDoKeepBoth.class),
     ON_AFTER_DESTINY_FILE_OPEN(On.class),
     ON_BEFORE_DESTINY_FILE_OPEN(On.class);
     

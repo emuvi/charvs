@@ -6,10 +6,8 @@ import br.com.pointel.jarch.mage.WizDesk;
 import java.awt.event.ActionEvent;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
-import java.util.List;
 import java.io.File;
 import java.nio.file.Files;
-import java.util.ArrayList;
 import java.util.Objects;
 import javax.swing.AbstractAction;
 import javax.swing.DefaultComboBoxModel;
@@ -25,7 +23,6 @@ public class CharvsDesk extends javax.swing.JFrame {
     
     private final DefaultComboBoxModel<String> modelOrigin = new DefaultComboBoxModel<>();
     
-    private final Setup setup = new Setup();
     private final Gears gears = new Gears();
     
     private final ActOnClipboardNewTextDoFrameToFront actOnClipboardNewTextDoFrameToFront;
@@ -40,6 +37,7 @@ public class CharvsDesk extends javax.swing.JFrame {
         initDesk();
         actOnClipboardNewTextDoFrameToFront = new ActOnClipboardNewTextDoFrameToFront(this);
         gears.add(new Gear(Event.ON_CLIPBOARD_NEW_TEXT, actOnClipboardNewTextDoFrameToFront));
+        gears.add(new Gear(Event.ON_BEFORE_DESTINY_FILE_SAVE, new ActOnBeforeDestinyFileSaveDoKeepBoth()));
     }
     
     private void initDesk() {
@@ -138,8 +136,7 @@ public class CharvsDesk extends javax.swing.JFrame {
     
     private void watchClipboardText() throws Exception {
         if (checkClipboardNewText()) {
-            gears.filterAct(Event.ON_CLIPBOARD_NEW_TEXT, 
-                    g -> g.getAction().execute(clipboardText));
+            gears.actOn(Event.ON_CLIPBOARD_NEW_TEXT, clipboardText, Void.class);
         }
     }
     
@@ -451,17 +448,14 @@ public class CharvsDesk extends javax.swing.JFrame {
             var title = cleanTitle(lines[0]);
             var folder = new File(fieldDestiny.getText());
             var file = new File(folder, title + ".txt");
-            var index = 1;
-            while (file.exists() && !setup.onSaveOverwritten) {
-                index++;
-                file = new File(folder, title + " (" + index + ").txt");
-            }
+            file = gears.actOn(Event.ON_BEFORE_DESTINY_FILE_SAVE, file, File.class);
             var exists = file.exists();
             Files.writeString(file.toPath(), text);
             labelStatus.setText(exists ? "Overwritten" : "Saved");
             bufferBody = "";
             bufferSize = 0;
             savedLast = file;
+            gears.actOn(Event.ON_AFTER_DESTINY_FILE_SAVE, file, File.class);
         } catch (Exception e) {
             WizDesk.showError(e);
         }

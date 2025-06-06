@@ -1,7 +1,7 @@
 package br.com.pointel.charvs;
 
 import java.util.ArrayList;
-import java.util.function.Consumer;
+import java.util.Objects;
 
 /**
  *
@@ -9,10 +9,14 @@ import java.util.function.Consumer;
  */
 public class Gears extends ArrayList<Gear> {
     
-    public void filterAct(Event filter, Consumer<? super Gear> act) {
-        stream()
-                .filter(g -> g.getEvent().equals(filter))
-                .forEach(act);
+    public <R> R actOn(Event event, Object input, Class<? extends R> returnClazz) {
+        var result = input;
+        for (var gear : this) {
+            if (Objects.equals(gear.getEvent(), event)) {
+                result = gear.getAction().execute(result);
+            }
+        }
+        return returnClazz.cast(result);
     }
     
 }
