@@ -81,7 +81,7 @@ public class CharvsDesk extends javax.swing.JFrame {
                 buttonInsertActionPerformed(e);
             }
         };
-        var keyCtrlW = KeyStroke.getKeyStroke(KeyEvent.VK_W, InputEvent.CTRL_DOWN_MASK);
+        var keyCtrlW = KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_DOWN_MASK);
         var switchActionKey = "SwitchActionKey";
         var switchAction = new AbstractAction() {
             @Override
