@@ -6,49 +6,65 @@ package br.com.pointel.charvs;
  */
 public enum Event {
     
-    ON_CLIPBOARD_CHANGE,
-    ON_CLIPBOARD_STARTS_WITH,
-    ON_CLIPBOARD_ENDS_WITH,
-    ON_CLIPBOARD_CONTAINS,
-    ON_CLIPBOARD_CHECK_REGEX,
+    ON_CLIPBOARD_NEW_TEXT(OnClipboardNewText.class,
+        ActOnClipboardNewTextDoFrameToFront.class),
+    ON_CLIPBOARD_NEW_IMAGE(OnClipboardNewImage.class),
     
-    BEFORE_BUFFER_CLEAR,
-    AFTER_BUFFER_CLEAR,
-    BEFORE_BUFFER_APPEND,
-    AFTER_BUFFER_APPEND,
+    ON_BEFORE_BUFFER_CLEAR(On.class),
+    ON_AFTER_BUFFER_CLEAR(On.class),
+    ON_BEFORE_BUFFER_APPEND(On.class),
+    ON_AFTER_BUFFER_APPEND(On.class),
     
-    BEFORE_ORIGIN_SELECT,
-    AFTER_ORIGIN_SELECT,
-    BEFORE_ORIGIN_OPEN,
-    AFTER_ORIGIN_OPEN,
-    BEFORE_ORIGIN_FILES_UPDATE,
-    AFTER_ORIGIN_FILES_UPDATE,
-    BEFORE_ORIGIN_FILE_OPEN,
-    AFTER_ORIGIN_FILE_OPEN,
-    BEFORE_ORIGIN_FILES_FIRST,
-    AFTER_ORIGIN_FILES_FIRST,
-    BEFORE_ORIGIN_FILES_PRIOR,
-    AFTER_ORIGIN_FILES_PRIOR,
-    BEFORE_ORIGIN_FILES_NEXT,
-    AFTER_ORIGIN_FILES_NEXT,
-    BEFORE_ORIGIN_FILES_LAST,
-    AFTER_ORIGIN_FILES_LAST,
-    BEFORE_ORIGIN_FILES_SWITCH,
-    AFTER_ORIGIN_FILES_SWITCH,
-    BEFORE_ORIGIN_FILES_SELECT,
-    AFTER_ORIGIN_FILES_SELECT,
-    BEFORE_ORIGIN_FILE_LOAD,
-    AFTER_ORIGIN_FILE_LOAD,
-    BEFORE_ORIGIN_FILE_INSERT,
-    AFTER_ORIGIN_FILE_INSERT,
+    ON_BEFORE_ORIGIN_SELECT(On.class),
+    ON_AFTER_ORIGIN_SELECT(On.class),
+    ON_BEFORE_ORIGIN_OPEN(On.class),
+    ON_AFTER_ORIGIN_OPEN(On.class),
+    ON_BEFORE_ORIGIN_FILES_UPDATE(On.class),
+    ON_AFTER_ORIGIN_FILES_UPDATE(On.class),
+    ON_BEFORE_ORIGIN_FILE_OPEN(On.class),
+    ON_AFTER_ORIGIN_FILE_OPEN(On.class),
+    ON_BEFORE_ORIGIN_FILES_FIRST(On.class),
+    ON_AFTER_ORIGIN_FILES_FIRST(On.class),
+    ON_BEFORE_ORIGIN_FILES_PRIOR(On.class),
+    ON_AFTER_ORIGIN_FILES_PRIOR(On.class),
+    ON_BEFORE_ORIGIN_FILES_NEXT(On.class),
+    ON_AFTER_ORIGIN_FILES_NEXT(On.class),
+    ON_BEFORE_ORIGIN_FILES_LAST(On.class),
+    ON_AFTER_ORIGIN_FILES_LAST(On.class),
+    ON_BEFORE_ORIGIN_FILES_SWITCH(On.class),
+    ON_AFTER_ORIGIN_FILES_SWITCH(On.class),
+    ON_BEFORE_ORIGIN_FILES_SELECT(On.class),
+    ON_AFTER_ORIGIN_FILES_SELECT(On.class),
+    ON_BEFORE_ORIGIN_FILE_LOAD(On.class),
+    ON_AFTER_ORIGIN_FILE_LOAD(On.class),
+    ON_BEFORE_ORIGIN_FILE_INSERT(On.class),
+    ON_AFTER_ORIGIN_FILE_INSERT(On.class),
     
-    BEFORE_DESTINY_SELECT,
-    AFTER_DESTINY_SELECT,
-    BEFORE_DESTINY_OPEN,
-    AFTER_DESTINY_OPEN,
-    BEFORE_DESTINY_FILE_SAVE,
-    AFTER_DESTINY_FILE_SAVE,
-    BEFORE_DESTINY_FILE_OPEN,
-    AFTER_DESTINY_FILE_OPEN,
+    ON_AFTER_DESTINY_SELECT(On.class),
+    ON_BEFORE_DESTINY_SELECT(On.class),
+    ON_AFTER_DESTINY_OPEN(On.class),
+    ON_BEFORE_DESTINY_OPEN(On.class),
+    ON_AFTER_DESTINY_FILE_SAVE(OnAfterDestinyFileSave.class),
+    ON_BEFORE_DESTINY_FILE_SAVE(OnBeforeDestinyFileSave.class),
+    ON_AFTER_DESTINY_FILE_OPEN(On.class),
+    ON_BEFORE_DESTINY_FILE_OPEN(On.class);
+    
+    private final Class<? extends On> onClazz;
+    private final Class<? extends On>[] actOnClazzs;
+
+    private Event(Class<? extends On> onClazz, Class<? extends On>... actOnClazzs) {
+        this.onClazz = onClazz;
+        this.actOnClazzs = actOnClazzs;
+    }
+
+    public Class<? extends On> getOnClazz() {
+        return onClazz;
+    }
+
+    public Class<? extends On>[] getActOnClazzs() {
+        return actOnClazzs;
+    }
+    
+    
     
 }

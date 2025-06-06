@@ -32,7 +32,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="checkGears" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="labelStatus" pref="184" max="32767" attributes="0"/>
+                      <Component id="labelStatus" pref="178" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="buttonLogs" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -90,7 +90,7 @@
                   <Component id="buttonInsert" alignment="3" max="32767" attributes="0"/>
                   <Component id="buttonBufferAppend" alignment="3" max="32767" attributes="0"/>
                   <Component id="buttonBufferClean" alignment="3" max="32767" attributes="0"/>
-                  <Component id="buttonGears" alignment="3" max="32767" attributes="0"/>
+                  <Component id="buttonGears" alignment="3" max="-2" attributes="0"/>
                   <Component id="labelStatus" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
                   <Component id="checkGears" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="buttonLogs" alignment="3" min="-2" max="-2" attributes="0"/>

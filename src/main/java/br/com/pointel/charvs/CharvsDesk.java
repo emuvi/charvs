@@ -28,7 +28,7 @@ public class CharvsDesk extends javax.swing.JFrame {
     private final Setup setup = new Setup();
     private final List<Gear> gears = new ArrayList<>();
     
-    private final ActionFrameToFront actionFrameToFront;
+    private final ActOnClipboardNewTextDoFrameToFront actOnClipboardNewTextDoFrameToFront;
     
     private String bufferBody = "";
     private Integer bufferSize = 0;
@@ -38,8 +38,8 @@ public class CharvsDesk extends javax.swing.JFrame {
     
     public CharvsDesk() {
         initDesk();
-        actionFrameToFront = new ActionFrameToFront(this);
-        gears.add(new Gear(Event.ON_CLIPBOARD_CHANGE, actionFrameToFront));
+        actOnClipboardNewTextDoFrameToFront = new ActOnClipboardNewTextDoFrameToFront(this);
+        gears.add(new Gear(Event.ON_CLIPBOARD_NEW_TEXT, actOnClipboardNewTextDoFrameToFront));
     }
     
     private void initDesk() {
@@ -129,27 +129,27 @@ public class CharvsDesk extends javax.swing.JFrame {
     }
     
     private void watch() throws Exception {
-        watchClipboardChange();
-    }
-    
-    private void watchClipboardChange() {
         try {
-            if (checkClipboardChange()) {
-                gears.stream()
-                        .filter(g -> Event.ON_CLIPBOARD_CHANGE.equals(g.getEvent()))
-                        .forEach(g -> g.getAction().execute());
-            }
+            watchClipboardText();
         } catch (Exception e) {
-            LOGGER.error("Error on watch clipboard change.", e);
+            LOGGER.error("Error on watcher clipboard text.", e);
         }
     }
     
-    private volatile String clipboardBuffer = null;
+    private void watchClipboardText() throws Exception {
+        if (checkClipboardNewText()) {
+            gears.stream()
+                    .filter(g -> Event.ON_CLIPBOARD_NEW_TEXT.equals(g.getEvent()))
+                    .forEach(g -> g.getAction().execute(clipboardText));
+        }
+    }
     
-    private boolean checkClipboardChange() throws Exception {
+    private volatile String clipboardText = null;
+    
+    private boolean checkClipboardNewText() throws Exception {
         var actualClipboard = WizDesk.getStringFromClipboard();
-        if (!Objects.equals(actualClipboard, clipboardBuffer)) {
-            clipboardBuffer = actualClipboard;
+        if (!Objects.equals(actualClipboard, clipboardText)) {
+            clipboardText = actualClipboard;
             return true;
         }
         return false;
@@ -345,7 +345,7 @@ public class CharvsDesk extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(checkGears)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(labelStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+                        .addComponent(labelStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttonLogs)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -396,7 +396,7 @@ public class CharvsDesk extends javax.swing.JFrame {
                     .addComponent(buttonInsert, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(buttonBufferAppend, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(buttonBufferClean, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(buttonGears, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(buttonGears)
                     .addComponent(labelStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(checkGears)
                     .addComponent(buttonLogs))
