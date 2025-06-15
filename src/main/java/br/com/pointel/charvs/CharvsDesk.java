@@ -628,7 +628,9 @@ public class CharvsDesk extends javax.swing.JFrame {
     }
     
     private String cleanCitation(String text) {
-        return text.replaceAll("\\[cite\\:(\\s|\\d|\\,)+\\]", "");
+        return text
+                .replace("[cite_start]", "")
+                .replaceAll("\\[cite\\:(\\s|\\d|\\,)+\\]", "");
     }
     
     public static void start(String args[]) {
