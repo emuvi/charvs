@@ -1,8 +1,8 @@
 package br.com.pointel.charvs;
 
-import br.com.pointel.jarch.mage.WizBase;
-import br.com.pointel.jarch.mage.WizChars;
 import br.com.pointel.jarch.mage.WizDesk;
+import br.com.pointel.jarch.mage.WizString;
+import br.com.pointel.jarch.mage.WizThread;
 import java.awt.event.ActionEvent;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
@@ -107,12 +107,12 @@ public class CharvsDesk extends javax.swing.JFrame {
         new Thread("Watcher") {
             @Override
             public void run() {
-                WizBase.sleep(1000);
+                WizThread.sleep(1000);
                 SwingUtilities.invokeLater(() -> {
                     buttonOriginUpdateActionPerformed(null);
                 });
                 while (isDisplayable()) {
-                    WizBase.sleep(1000);
+                    WizThread.sleep(1000);
                     if (!checkGears.isSelected()) {
                         continue;
                     }
@@ -444,7 +444,7 @@ public class CharvsDesk extends javax.swing.JFrame {
     private void buttonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSaveActionPerformed
         try {
             var text = cleanCitation(WizDesk.getStringFromClipboard()).trim();
-            var lines = WizChars.getLines(text);
+            var lines = WizString.getLines(text);
             var title = cleanTitle(lines[0]);
             var folder = new File(fieldDestiny.getText());
             var file = new File(folder, title + ".txt");
