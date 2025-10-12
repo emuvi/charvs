@@ -1,13 +1,17 @@
 package br.com.pointel.charvs;
 
 import br.com.pointel.jarch.mage.WizDesk;
+import br.com.pointel.jarch.mage.WizFile;
 import br.com.pointel.jarch.mage.WizString;
 import br.com.pointel.jarch.mage.WizThread;
+import br.com.pointel.jarch.mage.WizUtilDate;
 import java.awt.event.ActionEvent;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.util.Date;
 import java.util.Objects;
 import javax.swing.AbstractAction;
 import javax.swing.DefaultComboBoxModel;
@@ -21,11 +25,7 @@ public class CharvsDesk extends javax.swing.JFrame {
     
     private static final Logger LOGGER = LoggerFactory.getLogger(CharvsDesk.class);
     
-    private final DefaultComboBoxModel<String> modelOrigin = new DefaultComboBoxModel<>();
-    
-    private final Gears gears = new Gears();
-    
-    private final ActOnClipboardNewTextDoFrameToFront actOnClipboardNewTextDoFrameToFront;
+    private final DefaultComboBoxModel<String> modelInput = new DefaultComboBoxModel<>();
     
     private String bufferBody = "";
     private Integer bufferSize = 0;
@@ -35,9 +35,6 @@ public class CharvsDesk extends javax.swing.JFrame {
     
     public CharvsDesk() {
         initDesk();
-        actOnClipboardNewTextDoFrameToFront = new ActOnClipboardNewTextDoFrameToFront(this);
-        gears.add(new Gear(Event.ON_CLIPBOARD_NEW_TEXT, actOnClipboardNewTextDoFrameToFront));
-        gears.add(new Gear(Event.ON_BEFORE_DESTINY_FILE_SAVE, new ActOnBeforeDestinyFileSaveDoKeepBoth()));
     }
     
     private void initDesk() {
@@ -86,7 +83,7 @@ public class CharvsDesk extends javax.swing.JFrame {
         var switchAction = new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                buttonOriginSwitchActionPerformed(e);
+                buttonInputSwitchActionPerformed(e);
             }
         };
         var inputMap = getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
@@ -109,13 +106,10 @@ public class CharvsDesk extends javax.swing.JFrame {
             public void run() {
                 WizThread.sleep(1000);
                 SwingUtilities.invokeLater(() -> {
-                    buttonOriginUpdateActionPerformed(null);
+                    buttonInputUpdateActionPerformed(null);
                 });
                 while (isDisplayable()) {
                     WizThread.sleep(1000);
-                    if (!checkGears.isSelected()) {
-                        continue;
-                    }
                     try {
                         watch();
                     } catch (Exception e) {
@@ -136,7 +130,13 @@ public class CharvsDesk extends javax.swing.JFrame {
     
     private void watchClipboardText() throws Exception {
         if (checkClipboardNewText()) {
-            gears.actOn(Event.ON_CLIPBOARD_NEW_TEXT, clipboardText, Void.class);
+            if (Setup.doOnNewClipboardText() == OnNewClipboardText.ShowDesk) {
+                showDesk();
+            } else if (Setup.doOnNewClipboardText() == OnNewClipboardText.AppendOnBuffer) {
+                buttonBufferAppendActionPerformed(null);
+            } else if (Setup.doOnNewClipboardText() == OnNewClipboardText.InsertOnInput) {
+                buttonInsertActionPerformed(null);
+            } 
         }
     }
     
@@ -151,52 +151,63 @@ public class CharvsDesk extends javax.swing.JFrame {
         return false;
     }
     
+    private void showDesk() {
+        requestFocus();
+        requestFocusInWindow();
+        toFront();
+        setAlwaysOnTop(true);
+        setAlwaysOnTop(false);
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGears = new javax.swing.JButton();
-        checkGears = new javax.swing.JCheckBox();
-        labelStatus = new javax.swing.JLabel();
-        buttonLogs = new javax.swing.JButton();
+        buttonSetup = new javax.swing.JButton();
+        fieldStatus = new javax.swing.JTextField();
         buttonBufferClean = new javax.swing.JButton();
         buttonBufferAppend = new javax.swing.JButton();
         buttonInsert = new javax.swing.JButton();
-        buttonOriginSelect = new javax.swing.JButton();
-        buttonOriginFolder = new javax.swing.JButton();
-        fieldOrigin = new javax.swing.JTextField();
+        buttonInputSelect = new javax.swing.JButton();
+        buttonInputOpen = new javax.swing.JButton();
+        fieldInput = new javax.swing.JTextField();
         buttonLoad = new javax.swing.JButton();
-        buttonOriginUpdate = new javax.swing.JButton();
-        buttonOriginFile = new javax.swing.JButton();
-        comboOrigin = new javax.swing.JComboBox<>();
-        buttonOriginFirst = new javax.swing.JButton();
-        buttonOriginPrior = new javax.swing.JButton();
-        buttonOriginNext = new javax.swing.JButton();
-        buttonOriginSwitch = new javax.swing.JButton();
-        buttonDestinySelect = new javax.swing.JButton();
-        buttonDestinyOpen = new javax.swing.JButton();
+        buttonInputUpdate = new javax.swing.JButton();
+        buttonInputFileOpen = new javax.swing.JButton();
+        comboInput = new javax.swing.JComboBox<>();
+        buttonInputFirst = new javax.swing.JButton();
+        buttonInputPrior = new javax.swing.JButton();
+        buttonInputNext = new javax.swing.JButton();
+        buttonInputSwitch = new javax.swing.JButton();
+        buttonOutputSelect = new javax.swing.JButton();
+        buttonOutputOpen = new javax.swing.JButton();
         fieldDestiny = new javax.swing.JTextField();
         buttonSave = new javax.swing.JButton();
         buttonSaveOpen = new javax.swing.JButton();
+        buttonArchiveSelect = new javax.swing.JButton();
+        buttonArchiveOpen = new javax.swing.JButton();
+        fieldArchive = new javax.swing.JTextField();
+        checkArchiveMake = new javax.swing.JCheckBox();
+        scrollArchive = new javax.swing.JScrollPane();
+        textArchive = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Charvs");
+        setName("Desk"); // NOI18N
 
-        buttonGears.setText("G");
-        buttonGears.setToolTipText("Gears");
-        buttonGears.addActionListener(new java.awt.event.ActionListener() {
+        buttonSetup.setText("#");
+        buttonSetup.setToolTipText("Setup");
+        buttonSetup.setName(""); // NOI18N
+        buttonSetup.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonGearsActionPerformed(evt);
+                buttonSetupActionPerformed(evt);
             }
         });
 
-        checkGears.setToolTipText("Active Gears");
-        checkGears.setName("RunGears"); // NOI18N
+        fieldStatus.setEditable(false);
 
-        buttonLogs.setText("L");
-        buttonLogs.setToolTipText("Logs");
-
-        buttonBufferClean.setText("U");
+        buttonBufferClean.setMnemonic('C');
+        buttonBufferClean.setText("C");
         buttonBufferClean.setToolTipText("Clear Buffer");
         buttonBufferClean.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -204,117 +215,133 @@ public class CharvsDesk extends javax.swing.JFrame {
             }
         });
 
+        buttonBufferAppend.setMnemonic('A');
         buttonBufferAppend.setText("Append");
+        buttonBufferAppend.setToolTipText("Append Buffer (ctrl+A)");
         buttonBufferAppend.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonBufferAppendActionPerformed(evt);
             }
         });
 
+        buttonInsert.setMnemonic('I');
         buttonInsert.setText("Insert");
+        buttonInsert.setToolTipText("Insert on < INSERT> tag in Input chain and puts on clipboard (ctrl+E)");
         buttonInsert.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonInsertActionPerformed(evt);
             }
         });
 
-        buttonOriginSelect.setText("Origin");
-        buttonOriginSelect.addActionListener(new java.awt.event.ActionListener() {
+        buttonInputSelect.setMnemonic('n');
+        buttonInputSelect.setText("Input");
+        buttonInputSelect.setToolTipText("Select Input Folder");
+        buttonInputSelect.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonOriginSelectActionPerformed(evt);
+                buttonInputSelectActionPerformed(evt);
             }
         });
 
-        buttonOriginFolder.setText("*");
-        buttonOriginFolder.setToolTipText("Open Origin Folder");
-        buttonOriginFolder.addActionListener(new java.awt.event.ActionListener() {
+        buttonInputOpen.setText("*");
+        buttonInputOpen.setToolTipText("Open Origin Folder");
+        buttonInputOpen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonOriginFolderActionPerformed(evt);
+                buttonInputOpenActionPerformed(evt);
             }
         });
 
-        fieldOrigin.setName("Origin"); // NOI18N
+        fieldInput.setName("InputFolder"); // NOI18N
 
+        buttonLoad.setMnemonic('L');
         buttonLoad.setText("Load");
+        buttonLoad.setToolTipText("Loads selected Input on clipboard (ctrl+C)");
         buttonLoad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonLoadActionPerformed(evt);
             }
         });
 
-        buttonOriginUpdate.setText("~");
-        buttonOriginUpdate.setToolTipText("Update Origin Files");
-        buttonOriginUpdate.addActionListener(new java.awt.event.ActionListener() {
+        buttonInputUpdate.setText("~");
+        buttonInputUpdate.setToolTipText("Update Input Files");
+        buttonInputUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonOriginUpdateActionPerformed(evt);
+                buttonInputUpdateActionPerformed(evt);
             }
         });
 
-        buttonOriginFile.setText("*");
-        buttonOriginFile.setToolTipText("Open Origin File");
-        buttonOriginFile.addActionListener(new java.awt.event.ActionListener() {
+        buttonInputFileOpen.setText("*");
+        buttonInputFileOpen.setToolTipText("Open Input File");
+        buttonInputFileOpen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonOriginFileActionPerformed(evt);
+                buttonInputFileOpenActionPerformed(evt);
             }
         });
 
-        comboOrigin.setModel(modelOrigin);
-        comboOrigin.addActionListener(new java.awt.event.ActionListener() {
+        comboInput.setModel(modelInput);
+        comboInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboOriginActionPerformed(evt);
+                comboInputActionPerformed(evt);
             }
         });
 
-        buttonOriginFirst.setText("^");
-        buttonOriginFirst.setToolTipText("Select First Origin File");
-        buttonOriginFirst.addActionListener(new java.awt.event.ActionListener() {
+        buttonInputFirst.setMnemonic('^');
+        buttonInputFirst.setText("^");
+        buttonInputFirst.setToolTipText("Select First Input File");
+        buttonInputFirst.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonOriginFirstActionPerformed(evt);
+                buttonInputFirstActionPerformed(evt);
             }
         });
 
-        buttonOriginPrior.setText("<");
-        buttonOriginPrior.setToolTipText("Select Prior Origin File");
-        buttonOriginPrior.addActionListener(new java.awt.event.ActionListener() {
+        buttonInputPrior.setMnemonic('<');
+        buttonInputPrior.setText("<");
+        buttonInputPrior.setToolTipText("Select Prior Input File");
+        buttonInputPrior.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonOriginPriorActionPerformed(evt);
+                buttonInputPriorActionPerformed(evt);
             }
         });
 
-        buttonOriginNext.setText(">");
-        buttonOriginNext.setToolTipText("Select Next Origin File");
-        buttonOriginNext.addActionListener(new java.awt.event.ActionListener() {
+        buttonInputNext.setMnemonic('>');
+        buttonInputNext.setText(">");
+        buttonInputNext.setToolTipText("Select Next Input File");
+        buttonInputNext.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonOriginNextActionPerformed(evt);
+                buttonInputNextActionPerformed(evt);
             }
         });
 
-        buttonOriginSwitch.setText("%");
-        buttonOriginSwitch.setToolTipText("Switch Between Origin Files");
-        buttonOriginSwitch.addActionListener(new java.awt.event.ActionListener() {
+        buttonInputSwitch.setMnemonic('%');
+        buttonInputSwitch.setText("%");
+        buttonInputSwitch.setToolTipText("Switch between Input files (ctrl+S)");
+        buttonInputSwitch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonOriginSwitchActionPerformed(evt);
+                buttonInputSwitchActionPerformed(evt);
             }
         });
 
-        buttonDestinySelect.setText("Destiny");
-        buttonDestinySelect.addActionListener(new java.awt.event.ActionListener() {
+        buttonOutputSelect.setMnemonic('O');
+        buttonOutputSelect.setText("Output");
+        buttonOutputSelect.setToolTipText("Select Output Folder");
+        buttonOutputSelect.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonDestinySelectActionPerformed(evt);
+                buttonOutputSelectActionPerformed(evt);
             }
         });
 
-        buttonDestinyOpen.setText("*");
-        buttonDestinyOpen.setToolTipText("Open Destiny Folder");
-        buttonDestinyOpen.addActionListener(new java.awt.event.ActionListener() {
+        buttonOutputOpen.setText("*");
+        buttonOutputOpen.setToolTipText("Open Destiny Folder");
+        buttonOutputOpen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonDestinyOpenActionPerformed(evt);
+                buttonOutputOpenActionPerformed(evt);
             }
         });
 
-        fieldDestiny.setName("Destiny"); // NOI18N
+        fieldDestiny.setName("OutputFolder"); // NOI18N
 
+        buttonSave.setMnemonic('S');
         buttonSave.setText("Save");
+        buttonSave.setToolTipText("Saves clipboard on Output folder (ctrl+V)");
         buttonSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonSaveActionPerformed(evt);
@@ -329,59 +356,91 @@ public class CharvsDesk extends javax.swing.JFrame {
             }
         });
 
+        buttonArchiveSelect.setMnemonic('r');
+        buttonArchiveSelect.setText("Archive");
+        buttonArchiveSelect.setToolTipText("Select Archive Folder");
+        buttonArchiveSelect.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonArchiveSelectActionPerformed(evt);
+            }
+        });
+
+        buttonArchiveOpen.setText("*");
+        buttonArchiveOpen.setToolTipText("Open Archive Folder");
+        buttonArchiveOpen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonArchiveOpenActionPerformed(evt);
+            }
+        });
+
+        fieldArchive.setName("ArchiveFolder"); // NOI18N
+
+        checkArchiveMake.setText("Make");
+        checkArchiveMake.setName("ArchiveMake"); // NOI18N
+
+        textArchive.setEditable(false);
+        textArchive.setColumns(20);
+        textArchive.setRows(5);
+        scrollArchive.setViewportView(textArchive);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(buttonGears)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(scrollArchive)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(buttonInputSelect)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(checkGears)
+                        .addComponent(buttonInputOpen)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(fieldInput)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonLoad))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(buttonInputUpdate)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonInputFileOpen)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(comboInput, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonInputFirst)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonInputPrior)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonInputNext)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonInputSwitch))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(buttonOutputSelect)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonOutputOpen)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(fieldDestiny, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonSave)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buttonSaveOpen))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(buttonSetup)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(labelStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonLogs)
+                        .addComponent(fieldStatus)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(buttonBufferClean)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttonBufferAppend)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(buttonInsert))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(buttonOriginSelect)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(buttonArchiveSelect)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonOriginFolder)
+                        .addComponent(buttonArchiveOpen)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(fieldOrigin)
+                        .addComponent(fieldArchive)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonLoad))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(buttonOriginUpdate)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonOriginFile)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(comboOrigin, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonOriginFirst)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonOriginPrior)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonOriginNext)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonOriginSwitch))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(buttonDestinySelect)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonDestinyOpen)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(fieldDestiny)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonSave)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buttonSaveOpen)))
+                        .addComponent(checkArchiveMake)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -392,99 +451,121 @@ public class CharvsDesk extends javax.swing.JFrame {
                     .addComponent(buttonInsert, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(buttonBufferAppend, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(buttonBufferClean, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(buttonGears)
-                    .addComponent(labelStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(checkGears)
-                    .addComponent(buttonLogs))
+                    .addComponent(buttonSetup)
+                    .addComponent(fieldStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buttonOriginSelect)
-                    .addComponent(buttonOriginFolder)
+                    .addComponent(buttonInputSelect)
+                    .addComponent(buttonInputOpen)
                     .addComponent(buttonLoad)
-                    .addComponent(fieldOrigin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(fieldInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buttonOriginUpdate)
-                    .addComponent(buttonOriginSwitch)
-                    .addComponent(buttonOriginNext)
-                    .addComponent(buttonOriginPrior)
-                    .addComponent(buttonOriginFirst)
-                    .addComponent(comboOrigin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonOriginFile))
+                    .addComponent(buttonInputUpdate)
+                    .addComponent(buttonInputSwitch)
+                    .addComponent(buttonInputNext)
+                    .addComponent(buttonInputPrior)
+                    .addComponent(buttonInputFirst)
+                    .addComponent(comboInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonInputFileOpen))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buttonDestinySelect)
-                    .addComponent(buttonDestinyOpen)
+                    .addComponent(buttonOutputSelect)
+                    .addComponent(buttonOutputOpen)
                     .addComponent(buttonSaveOpen)
                     .addComponent(buttonSave)
                     .addComponent(fieldDestiny, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(fieldArchive, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonArchiveSelect)
+                    .addComponent(buttonArchiveOpen)
+                    .addComponent(checkArchiveMake))
+                .addGap(18, 18, 18)
+                .addComponent(scrollArchive)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void buttonDestinySelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDestinySelectActionPerformed
+    private void buttonOutputSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOutputSelectActionPerformed
         var selected = new File(fieldDestiny.getText());
         selected = WizDesk.selectFolder(selected);
         if (selected != null) {
             fieldDestiny.setText(selected.getAbsolutePath());
         }
-    }//GEN-LAST:event_buttonDestinySelectActionPerformed
+    }//GEN-LAST:event_buttonOutputSelectActionPerformed
 
-    private void buttonDestinyOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDestinyOpenActionPerformed
+    private void buttonOutputOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOutputOpenActionPerformed
         try {
             var selected = new File(fieldDestiny.getText());
             WizDesk.open(selected);
         } catch (Exception e) {
             WizDesk.showError(e);
         }
-    }//GEN-LAST:event_buttonDestinyOpenActionPerformed
+    }//GEN-LAST:event_buttonOutputOpenActionPerformed
 
     private void buttonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSaveActionPerformed
         try {
             var text = cleanCitation(WizDesk.getStringFromClipboard()).trim();
-            var lines = WizString.getLines(text);
-            var title = cleanTitle(lines[0]);
             var folder = new File(fieldDestiny.getText());
-            var file = new File(folder, title + ".txt");
-            file = gears.actOn(Event.ON_BEFORE_DESTINY_FILE_SAVE, file, File.class);
-            var exists = file.exists();
+            var name = WizUtilDate.formatTimestampFile(new Date());
+            var naming = Setup.doOnNaming();
+            if (naming == OnNaming.FirstLine) {
+                name = cleanName(WizString.getLines(text)[0]);
+            } else if (naming == OnNaming.Numbered) {
+                var prefix = Setup.getNameNumberedPrefix();
+                var index = 1;
+                var size = Setup.getNameNumberedSize();
+                var suffix = Setup.getNameNumberedSuffix();
+                name = prefix + WizString.fillAtStart(index + "", '0', size) + suffix;
+                var file = new File(folder, name + ".txt");
+                while (file.exists()) {
+                    index++;
+                    name = prefix + WizString.fillAtStart(index + "", '0', size) + suffix;
+                    file = new File(folder, name + ".txt");
+                }
+            }
+            var file = new File(folder, name + ".txt");
+            if (Setup.doOnSave() == OnSave.KeepAll) {
+                file = WizFile.notOverride(file);
+            }
+            var override = file.exists();
             Files.writeString(file.toPath(), text);
-            labelStatus.setText(exists ? "Overwritten" : "Saved");
+            putStatus((override ? "Override on " : "Saved on ") + file.getName(), text);
             bufferBody = "";
             bufferSize = 0;
             savedLast = file;
-            gears.actOn(Event.ON_AFTER_DESTINY_FILE_SAVE, file, File.class);
         } catch (Exception e) {
             WizDesk.showError(e);
         }
     }//GEN-LAST:event_buttonSaveActionPerformed
 
-    private void buttonOriginSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOriginSelectActionPerformed
-        var selected = new File(fieldOrigin.getText());
+    private void buttonInputSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonInputSelectActionPerformed
+        var selected = new File(fieldInput.getText());
         selected = WizDesk.selectFolder(selected);
         if (selected != null) {
-            fieldOrigin.setText(selected.getAbsolutePath());
+            fieldInput.setText(selected.getAbsolutePath());
         }
-    }//GEN-LAST:event_buttonOriginSelectActionPerformed
+    }//GEN-LAST:event_buttonInputSelectActionPerformed
 
-    private void buttonOriginFolderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOriginFolderActionPerformed
+    private void buttonInputOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonInputOpenActionPerformed
         try {
-            var selected = new File(fieldOrigin.getText());
+            var selected = new File(fieldInput.getText());
             WizDesk.open(selected);
         } catch (Exception e) {
             WizDesk.showError(e);
         }
-    }//GEN-LAST:event_buttonOriginFolderActionPerformed
+    }//GEN-LAST:event_buttonInputOpenActionPerformed
 
     private void buttonLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLoadActionPerformed
         try {
-            var folder = new File(fieldOrigin.getText());
-            var file = new File(folder, comboOrigin.getSelectedItem().toString());
-            var origin = Files.readString(file.toPath());
-            WizDesk.putStringOnClipboard(origin);
-            labelStatus.setText("Loaded");
+            var folder = new File(fieldInput.getText());
+            var file = new File(folder, comboInput.getSelectedItem().toString());
+            var input = Files.readString(file.toPath());
+            WizDesk.putStringOnClipboard(input);
+            putStatus("Loaded from " + file.getName(), input);
             bufferBody = "";
             bufferSize = 0;
         } catch (Exception e) {
@@ -492,32 +573,46 @@ public class CharvsDesk extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_buttonLoadActionPerformed
 
-    private void buttonOriginUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOriginUpdateActionPerformed
-        modelOrigin.removeAllElements();
-        var folder = new File(fieldOrigin.getText());
+    private void buttonInputUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonInputUpdateActionPerformed
+        modelInput.removeAllElements();
+        var folder = new File(fieldInput.getText());
         if (!folder.exists()) {
             return;
         }
         for (var inside : folder.listFiles()) {
             if (inside.getName().toLowerCase().endsWith(".txt")) {
-                modelOrigin.addElement(inside.getName());
+                modelInput.addElement(inside.getName());
             }
         }
-    }//GEN-LAST:event_buttonOriginUpdateActionPerformed
+    }//GEN-LAST:event_buttonInputUpdateActionPerformed
 
+    private String partialInsert = null;
+    private File partialFile = null;
+    
     private void buttonInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonInsertActionPerformed
         try {
             var body = WizDesk.getStringFromClipboard();
-            var folder = new File(fieldOrigin.getText());
-            var file = new File(folder, comboOrigin.getSelectedItem().toString());
-            var origin = Files.readString(file.toPath());
-            if (origin.contains("< INSERT >")) {
-                origin = origin.replace("< INSERT >", body);
+            var folder = new File(fieldInput.getText());
+            var file = new File(folder, comboInput.getSelectedItem().toString());
+            var input = partialInsert;
+            if (input == null) {    
+                input = Files.readString(file.toPath());
+            }
+            if (input.contains("< INSERT >")) {
+                input = input.replaceFirst("< INSERT >", body);
             } else {
                 throw new Exception("Did not found the < INSERT > tag.");
             }
-            WizDesk.putStringOnClipboard(origin);
-            labelStatus.setText("Inserted");
+            var remains = WizString.count(input, "< INSERT >");
+            WizDesk.putStringOnClipboard(input);
+            putStatus("Inserted " + (remains == 0 ? "Ok" : "-" + remains) + " on " + (partialInsert != null ?  "Partial of " + partialFile.getName() : file.getName()), input);
+            if (remains == 0) {
+                partialInsert = null;
+                partialFile = null;
+            } else {
+                partialInsert = input;
+                partialFile = file;
+            }
             bufferBody = "";
             bufferSize = 0;
         } catch (Exception e) {
@@ -531,7 +626,7 @@ public class CharvsDesk extends javax.swing.JFrame {
             bufferBody = (bufferBody.trim() + "\n\n" + body.trim()).trim();
             bufferSize++;
             WizDesk.putStringOnClipboard(bufferBody);
-            labelStatus.setText("Appended " + bufferSize);
+            putStatus("Appended " + bufferSize + " on Buffer", bufferBody);
         } catch (Exception e) {
             WizDesk.showError(e);
         }
@@ -545,66 +640,96 @@ public class CharvsDesk extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_buttonSaveOpenActionPerformed
 
-    private void comboOriginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboOriginActionPerformed
-        if (comboOrigin.getSelectedItem() != null) {
+    private void comboInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboInputActionPerformed
+        if (comboInput.getSelectedItem() != null) {
             originLast = originActual;
-            originActual = comboOrigin.getSelectedItem().toString();
+            originActual = comboInput.getSelectedItem().toString();
         }
-    }//GEN-LAST:event_comboOriginActionPerformed
+    }//GEN-LAST:event_comboInputActionPerformed
 
-    private void buttonOriginSwitchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOriginSwitchActionPerformed
+    private void buttonInputSwitchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonInputSwitchActionPerformed
         try {
-            comboOrigin.setSelectedItem(originLast);
+            comboInput.setSelectedItem(originLast);
         } catch (Exception e) {
             WizDesk.showError(e);
         }
-    }//GEN-LAST:event_buttonOriginSwitchActionPerformed
+    }//GEN-LAST:event_buttonInputSwitchActionPerformed
 
-    private void buttonOriginFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOriginFirstActionPerformed
+    private void buttonInputFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonInputFirstActionPerformed
         try {
-            comboOrigin.setSelectedIndex(0);
+            comboInput.setSelectedIndex(0);
         } catch (Exception e) {
             WizDesk.showError(e);
         }
-    }//GEN-LAST:event_buttonOriginFirstActionPerformed
+    }//GEN-LAST:event_buttonInputFirstActionPerformed
 
-    private void buttonOriginPriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOriginPriorActionPerformed
+    private void buttonInputPriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonInputPriorActionPerformed
         try {
-            comboOrigin.setSelectedIndex(comboOrigin.getSelectedIndex() - 1);
+            var toSelect = comboInput.getSelectedIndex() - 1;
+            if (toSelect < 0) {
+                toSelect = modelInput.getSize() - 1;
+            }
+            comboInput.setSelectedIndex(toSelect);
         } catch (Exception e) {
             WizDesk.showError(e);
         }
-    }//GEN-LAST:event_buttonOriginPriorActionPerformed
+    }//GEN-LAST:event_buttonInputPriorActionPerformed
 
-    private void buttonOriginNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOriginNextActionPerformed
+    private void buttonInputNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonInputNextActionPerformed
         try {
-            comboOrigin.setSelectedIndex(comboOrigin.getSelectedIndex() + 1);
+            var toSelect = comboInput.getSelectedIndex() + 1;
+            if (toSelect >= modelInput.getSize()) {
+                toSelect =  0;
+            }
+            comboInput.setSelectedIndex(toSelect);
+            comboInput.setSelectedIndex(comboInput.getSelectedIndex() + 1);
         } catch (Exception e) {
             WizDesk.showError(e);
         }
-    }//GEN-LAST:event_buttonOriginNextActionPerformed
+    }//GEN-LAST:event_buttonInputNextActionPerformed
 
     private void buttonBufferCleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBufferCleanActionPerformed
-        bufferBody = "";
-        bufferSize = 0;
-        labelStatus.setText("Appended " + bufferSize);
+        try {
+            bufferBody = "";
+            bufferSize = 0;
+            putStatus("Cleaned Buffer", "");
+        } catch (Exception e) {
+            WizDesk.showError(e);
+        }
     }//GEN-LAST:event_buttonBufferCleanActionPerformed
 
-    private void buttonGearsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGearsActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buttonGearsActionPerformed
+    private void buttonSetupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSetupActionPerformed
+        new SetupDesk().setVisible(true);
+    }//GEN-LAST:event_buttonSetupActionPerformed
 
-    private void buttonOriginFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOriginFileActionPerformed
+    private void buttonInputFileOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonInputFileOpenActionPerformed
         try {
-            var folder = new File(fieldOrigin.getText());
-            var file = new File(folder, comboOrigin.getSelectedItem().toString());
+            var folder = new File(fieldInput.getText());
+            var file = new File(folder, comboInput.getSelectedItem().toString());
             WizDesk.open(file);
         } catch (Exception e) {
             WizDesk.showError(e);
         }
-    }//GEN-LAST:event_buttonOriginFileActionPerformed
+    }//GEN-LAST:event_buttonInputFileOpenActionPerformed
+
+    private void buttonArchiveSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonArchiveSelectActionPerformed
+        var selected = new File(fieldArchive.getText());
+        selected = WizDesk.selectFolder(selected);
+        if (selected != null) {
+            fieldArchive.setText(selected.getAbsolutePath());
+        }
+    }//GEN-LAST:event_buttonArchiveSelectActionPerformed
+
+    private void buttonArchiveOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonArchiveOpenActionPerformed
+        try {
+            var selected = new File(fieldArchive.getText());
+            WizDesk.open(selected);
+        } catch (Exception e) {
+            WizDesk.showError(e);
+        }
+    }//GEN-LAST:event_buttonArchiveOpenActionPerformed
     
-    private String cleanTitle(String title) {
+    private String cleanName(String title) {
         title = title.trim();
         return title
                 .replace("{", "(")
@@ -633,33 +758,59 @@ public class CharvsDesk extends javax.swing.JFrame {
                 .replaceAll("\\[cite\\:(\\s|\\d|\\,)+\\]", "");
     }
     
+    private void putStatus(String status, String archive) throws Exception {
+        fieldStatus.setText(status);
+        fieldStatus.setSelectionStart(0);
+        fieldStatus.setSelectionEnd(0);
+        if (checkArchiveMake.isSelected()) {
+            var now = WizUtilDate.formatTimestampFile(new Date());
+            var builder = new StringBuilder();
+            builder.append("Time: ");
+            builder.append(now);
+            builder.append("\nStatus: ");
+            builder.append(status);
+            builder.append("\nArchive:\n");
+            builder.append(archive);
+            var folder = new File(fieldArchive.getText());
+            var file = new File(folder, now + ".txt");
+            Files.writeString(file.toPath(), builder.toString(), StandardCharsets.UTF_8);
+        }
+        textArchive.setText(archive);
+        textArchive.setSelectionStart(0);
+        textArchive.setSelectionEnd(0);
+    }
+    
     public static void start(String args[]) {
         WizDesk.start("Charvs", () -> new CharvsDesk().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buttonArchiveOpen;
+    private javax.swing.JButton buttonArchiveSelect;
     private javax.swing.JButton buttonBufferAppend;
     private javax.swing.JButton buttonBufferClean;
-    private javax.swing.JButton buttonDestinyOpen;
-    private javax.swing.JButton buttonDestinySelect;
-    private javax.swing.JButton buttonGears;
+    private javax.swing.JButton buttonInputFileOpen;
+    private javax.swing.JButton buttonInputFirst;
+    private javax.swing.JButton buttonInputNext;
+    private javax.swing.JButton buttonInputOpen;
+    private javax.swing.JButton buttonInputPrior;
+    private javax.swing.JButton buttonInputSelect;
+    private javax.swing.JButton buttonInputSwitch;
+    private javax.swing.JButton buttonInputUpdate;
     private javax.swing.JButton buttonInsert;
     private javax.swing.JButton buttonLoad;
-    private javax.swing.JButton buttonLogs;
-    private javax.swing.JButton buttonOriginFile;
-    private javax.swing.JButton buttonOriginFirst;
-    private javax.swing.JButton buttonOriginFolder;
-    private javax.swing.JButton buttonOriginNext;
-    private javax.swing.JButton buttonOriginPrior;
-    private javax.swing.JButton buttonOriginSelect;
-    private javax.swing.JButton buttonOriginSwitch;
-    private javax.swing.JButton buttonOriginUpdate;
+    private javax.swing.JButton buttonOutputOpen;
+    private javax.swing.JButton buttonOutputSelect;
     private javax.swing.JButton buttonSave;
     private javax.swing.JButton buttonSaveOpen;
-    private javax.swing.JCheckBox checkGears;
-    private javax.swing.JComboBox<String> comboOrigin;
+    private javax.swing.JButton buttonSetup;
+    private javax.swing.JCheckBox checkArchiveMake;
+    private javax.swing.JComboBox<String> comboInput;
+    private javax.swing.JTextField fieldArchive;
     private javax.swing.JTextField fieldDestiny;
-    private javax.swing.JTextField fieldOrigin;
-    private javax.swing.JLabel labelStatus;
+    private javax.swing.JTextField fieldInput;
+    private javax.swing.JTextField fieldStatus;
+    private javax.swing.JScrollPane scrollArchive;
+    private javax.swing.JTextArea textArchive;
     // End of variables declaration//GEN-END:variables
 }

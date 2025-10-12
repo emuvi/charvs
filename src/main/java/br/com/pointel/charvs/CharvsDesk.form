@@ -4,6 +4,7 @@
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
     <Property name="title" type="java.lang.String" value="Charvs"/>
+    <Property name="name" type="java.lang.String" value="Desk" noResource="true"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -24,58 +25,64 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
+          <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="buttonGears" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="checkGears" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="labelStatus" pref="178" max="32767" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="buttonLogs" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="buttonBufferClean" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="buttonBufferAppend" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="buttonInsert" min="-2" max="-2" attributes="0"/>
-                  </Group>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="scrollArchive" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="buttonOriginSelect" min="-2" max="-2" attributes="0"/>
+                      <Component id="buttonInputSelect" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="buttonOriginFolder" min="-2" max="-2" attributes="0"/>
+                      <Component id="buttonInputOpen" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="fieldOrigin" max="32767" attributes="0"/>
+                      <Component id="fieldInput" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="buttonLoad" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="buttonOriginUpdate" min="-2" max="-2" attributes="0"/>
+                      <Component id="buttonInputUpdate" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="buttonOriginFile" min="-2" max="-2" attributes="0"/>
+                      <Component id="buttonInputFileOpen" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="comboOrigin" max="32767" attributes="0"/>
+                      <Component id="comboInput" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="buttonOriginFirst" min="-2" max="-2" attributes="0"/>
+                      <Component id="buttonInputFirst" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="buttonOriginPrior" min="-2" max="-2" attributes="0"/>
+                      <Component id="buttonInputPrior" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="buttonOriginNext" min="-2" max="-2" attributes="0"/>
+                      <Component id="buttonInputNext" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="buttonOriginSwitch" min="-2" max="-2" attributes="0"/>
+                      <Component id="buttonInputSwitch" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="buttonDestinySelect" min="-2" max="-2" attributes="0"/>
+                      <Component id="buttonOutputSelect" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="buttonDestinyOpen" min="-2" max="-2" attributes="0"/>
+                      <Component id="buttonOutputOpen" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="fieldDestiny" max="32767" attributes="0"/>
+                      <Component id="fieldDestiny" pref="174" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="buttonSave" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="buttonSaveOpen" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="buttonSetup" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="fieldStatus" max="32767" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="buttonBufferClean" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="buttonBufferAppend" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="buttonInsert" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="buttonArchiveSelect" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="buttonArchiveOpen" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="fieldArchive" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="checkArchiveMake" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -90,68 +97,68 @@
                   <Component id="buttonInsert" alignment="3" max="32767" attributes="0"/>
                   <Component id="buttonBufferAppend" alignment="3" max="32767" attributes="0"/>
                   <Component id="buttonBufferClean" alignment="3" max="32767" attributes="0"/>
-                  <Component id="buttonGears" alignment="3" max="-2" attributes="0"/>
-                  <Component id="labelStatus" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
-                  <Component id="checkGears" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="buttonLogs" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="buttonSetup" alignment="3" max="-2" attributes="0"/>
+                  <Component id="fieldStatus" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="buttonOriginSelect" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="buttonOriginFolder" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="buttonInputSelect" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="buttonInputOpen" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="buttonLoad" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="fieldOrigin" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="fieldInput" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="buttonOriginUpdate" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="buttonOriginSwitch" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="buttonOriginNext" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="buttonOriginPrior" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="buttonOriginFirst" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="comboOrigin" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="buttonOriginFile" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="buttonInputUpdate" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="buttonInputSwitch" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="buttonInputNext" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="buttonInputPrior" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="buttonInputFirst" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="comboInput" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="buttonInputFileOpen" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="buttonDestinySelect" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="buttonDestinyOpen" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="buttonOutputSelect" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="buttonOutputOpen" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="buttonSaveOpen" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="buttonSave" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="fieldDestiny" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="fieldArchive" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="buttonArchiveSelect" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="buttonArchiveOpen" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="checkArchiveMake" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="scrollArchive" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="buttonGears">
+    <Component class="javax.swing.JButton" name="buttonSetup">
       <Properties>
-        <Property name="text" type="java.lang.String" value="G"/>
-        <Property name="toolTipText" type="java.lang.String" value="Gears"/>
+        <Property name="text" type="java.lang.String" value="#"/>
+        <Property name="toolTipText" type="java.lang.String" value="Setup"/>
+        <Property name="name" type="java.lang.String" value="" noResource="true"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonGearsActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonSetupActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="checkGears">
+    <Component class="javax.swing.JTextField" name="fieldStatus">
       <Properties>
-        <Property name="toolTipText" type="java.lang.String" value="Active Gears"/>
-        <Property name="name" type="java.lang.String" value="RunGears" noResource="true"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="labelStatus">
-    </Component>
-    <Component class="javax.swing.JButton" name="buttonLogs">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="L"/>
-        <Property name="toolTipText" type="java.lang.String" value="Logs"/>
+        <Property name="editable" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="buttonBufferClean">
       <Properties>
-        <Property name="text" type="java.lang.String" value="U"/>
+        <Property name="mnemonic" type="int" value="67"/>
+        <Property name="text" type="java.lang.String" value="C"/>
         <Property name="toolTipText" type="java.lang.String" value="Clear Buffer"/>
       </Properties>
       <Events>
@@ -160,7 +167,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="buttonBufferAppend">
       <Properties>
+        <Property name="mnemonic" type="int" value="65"/>
         <Property name="text" type="java.lang.String" value="Append"/>
+        <Property name="toolTipText" type="java.lang.String" value="Append Buffer (ctrl+A)"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonBufferAppendActionPerformed"/>
@@ -168,134 +177,148 @@
     </Component>
     <Component class="javax.swing.JButton" name="buttonInsert">
       <Properties>
+        <Property name="mnemonic" type="int" value="73"/>
         <Property name="text" type="java.lang.String" value="Insert"/>
+        <Property name="toolTipText" type="java.lang.String" value="Insert on &lt; INSERT&gt; tag in Input chain and puts on clipboard (ctrl+E)"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonInsertActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="buttonOriginSelect">
+    <Component class="javax.swing.JButton" name="buttonInputSelect">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Origin"/>
+        <Property name="mnemonic" type="int" value="110"/>
+        <Property name="text" type="java.lang.String" value="Input"/>
+        <Property name="toolTipText" type="java.lang.String" value="Select Input Folder"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonOriginSelectActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonInputSelectActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="buttonOriginFolder">
+    <Component class="javax.swing.JButton" name="buttonInputOpen">
       <Properties>
         <Property name="text" type="java.lang.String" value="*"/>
         <Property name="toolTipText" type="java.lang.String" value="Open Origin Folder"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonOriginFolderActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonInputOpenActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="fieldOrigin">
+    <Component class="javax.swing.JTextField" name="fieldInput">
       <Properties>
-        <Property name="name" type="java.lang.String" value="Origin" noResource="true"/>
+        <Property name="name" type="java.lang.String" value="InputFolder" noResource="true"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="buttonLoad">
       <Properties>
+        <Property name="mnemonic" type="int" value="76"/>
         <Property name="text" type="java.lang.String" value="Load"/>
+        <Property name="toolTipText" type="java.lang.String" value="Loads selected Input on clipboard (ctrl+C)"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonLoadActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="buttonOriginUpdate">
+    <Component class="javax.swing.JButton" name="buttonInputUpdate">
       <Properties>
         <Property name="text" type="java.lang.String" value="~"/>
-        <Property name="toolTipText" type="java.lang.String" value="Update Origin Files"/>
+        <Property name="toolTipText" type="java.lang.String" value="Update Input Files"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonOriginUpdateActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonInputUpdateActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="buttonOriginFile">
+    <Component class="javax.swing.JButton" name="buttonInputFileOpen">
       <Properties>
         <Property name="text" type="java.lang.String" value="*"/>
-        <Property name="toolTipText" type="java.lang.String" value="Open Origin File"/>
+        <Property name="toolTipText" type="java.lang.String" value="Open Input File"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonOriginFileActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonInputFileOpenActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JComboBox" name="comboOrigin">
+    <Component class="javax.swing.JComboBox" name="comboInput">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="modelOrigin" type="code"/>
+          <Connection code="modelInput" type="code"/>
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comboOriginActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comboInputActionPerformed"/>
       </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JButton" name="buttonOriginFirst">
+    <Component class="javax.swing.JButton" name="buttonInputFirst">
       <Properties>
+        <Property name="mnemonic" type="int" value="94"/>
         <Property name="text" type="java.lang.String" value="^"/>
-        <Property name="toolTipText" type="java.lang.String" value="Select First Origin File"/>
+        <Property name="toolTipText" type="java.lang.String" value="Select First Input File"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonOriginFirstActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonInputFirstActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="buttonOriginPrior">
+    <Component class="javax.swing.JButton" name="buttonInputPrior">
       <Properties>
+        <Property name="mnemonic" type="int" value="60"/>
         <Property name="text" type="java.lang.String" value="&lt;"/>
-        <Property name="toolTipText" type="java.lang.String" value="Select Prior Origin File"/>
+        <Property name="toolTipText" type="java.lang.String" value="Select Prior Input File"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonOriginPriorActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonInputPriorActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="buttonOriginNext">
+    <Component class="javax.swing.JButton" name="buttonInputNext">
       <Properties>
+        <Property name="mnemonic" type="int" value="62"/>
         <Property name="text" type="java.lang.String" value="&gt;"/>
-        <Property name="toolTipText" type="java.lang.String" value="Select Next Origin File"/>
+        <Property name="toolTipText" type="java.lang.String" value="Select Next Input File"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonOriginNextActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonInputNextActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="buttonOriginSwitch">
+    <Component class="javax.swing.JButton" name="buttonInputSwitch">
       <Properties>
+        <Property name="mnemonic" type="int" value="37"/>
         <Property name="text" type="java.lang.String" value="%"/>
-        <Property name="toolTipText" type="java.lang.String" value="Switch Between Origin Files"/>
+        <Property name="toolTipText" type="java.lang.String" value="Switch between Input files (ctrl+S)"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonOriginSwitchActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonInputSwitchActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="buttonDestinySelect">
+    <Component class="javax.swing.JButton" name="buttonOutputSelect">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Destiny"/>
+        <Property name="mnemonic" type="int" value="79"/>
+        <Property name="text" type="java.lang.String" value="Output"/>
+        <Property name="toolTipText" type="java.lang.String" value="Select Output Folder"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonDestinySelectActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonOutputSelectActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="buttonDestinyOpen">
+    <Component class="javax.swing.JButton" name="buttonOutputOpen">
       <Properties>
         <Property name="text" type="java.lang.String" value="*"/>
         <Property name="toolTipText" type="java.lang.String" value="Open Destiny Folder"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonDestinyOpenActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonOutputOpenActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="fieldDestiny">
       <Properties>
-        <Property name="name" type="java.lang.String" value="Destiny" noResource="true"/>
+        <Property name="name" type="java.lang.String" value="OutputFolder" noResource="true"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="buttonSave">
       <Properties>
+        <Property name="mnemonic" type="int" value="83"/>
         <Property name="text" type="java.lang.String" value="Save"/>
+        <Property name="toolTipText" type="java.lang.String" value="Saves clipboard on Output folder (ctrl+V)"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonSaveActionPerformed"/>
@@ -310,5 +333,51 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonSaveOpenActionPerformed"/>
       </Events>
     </Component>
+    <Component class="javax.swing.JButton" name="buttonArchiveSelect">
+      <Properties>
+        <Property name="mnemonic" type="int" value="114"/>
+        <Property name="text" type="java.lang.String" value="Archive"/>
+        <Property name="toolTipText" type="java.lang.String" value="Select Archive Folder"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonArchiveSelectActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="buttonArchiveOpen">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="*"/>
+        <Property name="toolTipText" type="java.lang.String" value="Open Archive Folder"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonArchiveOpenActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="fieldArchive">
+      <Properties>
+        <Property name="name" type="java.lang.String" value="ArchiveFolder" noResource="true"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="checkArchiveMake">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Make"/>
+        <Property name="name" type="java.lang.String" value="ArchiveMake" noResource="true"/>
+      </Properties>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="scrollArchive">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextArea" name="textArchive">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="columns" type="int" value="20"/>
+            <Property name="rows" type="int" value="5"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
   </SubComponents>
 </Form>
