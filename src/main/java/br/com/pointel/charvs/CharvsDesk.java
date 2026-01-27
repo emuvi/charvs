@@ -678,11 +678,10 @@ public class CharvsDesk extends javax.swing.JFrame {
     private void buttonInputNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonInputNextActionPerformed
         try {
             var toSelect = comboInput.getSelectedIndex() + 1;
-            if (toSelect >= modelInput.getSize()) {
+            if (toSelect > modelInput.getSize() -1) {
                 toSelect =  0;
             }
             comboInput.setSelectedIndex(toSelect);
-            comboInput.setSelectedIndex(comboInput.getSelectedIndex() + 1);
         } catch (Exception e) {
             WizDesk.showError(e);
         }
