@@ -35,7 +35,7 @@ public class SetupDesk extends javax.swing.JFrame {
         setTitle("Setup");
         setName("Setup"); // NOI18N
 
-        comboOnSave.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ShowDesk", "AppendOnBuffer", "InsertOnInput" }));
+        comboOnSave.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nothing", "ShowDesk", "AppendOnBuffer", "InsertOnInput" }));
         comboOnSave.setName("OnClipboadNewText"); // NOI18N
 
         jLabel1.setText("On ClipBoard New Text:");
