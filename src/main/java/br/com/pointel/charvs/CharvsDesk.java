@@ -747,6 +747,7 @@ public class CharvsDesk extends javax.swing.JFrame {
                 .replace(">", "")
                 .replace("*", "")
                 .replace("#", "")
+                .replace(": ", " - ")
                 .replace(":", ",")
                 .replace(";", ",")
                 .trim();
