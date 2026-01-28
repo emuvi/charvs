@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Charvs",
+      "request": "launch",
+      "mainClass": "br.com.pointel.charvs.Charvs",
+      "projectName": "charvs",
+      "args": "--gui"
+    }
+  ]
+}
