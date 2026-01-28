@@ -404,8 +404,6 @@ public class CharvsDesk extends JFrame {
         }
     }
 
-    
-    
     private void buttonInsertActionPerformed(ActionEvent evt) {
         try {
             var body = WizDesk.getStringFromClipboard();
@@ -415,25 +413,73 @@ public class CharvsDesk extends JFrame {
             if (input == null) {    
                 input = Files.readString(file.toPath());
             }
-            if (input.contains("< INSERT >")) {
-                input = input.replaceFirst("< INSERT >", body);
+            int insertPos = input.indexOf("< INSERT");
+            if (insertPos > -1) {
+                int insertEnd = input.indexOf(">", insertPos);
+                if (insertEnd > -1) {
+                    input = input.substring(0, insertPos) + body + input.substring(insertEnd + 1);
+                } else {
+                    throw new Exception("Malformed < INSERT > tag.");
+                }
             } else {
-                throw new Exception("Did not found the < INSERT > tag.");
+                throw new Exception("Not found < INSERT > tag.");
             }
-            var remains = WizString.count(input, "< INSERT >");
+            var remains = WizString.count(input, "< INSERT");
             WizDesk.putStringOnClipboard(input);
-            putStatus("Inserted " + (remains == 0 ? "Ok" : "-" + remains) + " on " + (partialInsert != null ?  "Partial of " + partialFile.getName() : file.getName()), input);
+            putStatus("Inserted " + (remains == 0 ? "Done" : "Left " + remains) + " on " + (partialInsert != null ?  "Partial of " + partialFile.getName() : file.getName()), input);
             if (remains == 0) {
                 partialInsert = null;
                 partialFile = null;
+                int warnPos = input.indexOf("< WARN");
+                if (warnPos > -1) {
+                    int warnEnd = input.indexOf(">", warnPos);
+                    if (warnEnd > -1) {
+                         var warnText = input.substring(warnPos + 6, warnEnd).trim();
+                        if (warnText.startsWith(":")) {
+                            warnText = warnText.substring(1).trim();
+                        }
+                        WizDesk.showInfo(warnText);
+                    } else {
+                        throw new Exception("Malformed < WARN > tag.");
+                    }
+                }
             } else {
                 partialInsert = input;
                 partialFile = file;
             }
             bufferBody = "";
             bufferSize = 0;
+            putInsertTitle();
         } catch (Exception e) {
             WizDesk.showError(e);
+        }
+    }
+
+    private void putInsertTitle() {
+        try {
+            var folder = new File(fieldInput.getText());
+            var file = new File(folder, comboInput.getSelectedItem().toString());
+            var input = partialInsert;
+            if (input == null) {    
+                input = Files.readString(file.toPath());
+            }
+            int insertPos = input.indexOf("< INSERT");
+            if (insertPos > -1) {
+                int insertEnd = input.indexOf(">", insertPos);
+                if (insertEnd > -1) {
+                    var insertTitle = input.substring(insertPos + 8, insertEnd).trim();
+                    if (insertTitle.startsWith(":")) {
+                        insertTitle = insertTitle.substring(1).trim();
+                    }
+                    fieldInsertTitle.setText(insertTitle.isEmpty() ? "Found <INSERT> tag." : insertTitle);
+                } else {
+                    throw new Exception("Malformed < INSERT > tag.");
+                }
+            } else {
+                throw new Exception("Not found < INSERT > tag.");
+            }
+        } catch (Exception e) {
+            fieldInsertTitle.setText(e.getMessage());
         }
     }
 
@@ -463,6 +509,19 @@ public class CharvsDesk extends JFrame {
             putStatus("Loaded from " + file.getName(), input);
             bufferBody = "";
             bufferSize = 0;
+            int warnPos = input.indexOf("< WARN");
+            if (warnPos > -1) {
+                int warnEnd = input.indexOf(">", warnPos);
+                if (warnEnd > -1) {
+                        var warnText = input.substring(warnPos + 6, warnEnd).trim();
+                    if (warnText.startsWith(":")) {
+                        warnText = warnText.substring(1).trim();
+                    }
+                    WizDesk.showInfo(warnText);
+                } else {
+                    throw new Exception("Malformed < WARN > tag.");
+                }
+            }
         } catch (Exception e) {
             WizDesk.showError(e);
         }
@@ -495,6 +554,9 @@ public class CharvsDesk extends JFrame {
         if (comboInput.getSelectedItem() != null) {
             originLast = originActual;
             originActual = comboInput.getSelectedItem().toString();
+            partialInsert = null;
+            partialFile = null;
+            putInsertTitle();
         }
     }
 
