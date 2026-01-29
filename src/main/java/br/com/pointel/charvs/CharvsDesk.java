@@ -330,7 +330,10 @@ public class CharvsDesk extends JFrame {
     }
 
     private String cleanFileName(String title) {
-        title = WizString.capitalizeWords(title.trim());
+        title = title.trim();
+        if (title.equals(title.toUpperCase()) || title.equals(title.toLowerCase())) {
+            title = WizString.capitalizeWords(title.toLowerCase());
+        }
         title = title
                 .replace("{", "(")
                 .replace("}", ")")
@@ -354,7 +357,7 @@ public class CharvsDesk extends JFrame {
         title = title.replaceAll("\\s+", " ");
         var parts = title.split("\\s\\-\\s");
         return String.join(" - ", Arrays.asList(parts).stream()
-                .map(part -> WizString.capitalizeFirstLetter(part).trim()).toList());
+                .map(part -> WizString.capitalizeFirstLetter(part).trim()).toList()).trim();
     }
     
     private String cleanCitation(String text) {
