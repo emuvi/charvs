@@ -328,8 +328,8 @@ public class CharvsDesk extends JFrame {
         setAlwaysOnTop(false);
     }
 
-    private String cleanName(String title) {
-        title = title.trim();
+    private String cleanFileName(String title) {
+        title = WizString.capitalizeWords(title.trim());
         return title
                 .replace("{", "(")
                 .replace("}", ")")
@@ -624,24 +624,24 @@ public class CharvsDesk extends JFrame {
         try {
             var text = cleanCitation(WizDesk.getStringFromClipboard()).trim();
             var folder = new File(fieldOutput.getText());
-            var name = WizUtilDate.formatTimestampFile(new Date());
-            var naming = Setup.getOnNaming();
-            if (naming == OnNaming.FirstLine) {
-                name = cleanName(WizString.getLines(text)[0]);
-            } else if (naming == OnNaming.Numbered) {
+            var fileName = WizUtilDate.formatTimestampFile(new Date());
+            var setupNaming = Setup.getOnNaming();
+            if (setupNaming == OnNaming.FirstLine) {
+                fileName = cleanFileName(WizString.getLines(text)[0]);
+            } else if (setupNaming == OnNaming.Numbered) {
                 var prefix = Setup.getNameNumberedPrefix();
                 var index = 1;
                 var size = Setup.getNameNumberedSize();
                 var suffix = Setup.getNameNumberedSuffix();
-                name = prefix + WizString.fillAtStart(index + "", '0', size) + suffix;
-                var file = new File(folder, name + ".txt");
+                fileName = prefix + WizString.fillAtStart(index + "", '0', size) + suffix;
+                var file = new File(folder, fileName + ".txt");
                 while (file.exists()) {
                     index++;
-                    name = prefix + WizString.fillAtStart(index + "", '0', size) + suffix;
-                    file = new File(folder, name + ".txt");
+                    fileName = prefix + WizString.fillAtStart(index + "", '0', size) + suffix;
+                    file = new File(folder, fileName + ".txt");
                 }
             }
-            var file = new File(folder, name + ".txt");
+            var file = new File(folder, fileName + ".txt");
             if (Setup.getOnSave() == OnSave.KeepAll) {
                 file = WizFile.notOverride(file);
             }
