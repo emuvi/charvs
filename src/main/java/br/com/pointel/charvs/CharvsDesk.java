@@ -482,6 +482,8 @@ public class CharvsDesk extends JFrame {
             }
         } catch (Exception e) {
             fieldInsertTitle.setText(e.getMessage());
+            fieldInsertTitle.setSelectionStart(0);
+            fieldInsertTitle.setSelectionEnd(0);
         }
     }
 
