@@ -104,10 +104,9 @@ public class CharvsDesk extends JFrame {
             .growHorizontal().put(fieldArchive)
             .growNone().put(checkArchiveMake);
 
-    private JTextArea fieldStatus = new JTextArea();
-    private JScrollPane scrollStatus = new JScrollPane(fieldStatus);
+    private JTextField fieldStatus = new JTextField();
     private DRow rowStatus = new DRow().insets(2)
-            .growBoth().put(scrollStatus);
+            .growBoth().put(fieldStatus);
 
     private DPane paneBody = new DCol()
             .growHorizontal().put(rowMain)
