@@ -301,11 +301,11 @@ public class CharvsDesk extends JFrame {
     
     private void watchClipboardText() throws Exception {
         if (checkClipboardNewText()) {
-            if (Setup.doOnNewClipboardText() == OnNewClipboardText.ShowDesk) {
+            if (Setup.getOnNewClipboardText() == OnNewClipboardText.ShowDesk) {
                 showDesk();
-            } else if (Setup.doOnNewClipboardText() == OnNewClipboardText.AppendOnBuffer) {
+            } else if (Setup.getOnNewClipboardText() == OnNewClipboardText.AppendOnBuffer) {
                 buttonBufferAppendActionPerformed(null);
-            } else if (Setup.doOnNewClipboardText() == OnNewClipboardText.InsertOnInput) {
+            } else if (Setup.getOnNewClipboardText() == OnNewClipboardText.InsertOnInput) {
                 buttonInsertActionPerformed(null);
             } 
         }
@@ -625,7 +625,7 @@ public class CharvsDesk extends JFrame {
             var text = cleanCitation(WizDesk.getStringFromClipboard()).trim();
             var folder = new File(fieldOutput.getText());
             var name = WizUtilDate.formatTimestampFile(new Date());
-            var naming = Setup.doOnNaming();
+            var naming = Setup.getOnNaming();
             if (naming == OnNaming.FirstLine) {
                 name = cleanName(WizString.getLines(text)[0]);
             } else if (naming == OnNaming.Numbered) {
@@ -642,7 +642,7 @@ public class CharvsDesk extends JFrame {
                 }
             }
             var file = new File(folder, name + ".txt");
-            if (Setup.doOnSave() == OnSave.KeepAll) {
+            if (Setup.getOnSave() == OnSave.KeepAll) {
                 file = WizFile.notOverride(file);
             }
             var override = file.exists();
