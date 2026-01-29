@@ -370,7 +370,7 @@ public class CharvsDesk extends JFrame {
             builder.append(now);
             builder.append("\nStatus: ");
             builder.append(status);
-            builder.append("\nArchive:\n");
+            builder.append("\nArchive:\n\n");
             builder.append(archive);
             var folder = new File(fieldArchive.getText());
             var file = new File(folder, now + ".txt");
@@ -472,6 +472,8 @@ public class CharvsDesk extends JFrame {
                         insertTitle = insertTitle.substring(1).trim();
                     }
                     fieldInsertTitle.setText(insertTitle.isEmpty() ? "Found <INSERT> tag." : insertTitle);
+                    fieldInsertTitle.setSelectionStart(0);
+                    fieldInsertTitle.setSelectionEnd(0);
                 } else {
                     throw new Exception("Malformed < INSERT > tag.");
                 }
