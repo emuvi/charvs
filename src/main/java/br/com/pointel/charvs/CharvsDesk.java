@@ -335,10 +335,6 @@ public class CharvsDesk extends JFrame {
             title = WizString.capitalizeWords(title.toLowerCase());
         }
         title = title
-                .replace("{", "(")
-                .replace("}", ")")
-                .replace("[", "(")
-                .replace("]", ")")
                 .replace("\"", "”")
                 .replace("'", "”")
                 .replace("/", "-")
