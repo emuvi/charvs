@@ -3,6 +3,7 @@ package br.com.pointel.charvs;
 import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Objects;
 import java.awt.GridBagConstraints;
@@ -330,7 +331,7 @@ public class CharvsDesk extends JFrame {
 
     private String cleanFileName(String title) {
         title = WizString.capitalizeWords(title.trim());
-        return title
+        title = title
                 .replace("{", "(")
                 .replace("}", ")")
                 .replace("[", "(")
@@ -350,6 +351,10 @@ public class CharvsDesk extends JFrame {
                 .replace(":", ",")
                 .replace(";", ",")
                 .trim();
+        title = title.replaceAll("\\s+", " ");
+        var parts = title.split("\\s\\-\\s");
+        return String.join(" - ", Arrays.asList(parts).stream()
+                .map(part -> WizString.capitalizeFirstLetter(part).trim()).toList());
     }
     
     private String cleanCitation(String text) {
