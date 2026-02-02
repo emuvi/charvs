@@ -36,7 +36,7 @@ public class SetupDesk extends JFrame {
     private DefaultComboBoxModel<String> modelOnSave = new DefaultComboBoxModel<>(new String[] { "Override", "KeepAll" });
     private JComboBox<String> comboOnSave = new JComboBox<>(modelOnSave);
     private JLabel labelOnRecord = new JLabel("On Record:");
-    private DefaultComboBoxModel<String> modelOnRecord = new DefaultComboBoxModel<>(new String[] { "FileBase", "FileName", "FilePath" });
+    private DefaultComboBoxModel<String> modelOnRecord = new DefaultComboBoxModel<>(new String[] { "Empty", "FileBase", "FileName", "FilePath" });
     private JComboBox<String> comboOnRecord = new JComboBox<>(modelOnRecord);
      private JLabel labelRecordPrefix = new JLabel("  Prefix:");
     private JTextField fieldRecordPrefix = new JTextField();

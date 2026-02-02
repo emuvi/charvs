@@ -21,6 +21,7 @@ import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 
+import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,6 +31,7 @@ import br.com.pointel.jarch.desk.DRow;
 import br.com.pointel.jarch.mage.WizDesk;
 import br.com.pointel.jarch.mage.WizFile;
 import br.com.pointel.jarch.mage.WizString;
+import br.com.pointel.jarch.mage.WizText;
 import br.com.pointel.jarch.mage.WizThread;
 import br.com.pointel.jarch.mage.WizUtilDate;
 
@@ -667,9 +669,29 @@ public class CharvsDesk extends JFrame {
             bufferBody = "";
             bufferSize = 0;
             savedLast = file;
+            if (checkRecordMake.isSelected()) {
+                makeRecord();
+            }
         } catch (Exception e) {
             WizDesk.showError(e);
         }
+    }
+
+    private void makeRecord() throws Exception {
+        var record = "\n" + WizString.replaceHolders(Setup.getRecordPrefix());
+        switch (Setup.getOnRecord()) {
+            case FileBase:
+                record += FilenameUtils.getBaseName(savedLast.getName());
+                break;
+            case FileName:
+                record += savedLast.getName();
+                break;
+            case FilePath:
+                record += savedLast.getAbsolutePath();
+                break;
+        }
+        record += WizString.replaceHolders(Setup.getRecordSuffix());
+        WizText.append(new File(fieldRecord.getText()), record);
     }
 
     private void buttonSaveOpenActionPerformed(ActionEvent evt) {
