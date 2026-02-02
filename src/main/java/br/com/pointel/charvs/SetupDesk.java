@@ -32,6 +32,8 @@ public class SetupDesk extends JFrame {
     private JSpinner spinnerNumberedSize = new JSpinner();
     private JLabel labelNumberedSuffix = new JLabel("  Numbered Suffix:");
     private JTextField fieldNumberedSuffix = new JTextField();
+    private JLabel labelNameExtension = new JLabel("Name Extension:");
+    private JTextField fieldNameExtension = new JTextField();
     private JLabel labelOnSave = new JLabel("On Save:");
     private DefaultComboBoxModel<String> modelOnSave = new DefaultComboBoxModel<>(new String[] { "Override", "KeepAll" });
     private JComboBox<String> comboOnSave = new JComboBox<>(modelOnSave);
@@ -63,6 +65,7 @@ public class SetupDesk extends JFrame {
         fieldNumberedPrefix.setName("NameNumberedPrefix");
         spinnerNumberedSize.setName("NameNumberedSize");
         fieldNumberedSuffix.setName("NameNumberedSuffix");
+        fieldNameExtension.setName("NameExtension");
         comboOnSave.setName("OnSave");
         comboOnRecord.setName("OnRecord");
         fieldRecordPrefix.setName("RecordPrefix");
@@ -70,7 +73,7 @@ public class SetupDesk extends JFrame {
 
         panelBody.setBorder(BorderFactory.createEmptyBorder(9, 9, 9, 9));
 
-        panelBody.setLayout(new GridLayout(9, 2, 2, 2));
+        panelBody.setLayout(new GridLayout(10, 2, 2, 2));
         panelBody.add(labelOnClipboardNewText);
         panelBody.add(comboOnClipboardNewText);
         panelBody.add(labelOnNaming);
@@ -81,6 +84,8 @@ public class SetupDesk extends JFrame {
         panelBody.add(spinnerNumberedSize);
         panelBody.add(labelNumberedSuffix);
         panelBody.add(fieldNumberedSuffix);
+        panelBody.add(labelNameExtension);
+        panelBody.add(fieldNameExtension);
         panelBody.add(labelOnSave);
         panelBody.add(comboOnSave);
         panelBody.add(labelOnRecord);

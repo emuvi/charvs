@@ -1,6 +1,7 @@
 package br.com.pointel.charvs;
 
 import br.com.pointel.jarch.mage.WizProps;
+import br.com.pointel.jarch.mage.WizString;
 
 public class Setup {
     
@@ -32,6 +33,12 @@ public class Setup {
     
     public static String getNameNumberedSuffix() {
         return WizProps.get(keyNameNumberedSuffix, "");
+    }
+
+    public static final String keyNameExtension = "FRAME_SETUP_COMP_NAMEEXTENSION";
+    
+    public static String getNameExtension() {
+        return WizString.firstNonEmpty(WizProps.get(keyNameExtension, ""), ".txt");
     }
     
     public static final String keyOnSave = "FRAME_SETUP_COMP_ONSAVE";

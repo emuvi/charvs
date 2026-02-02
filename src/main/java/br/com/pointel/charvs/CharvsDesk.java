@@ -643,6 +643,7 @@ public class CharvsDesk extends JFrame {
             var text = cleanCitation(WizDesk.getStringFromClipboard()).trim();
             var folder = new File(fieldOutput.getText());
             var fileName = WizUtilDate.formatTimestampFile(new Date());
+            var fileExtension = Setup.getNameExtension();
             var setupNaming = Setup.getOnNaming();
             if (setupNaming == OnNaming.FirstLine) {
                 fileName = cleanFileName(WizString.getLines(text)[0]);
@@ -652,14 +653,14 @@ public class CharvsDesk extends JFrame {
                 var size = Setup.getNameNumberedSize();
                 var suffix = Setup.getNameNumberedSuffix();
                 fileName = prefix + WizString.fillAtStart(index + "", '0', size) + suffix;
-                var file = new File(folder, fileName + ".txt");
+                var file = new File(folder, fileName + fileExtension);
                 while (file.exists()) {
                     index++;
                     fileName = prefix + WizString.fillAtStart(index + "", '0', size) + suffix;
-                    file = new File(folder, fileName + ".txt");
+                    file = new File(folder, fileName + fileExtension);
                 }
             }
-            var file = new File(folder, fileName + ".txt");
+            var file = new File(folder, fileName + fileExtension);
             if (Setup.getOnSave() == OnSave.KeepAll) {
                 file = WizFile.notOverride(file);
             }
