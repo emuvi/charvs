@@ -35,6 +35,12 @@ public class Setup {
         return WizProps.get(keyNameNumberedSuffix, "");
     }
 
+    public static final String keyStripFirstLines = "FRAME_SETUP_COMP_STRIPFIRSTLINES";
+    
+    public static Integer getStripFirstLines() {
+        return WizProps.get(keyStripFirstLines, 0);
+    }
+
     public static final String keyNameExtension = "FRAME_SETUP_COMP_NAMEEXTENSION";
     
     public static String getNameExtension() {

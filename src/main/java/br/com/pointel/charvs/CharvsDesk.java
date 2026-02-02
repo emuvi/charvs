@@ -26,7 +26,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import br.com.pointel.jarch.desk.DCol;
-import br.com.pointel.jarch.desk.DPane;
+import br.com.pointel.jarch.desk.DPanel;
 import br.com.pointel.jarch.desk.DRow;
 import br.com.pointel.jarch.mage.WizDesk;
 import br.com.pointel.jarch.mage.WizFile;
@@ -114,7 +114,7 @@ public class CharvsDesk extends JFrame {
     private DRow rowStatus = new DRow().insets(2)
             .growBoth().put(fieldStatus);
 
-    private DPane paneBody = new DCol()
+    private DPanel paneBody = new DCol()
             .growHorizontal().put(rowMain)
             .growHorizontal().put(rowInput)
             .growHorizontal().put(rowInputFile)
@@ -659,6 +659,9 @@ public class CharvsDesk extends JFrame {
                     fileName = prefix + WizString.fillAtStart(index + "", '0', size) + suffix;
                     file = new File(folder, fileName + fileExtension);
                 }
+            }
+            if (Setup.getStripFirstLines() > 0) {
+                text = WizString.stripFirstLines(text, Setup.getStripFirstLines()).trim();
             }
             var file = new File(folder, fileName + fileExtension);
             if (Setup.getOnSave() == OnSave.KeepAll) {

@@ -32,6 +32,8 @@ public class SetupDesk extends JFrame {
     private JSpinner spinnerNumberedSize = new JSpinner();
     private JLabel labelNumberedSuffix = new JLabel("  Numbered Suffix:");
     private JTextField fieldNumberedSuffix = new JTextField();
+    private JLabel labelStripFirstLines = new JLabel("Strip First Lines:");
+    private JSpinner spinnerStripFirstLines = new JSpinner();
     private JLabel labelNameExtension = new JLabel("Name Extension:");
     private JTextField fieldNameExtension = new JTextField();
     private JLabel labelOnSave = new JLabel("On Save:");
@@ -65,6 +67,7 @@ public class SetupDesk extends JFrame {
         fieldNumberedPrefix.setName("NameNumberedPrefix");
         spinnerNumberedSize.setName("NameNumberedSize");
         fieldNumberedSuffix.setName("NameNumberedSuffix");
+        spinnerStripFirstLines.setName("StripFirstLines");
         fieldNameExtension.setName("NameExtension");
         comboOnSave.setName("OnSave");
         comboOnRecord.setName("OnRecord");
@@ -73,7 +76,7 @@ public class SetupDesk extends JFrame {
 
         panelBody.setBorder(BorderFactory.createEmptyBorder(9, 9, 9, 9));
 
-        panelBody.setLayout(new GridLayout(10, 2, 2, 2));
+        panelBody.setLayout(new GridLayout(11, 2, 2, 2));
         panelBody.add(labelOnClipboardNewText);
         panelBody.add(comboOnClipboardNewText);
         panelBody.add(labelOnNaming);
@@ -84,6 +87,8 @@ public class SetupDesk extends JFrame {
         panelBody.add(spinnerNumberedSize);
         panelBody.add(labelNumberedSuffix);
         panelBody.add(fieldNumberedSuffix);
+        panelBody.add(labelStripFirstLines);
+        panelBody.add(spinnerStripFirstLines);
         panelBody.add(labelNameExtension);
         panelBody.add(fieldNameExtension);
         panelBody.add(labelOnSave);
