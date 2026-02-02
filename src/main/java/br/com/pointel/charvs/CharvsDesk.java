@@ -88,6 +88,16 @@ public class CharvsDesk extends JFrame {
             .growNone().put(buttonSave)
             .growNone().put(buttonSaveOpen);
 
+    private JButton buttonRecordSelect = new JButton("Record");
+    private JButton buttonRecordOpen = new JButton("*");
+    private JTextField fieldRecord = new JTextField();
+    private JCheckBox checkRecordMake = new JCheckBox("Make");
+    private DRow rowRecord = new DRow().insets(2)
+            .growNone().put(buttonRecordSelect)
+            .growNone().put(buttonRecordOpen)
+            .growHorizontal().put(fieldRecord)
+            .growNone().put(checkRecordMake);
+
     private JButton buttonArchiveSelect = new JButton("Archive");
     private JButton buttonArchiveOpen = new JButton("*");
     private JTextField fieldArchive = new JTextField();
@@ -107,6 +117,7 @@ public class CharvsDesk extends JFrame {
             .growHorizontal().put(rowInput)
             .growHorizontal().put(rowInputFile)
             .growHorizontal().put(rowOutput)
+            .growHorizontal().put(rowRecord)
             .growHorizontal().put(rowArchive)
             .growBoth().put(rowStatus)
             .borderEmpty(7);
@@ -200,7 +211,15 @@ public class CharvsDesk extends JFrame {
         buttonSaveOpen.setToolTipText("Open Last Saved File");
         buttonSaveOpen.addActionListener(this::buttonSaveOpenActionPerformed);
 
-        buttonArchiveSelect.setMnemonic('r');
+        buttonRecordSelect.setMnemonic('r');
+        buttonRecordSelect.setToolTipText("Select Record File");
+        buttonRecordSelect.addActionListener(this::buttonRecordSelectActionPerformed);
+        buttonRecordOpen.setToolTipText("Open Record File");
+        buttonRecordOpen.addActionListener(this::buttonRecordOpenActionPerformed);
+        fieldRecord.setName("RecordFolder");
+        checkRecordMake.setName("RecordMake");
+
+        buttonArchiveSelect.setMnemonic('h');
         buttonArchiveSelect.setToolTipText("Select Archive Folder");
         buttonArchiveSelect.addActionListener(this::buttonArchiveSelectActionPerformed);
         buttonArchiveOpen.setToolTipText("Open Archive Folder");
@@ -656,6 +675,23 @@ public class CharvsDesk extends JFrame {
     private void buttonSaveOpenActionPerformed(ActionEvent evt) {
         try {
             WizDesk.open(savedLast);
+        } catch (Exception e) {
+            WizDesk.showError(e);
+        }
+    }
+
+    private void buttonRecordSelectActionPerformed(ActionEvent evt) {
+        var selected = new File(fieldRecord.getText());
+        selected = WizDesk.selectFile(selected);
+        if (selected != null) {
+            fieldRecord.setText(selected.getAbsolutePath());
+        }
+    }
+
+    private void buttonRecordOpenActionPerformed(ActionEvent evt) {
+        try {
+            var selected = new File(fieldRecord.getText());
+            WizDesk.open(selected);
         } catch (Exception e) {
             WizDesk.showError(e);
         }
