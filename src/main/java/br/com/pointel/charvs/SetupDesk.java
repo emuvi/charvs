@@ -1,9 +1,40 @@
 package br.com.pointel.charvs;
 
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
+import javax.swing.JTextField;
+import javax.swing.WindowConstants;
+
+import java.awt.GridLayout;
+
 import br.com.pointel.jarch.mage.WizDesk;
 
-public class SetupDesk extends javax.swing.JFrame {
+public class SetupDesk extends JFrame {
 
+    private JPanel panelBody = new JPanel();
+    private JScrollPane scrollBody = new JScrollPane(panelBody);
+
+    private JLabel labelOnClipboardNewText = new JLabel("On Clipboard New Text:");
+    private DefaultComboBoxModel<String> modelOnClipboardNewText = new DefaultComboBoxModel<>(new String[] { "Nothing", "ShowDesk", "AppendOnBuffer", "InsertOnInput" });
+    private JComboBox<String> comboOnClipboardNewText = new JComboBox<>(modelOnClipboardNewText);
+    private JLabel labelOnNaming = new JLabel("On Naming:");
+    private DefaultComboBoxModel<String> modelOnNaming = new DefaultComboBoxModel<>(new String[] { "FirstLine", "Timestamp", "Numbered" });
+    private JComboBox<String> comboOnNaming = new JComboBox<>(modelOnNaming);
+    private JLabel labelNumberedPrefix = new JLabel("  Numbered Prefix:");
+    private JTextField fieldNumberedPrefix = new JTextField();
+    private JLabel labelNumberedSize = new JLabel("  Numbered Size:");
+    private JSpinner spinnerNumberedSize = new JSpinner();
+    private JLabel labelNumberedSuffix = new JLabel("  Numbered Suffix:");
+    private JTextField fieldNumberedSuffix = new JTextField();
+    private JLabel labelOnSave = new JLabel("On Save:");
+    private DefaultComboBoxModel<String> modelOnSave = new DefaultComboBoxModel<>(new String[] { "Override", "KeepAll" });
+    private JComboBox<String> comboOnSave = new JComboBox<>(modelOnSave);
+    
     public SetupDesk() {
         initDesk();
     }
@@ -14,123 +45,35 @@ public class SetupDesk extends javax.swing.JFrame {
         WizDesk.initFrame(this);
     }
 
-    @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-
-        comboOnSave = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jSpinner1 = new javax.swing.JSpinner();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jLabel6 = new javax.swing.JLabel();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Setup");
-        setName("Setup"); // NOI18N
+        setName("Setup");
+        
+        comboOnClipboardNewText.setName("OnClipboardNewText");
+        comboOnNaming.setName("OnNaming");
+        fieldNumberedPrefix.setName("NameNumberedPrefix");
+        spinnerNumberedSize.setName("NameNumberedSize");
+        fieldNumberedSuffix.setName("NameNumberedSuffix");
+        comboOnSave.setName("OnSave");
 
-        comboOnSave.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nothing", "ShowDesk", "AppendOnBuffer", "InsertOnInput" }));
-        comboOnSave.setName("OnClipboadNewText"); // NOI18N
+        panelBody.setLayout(new GridLayout(6, 2, 2, 2));
+        panelBody.add(labelOnClipboardNewText);
+        panelBody.add(comboOnClipboardNewText);
+        panelBody.add(labelOnNaming);
+        panelBody.add(comboOnNaming);
+        panelBody.add(labelNumberedPrefix);
+        panelBody.add(fieldNumberedPrefix);
+        panelBody.add(labelNumberedSize);
+        panelBody.add(spinnerNumberedSize);
+        panelBody.add(labelNumberedSuffix);
+        panelBody.add(fieldNumberedSuffix);
+        panelBody.add(labelOnSave);
+        panelBody.add(comboOnSave);
 
-        jLabel1.setText("On ClipBoard New Text:");
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "FirstLine", "Timestamp", "Numbered" }));
-        jComboBox1.setName("OnNaming"); // NOI18N
-
-        jLabel2.setText("On Naming:");
-
-        jTextField1.setName("NameNumberedPrefix"); // NOI18N
-
-        jSpinner1.setName("NameNumberedSize"); // NOI18N
-
-        jTextField2.setName("NameNumberedSuffix"); // NOI18N
-
-        jLabel3.setText("  Numbered Prefix:");
-
-        jLabel4.setText("  Numbered Size:");
-
-        jLabel5.setText("  Numbered Suffix:");
-
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Override", "KeepAll" }));
-        jComboBox2.setName("OnSave"); // NOI18N
-
-        jLabel6.setText("On Save:");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(comboOnSave, 0, 155, Short.MAX_VALUE)
-                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField1)
-                    .addComponent(jSpinner1)
-                    .addComponent(jTextField2)
-                    .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(comboOnSave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
+        setContentPane(scrollBody);
+        setLocationRelativeTo(null);
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }
 
-   
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> comboOnSave;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    // End of variables declaration//GEN-END:variables
 }
