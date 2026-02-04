@@ -20,14 +20,15 @@ import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
+import javax.swing.WindowConstants;
 
 import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import br.com.pointel.jarch.desk.DCol;
-import br.com.pointel.jarch.desk.DPanel;
-import br.com.pointel.jarch.desk.DRow;
+import br.com.pointel.jarch.desk.DColPane;
+import br.com.pointel.jarch.desk.DPane;
+import br.com.pointel.jarch.desk.DRowPane;
 import br.com.pointel.jarch.mage.WizDesk;
 import br.com.pointel.jarch.mage.WizFile;
 import br.com.pointel.jarch.mage.WizString;
@@ -40,12 +41,14 @@ public class CharvsDesk extends JFrame {
     private static final Logger LOG = LoggerFactory.getLogger(CharvsDesk.class);
 
     private JButton buttonSetup = new JButton("#");
+    private JButton buttonReplaces = new JButton("$");
     private JButton buttonBufferAppend = new JButton("Append");
     private JButton buttonBufferClean = new JButton("C");
     private JButton buttonInsert = new JButton("Insert");
     private JTextField fieldInsertTitle = new JTextField();
-    private DRow rowMain = new DRow().insets(2)
-            .growNone().insetsRight(7).put(buttonSetup)
+    private DRowPane rowMain = new DRowPane().insets(2)
+            .growNone().insetsRight(0).put(buttonSetup)
+            .growNone().insetsRight(7).put(buttonReplaces)
             .growNone().insetsRight(0).put(buttonBufferAppend)
             .growNone().insetsRight(7).put(buttonBufferClean)
             .growNone().insetsRight(0).put(buttonInsert)
@@ -55,7 +58,7 @@ public class CharvsDesk extends JFrame {
     private JButton buttonInputOpen = new JButton("*");
     private JTextField fieldInput = new JTextField();
     private JButton buttonLoad = new JButton("Load");
-    private DRow rowInput = new DRow().insets(2)
+    private DRowPane rowInput = new DRowPane().insets(2)
             .growNone().put(buttonInputSelect)
             .growNone().put(buttonInputOpen)
             .growHorizontal().put(fieldInput)
@@ -69,7 +72,7 @@ public class CharvsDesk extends JFrame {
     private JButton buttonInputPrior = new JButton("<");
     private JButton buttonInputNext = new JButton(">");
     private JButton buttonInputSwitch = new JButton("%");
-    private DRow rowInputFile = new DRow().insets(2)
+    private DRowPane rowInputFile = new DRowPane().insets(2)
             .growNone().put(buttonInputUpdate)
             .growNone().put(buttonInputFileOpen)
             .growHorizontal().put(comboInput)
@@ -83,7 +86,7 @@ public class CharvsDesk extends JFrame {
     private JTextField fieldOutput = new JTextField();
     private JButton buttonSave = new JButton("Save");
     private JButton buttonSaveOpen = new JButton("*");
-    private DRow rowOutput = new DRow().insets(2)
+    private DRowPane rowOutput = new DRowPane().insets(2)
             .growNone().put(buttonOutputSelect)
             .growNone().put(buttonOutputOpen)
             .growHorizontal().put(fieldOutput)
@@ -94,7 +97,7 @@ public class CharvsDesk extends JFrame {
     private JButton buttonRecordOpen = new JButton("*");
     private JTextField fieldRecord = new JTextField();
     private JCheckBox checkRecordMake = new JCheckBox("Make");
-    private DRow rowRecord = new DRow().insets(2)
+    private DRowPane rowRecord = new DRowPane().insets(2)
             .growNone().put(buttonRecordSelect)
             .growNone().put(buttonRecordOpen)
             .growHorizontal().put(fieldRecord)
@@ -104,17 +107,17 @@ public class CharvsDesk extends JFrame {
     private JButton buttonArchiveOpen = new JButton("*");
     private JTextField fieldArchive = new JTextField();
     private JCheckBox checkArchiveMake = new JCheckBox("Make");
-    private DRow rowArchive = new DRow().insets(2)
+    private DRowPane rowArchive = new DRowPane().insets(2)
             .growNone().put(buttonArchiveSelect)
             .growNone().put(buttonArchiveOpen)
             .growHorizontal().put(fieldArchive)
             .growNone().put(checkArchiveMake);
 
     private JTextField fieldStatus = new JTextField();
-    private DRow rowStatus = new DRow().insets(2)
+    private DRowPane rowStatus = new DRowPane().insets(2)
             .growBoth().put(fieldStatus);
 
-    private DPanel paneBody = new DCol()
+    private DPane paneBody = new DColPane()
             .growHorizontal().put(rowMain)
             .growHorizontal().put(rowInput)
             .growHorizontal().put(rowInputFile)
@@ -141,24 +144,26 @@ public class CharvsDesk extends JFrame {
     private void initDesk() {
         initComponents();
         initShortcuts();
-        setIconImage(WizDesk.getLogo());
-        WizDesk.initFrame(this);
         initWatcher();
+        WizDesk.initFrame(this);
     }
     
     private void initComponents() {
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setTitle("Charvs");
-        setName("Desk");
-        setContentPane(paneBody);
-        pack();
+        setName("Charvs");
         setLocationRelativeTo(null);
-
-        fieldStatus.setEditable(false);
+        setContentPane(paneBody);
+        setIconImage(WizDesk.getLogo());
+        pack();
 
         buttonSetup.setToolTipText("Setup");
-        buttonSetup.setName(""); // NOI18N
+        buttonSetup.setName("");
         buttonSetup.addActionListener(this::buttonSetupActionPerformed);
+
+        buttonReplaces.setToolTipText("Replaces");
+        buttonReplaces.setName("");
+        buttonReplaces.addActionListener(this::buttonReplacesActionPerformed);
 
         buttonBufferAppend.setMnemonic('A');
         buttonBufferAppend.setToolTipText("Append Buffer (ctrl+A)");
@@ -229,6 +234,7 @@ public class CharvsDesk extends JFrame {
         fieldArchive.setName("ArchiveFolder");
         checkArchiveMake.setName("ArchiveMake");
 
+        fieldStatus.setEditable(false);
     }
     
     private void initShortcuts() {
@@ -372,8 +378,11 @@ public class CharvsDesk extends JFrame {
     
     private String cleanCitation(String text) {
         return text
+                .replace(" ", " ")
+                .replace("  ", " ")
                 .replace("[cite_start]", "")
-                .replaceAll("\\[cite\\:(\\s|\\d|\\,)+\\]", "");
+                .replaceAll("\\[cite\\:(\\s|\\d|\\,)+\\]", "")
+                .replaceAll("(?m)^\\h*\\+\\d+\\h*(\\R|$)", "");
     }
 
     private void putStatus(String status, String archive) throws Exception {
@@ -397,6 +406,10 @@ public class CharvsDesk extends JFrame {
 
     private void buttonSetupActionPerformed(ActionEvent evt) {
         new SetupDesk().setVisible(true);
+    }
+
+    private void buttonReplacesActionPerformed(ActionEvent evt) {
+        new ReplacesDesk().setVisible(true);
     }
 
     private void buttonBufferAppendActionPerformed(ActionEvent evt) {
@@ -682,7 +695,7 @@ public class CharvsDesk extends JFrame {
     }
 
     private void makeRecord() throws Exception {
-        var record = "\n" + WizString.replaceHolders(Setup.getRecordPrefix());
+        var record = WizString.replaceHolders(Setup.getRecordPrefix());
         switch (Setup.getOnRecord()) {
             case FileBase:
                 record += FilenameUtils.getBaseName(savedLast.getName());
@@ -695,7 +708,13 @@ public class CharvsDesk extends JFrame {
                 break;
         }
         record += WizString.replaceHolders(Setup.getRecordSuffix());
-        WizText.append(new File(fieldRecord.getText()), record);
+        var file = new File(fieldRecord.getText());
+        var text = WizText.read(file);
+        if (!text.isEmpty()) {
+            text += "\n\n";
+        }
+        text += record;
+        WizText.write(file, text);
     }
 
     private void buttonSaveOpenActionPerformed(ActionEvent evt) {
