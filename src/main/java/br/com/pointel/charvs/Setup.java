@@ -1,5 +1,9 @@
 package br.com.pointel.charvs;
 
+import java.io.File;
+import java.util.ArrayList;
+
+import br.com.pointel.jarch.mage.WizObject;
 import br.com.pointel.jarch.mage.WizProps;
 import br.com.pointel.jarch.mage.WizString;
 
@@ -35,16 +39,46 @@ public class Setup {
         return WizProps.get(keyNameNumberedSuffix, "");
     }
 
+    public static final String keyNameExtension = "FRAME_SETUP_COMP_NAME_EXTENSION";
+    
+    public static String getNameExtension() {
+        return WizString.firstNonEmpty(WizProps.get(keyNameExtension, ""), ".txt");
+    }
+
     public static final String keyStripFirstLines = "FRAME_SETUP_COMP_STRIP_FIRST_LINES";
     
     public static Integer getStripFirstLines() {
         return WizProps.get(keyStripFirstLines, 0);
     }
 
-    public static final String keyNameExtension = "FRAME_SETUP_COMP_NAME_EXTENSION";
+    public static final String keyApplyReplacesList = "FRAME_SETUP_COMP_APPLY_REPLACES_LIST";
     
-    public static String getNameExtension() {
-        return WizString.firstNonEmpty(WizProps.get(keyNameExtension, ""), ".txt");
+    public static Boolean getApplyReplacesList() {
+        return WizProps.get(keyApplyReplacesList, false);
+    }
+
+    public static final String keyReplaceVarsHolders = "FRAME_SETUP_COMP_REPLACE_VARS_HOLDERS";
+    
+    public static Boolean getReplaceVarsHolders() {
+        return WizProps.get(keyReplaceVarsHolders, false);
+    }
+
+    public static final String keyTrimFinalText = "FRAME_SETUP_COMP_TRIM_FINAL_TEXT";
+    
+    public static Boolean getTrimFinalText() {
+        return WizProps.get(keyTrimFinalText, false);
+    }
+
+    public static ArrayList<Replace> readReplacesList() throws Exception {
+        var file = new File("replaces.ser");
+        if (!file.exists()) {
+            return new ArrayList<>();
+        }
+        return (ArrayList<Replace>) WizObject.read(file);
+    }
+
+    public static void writeReplacesList(ArrayList<Replace> replaces) throws Exception {
+        WizObject.write(new File("replaces.ser"), replaces);
     }
     
     public static final String keyOnSave = "FRAME_SETUP_COMP_ON_SAVE";

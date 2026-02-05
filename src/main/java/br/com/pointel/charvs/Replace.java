@@ -23,9 +23,20 @@ public class Replace implements Serializable {
         this.to = to;
     }
 
+    public String apply(String text) {
+        if (!Boolean.TRUE.equals(active)) {
+            return text;
+        }
+        if (Boolean.TRUE.equals(regex)) {
+            return text.replaceAll(of, to);
+        } else {
+            return text.replace(of, to);
+        }
+    }
+
     @Override
     public String toString() {
-        return (active ? "(X)" : "( )") + " | " + (regex ? "(R)" : "( )") + " | " + of + " -> " + to;
+        return (Boolean.TRUE.equals(active) ? "(X)" : "( )") + (Boolean.TRUE.equals(regex) ? "(R)" : "( )") + " | " + of + " -> " + to;
     }
 
 }

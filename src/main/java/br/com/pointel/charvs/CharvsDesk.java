@@ -375,15 +375,6 @@ public class CharvsDesk extends JFrame {
         return String.join(" - ", Arrays.asList(parts).stream()
                 .map(part -> WizString.capitalizeFirstLetter(part).trim()).toList()).trim();
     }
-    
-    private String cleanCitation(String text) {
-        return text
-                .replace(" ", " ")
-                .replace("  ", " ")
-                .replace("[cite_start]", "")
-                .replaceAll("\\[cite\\:(\\s|\\d|\\,)+\\]", "")
-                .replaceAll("(?m)^\\h*\\+\\d+\\h*(\\R|$)", "");
-    }
 
     private void putStatus(String status, String archive) throws Exception {
         fieldStatus.setText(status);
@@ -653,7 +644,7 @@ public class CharvsDesk extends JFrame {
 
     private void buttonSaveActionPerformed(ActionEvent evt) {
         try {
-            var text = cleanCitation(WizDesk.getStringFromClipboard()).trim();
+            var text = WizDesk.getStringFromClipboard();
             var folder = new File(fieldOutput.getText());
             var fileName = WizUtilDate.formatTimestampFile(new Date());
             var fileExtension = Setup.getNameExtension();
@@ -674,7 +665,16 @@ public class CharvsDesk extends JFrame {
                 }
             }
             if (Setup.getStripFirstLines() > 0) {
-                text = WizString.stripFirstLines(text, Setup.getStripFirstLines()).trim();
+                text = WizString.stripFirstLines(text, Setup.getStripFirstLines());
+            }
+            if (Boolean.TRUE.equals(Setup.getApplyReplacesList())) {
+                text = applyReplacesList(text);
+            }
+            if (Boolean.TRUE.equals(Setup.getReplaceVarsHolders())) {
+                text = WizString.replaceVarsHolders(text);
+            }
+            if (Boolean.TRUE.equals(Setup.getTrimFinalText())) {
+                text = text.trim();
             }
             var file = new File(folder, fileName + fileExtension);
             if (Setup.getOnSave() == OnSave.KeepAll) {
@@ -694,26 +694,37 @@ public class CharvsDesk extends JFrame {
         }
     }
 
+    private String applyReplacesList(String text) throws Exception {
+        var replaces = Setup.readReplacesList();
+        if (replaces == null || replaces.isEmpty()) {
+            return text;
+        }
+        for (var replace : replaces) {
+            text = replace.apply(text);
+        }
+        return text;
+    }
+
     private void makeRecord() throws Exception {
-        var record = WizString.replaceHolders(Setup.getRecordPrefix());
+        var recordText = WizString.replaceVarsHolders(Setup.getRecordPrefix());
         switch (Setup.getOnRecord()) {
             case FileBase:
-                record += FilenameUtils.getBaseName(savedLast.getName());
+                recordText += FilenameUtils.getBaseName(savedLast.getName());
                 break;
             case FileName:
-                record += savedLast.getName();
+                recordText += savedLast.getName();
                 break;
             case FilePath:
-                record += savedLast.getAbsolutePath();
+                recordText += savedLast.getAbsolutePath();
                 break;
         }
-        record += WizString.replaceHolders(Setup.getRecordSuffix());
+        recordText += WizString.replaceVarsHolders(Setup.getRecordSuffix());
         var file = new File(fieldRecord.getText());
         var text = WizText.read(file);
         if (!text.isEmpty()) {
             text += "\n\n";
         }
-        text += record;
+        text += recordText;
         WizText.write(file, text);
     }
 

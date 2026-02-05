@@ -35,11 +35,7 @@ public class ReplacesDesk extends DFrame {
 
     private void read() {
         try {
-            var file = new File("replaces.ser");
-            if (file.exists()) {
-                var replaces = (ArrayList<Replace>) WizObject.read(file);
-                listEditor.setValue(replaces);
-            }
+            listEditor.setValue(Setup.readReplacesList());
         } catch (Exception e) {
             WizDesk.showError(e);
         }
@@ -47,8 +43,7 @@ public class ReplacesDesk extends DFrame {
 
     private void write() {
         try {
-            var replaces = listEditor.getValue();
-            WizObject.write(new File("replaces.ser"), replaces);
+            Setup.writeReplacesList(listEditor.getValue());
         } catch (Exception e) {
             WizDesk.showError(e);
         }
