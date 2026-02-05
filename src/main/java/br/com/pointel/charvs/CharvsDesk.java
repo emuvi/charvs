@@ -328,7 +328,7 @@ public class CharvsDesk extends JFrame {
                 buttonBufferAppendActionPerformed(null);
             } else if (Setup.getOnNewClipboardText() == OnNewClipboardText.InsertOnInput) {
                 buttonInsertActionPerformed(null);
-            } 
+            }
         }
     }
 
@@ -659,7 +659,7 @@ public class CharvsDesk extends JFrame {
             var fileExtension = Setup.getNameExtension();
             var setupNaming = Setup.getOnNaming();
             if (setupNaming == OnNaming.FirstLine) {
-                fileName = cleanFileName(WizString.getLines(text)[0]);
+                fileName = cleanFileName(WizString.getFirstLine(text));
             } else if (setupNaming == OnNaming.Numbered) {
                 var prefix = Setup.getNameNumberedPrefix();
                 var index = 1;
