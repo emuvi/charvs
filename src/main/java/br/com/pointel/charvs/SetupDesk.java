@@ -2,6 +2,7 @@ package br.com.pointel.charvs;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -34,6 +35,8 @@ public class SetupDesk extends JFrame {
     private JTextField fieldNumberedSuffix = new JTextField();
     private JLabel labelStripFirstLines = new JLabel("Strip First Lines:");
     private JSpinner spinnerStripFirstLines = new JSpinner();
+    private JLabel labelReplaceVarsHolders = new JLabel("Replace Vars Holders:");
+    private JCheckBox fieldReplaceVarsHolders = new JCheckBox();
     private JLabel labelNameExtension = new JLabel("Name Extension:");
     private JTextField fieldNameExtension = new JTextField();
     private JLabel labelOnSave = new JLabel("On Save:");
@@ -68,6 +71,7 @@ public class SetupDesk extends JFrame {
         spinnerNumberedSize.setName("NameNumberedSize");
         fieldNumberedSuffix.setName("NameNumberedSuffix");
         spinnerStripFirstLines.setName("StripFirstLines");
+        fieldReplaceVarsHolders.setName("ReplaceVarsHolders");
         fieldNameExtension.setName("NameExtension");
         comboOnSave.setName("OnSave");
         comboOnRecord.setName("OnRecord");
@@ -76,7 +80,7 @@ public class SetupDesk extends JFrame {
 
         panelBody.setBorder(BorderFactory.createEmptyBorder(9, 9, 9, 9));
 
-        panelBody.setLayout(new GridLayout(11, 2, 2, 2));
+        panelBody.setLayout(new GridLayout(12, 2, 2, 2));
         panelBody.add(labelOnClipboardNewText);
         panelBody.add(comboOnClipboardNewText);
         panelBody.add(labelOnNaming);
@@ -89,6 +93,8 @@ public class SetupDesk extends JFrame {
         panelBody.add(fieldNumberedSuffix);
         panelBody.add(labelStripFirstLines);
         panelBody.add(spinnerStripFirstLines);
+        panelBody.add(labelReplaceVarsHolders);
+        panelBody.add(fieldReplaceVarsHolders);
         panelBody.add(labelNameExtension);
         panelBody.add(fieldNameExtension);
         panelBody.add(labelOnSave);
