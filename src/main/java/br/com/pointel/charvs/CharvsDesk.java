@@ -760,7 +760,7 @@ public class CharvsDesk extends JFrame {
     }
     
     public static void start(String args[]) {
-        WizDesk.start("Charvs", () -> new CharvsDesk().setVisible(true));
+        WizDesk.start(() -> new CharvsDesk().setVisible(true));
     }
 
 }
