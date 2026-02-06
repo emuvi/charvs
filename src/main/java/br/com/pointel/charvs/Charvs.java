@@ -2,7 +2,6 @@ package br.com.pointel.charvs;
 
 import br.com.pointel.jarch.flow.App;
 import br.com.pointel.jarch.flow.AppGUI;
-import br.com.pointel.jarch.mage.WizApp;
 
 public class Charvs {
 
