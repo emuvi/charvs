@@ -362,10 +362,7 @@ public class CharvsDesk extends DFrame {
                 .replace(":", ",")
                 .replace(";", ",")
                 .trim();
-        title = title.replaceAll("\\s+", " ");
-        var parts = title.split("\\s\\-\\s");
-        return String.join(" - ", Arrays.asList(parts).stream()
-                .map(part -> WizString.capitalizeFirstLetter(part).trim()).toList()).trim();
+        return title.replaceAll("\\s+", " ");
     }
 
     private void putStatus(String status, String archive) throws Exception {
