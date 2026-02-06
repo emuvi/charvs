@@ -51,6 +51,18 @@ public class Setup {
         return WizProps.get(keyStripFirstLines, 0);
     }
 
+    public static final String keyInsertAtBegin = "FRAME_SETUP_COMP_INSERT_AT_BEGIN";
+    
+    public static String getInsertAtBegin() {
+        return WizProps.get(keyInsertAtBegin, "");
+    }
+
+    public static final String keyInsertAtEnd = "FRAME_SETUP_COMP_INSERT_AT_END";
+    
+    public static String getInsertAtEnd() {
+        return WizProps.get(keyInsertAtEnd, "");
+    }
+
     public static final String keyApplyReplacesList = "FRAME_SETUP_COMP_APPLY_REPLACES_LIST";
     
     public static Boolean getApplyReplacesList() {

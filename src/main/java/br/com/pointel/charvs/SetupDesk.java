@@ -37,6 +37,10 @@ public class SetupDesk extends JFrame {
     private JTextField fieldNameExtension = new JTextField();
     private JLabel labelStripFirstLines = new JLabel("Strip First Lines:");
     private JSpinner spinnerStripFirstLines = new JSpinner();
+    private JLabel labelInsertAtBegin = new JLabel("Insert At Begin:");
+    private JTextField fieldInsertAtBegin = new JTextField();
+    private JLabel labelInsertAtEnd = new JLabel("Insert At End:");
+    private JTextField fieldInsertAtEnd = new JTextField();
     private JLabel labelApplyReplacesList = new JLabel("Apply Replaces List:");
     private JCheckBox fieldApplyReplacesList = new JCheckBox();
     private JLabel labelReplaceVarsHolders = new JLabel("Replace Vars Holders:");
@@ -75,6 +79,8 @@ public class SetupDesk extends JFrame {
         spinnerNumberedSize.setName("NameNumberedSize");
         fieldNumberedSuffix.setName("NameNumberedSuffix");
         fieldNameExtension.setName("NameExtension");
+        fieldInsertAtBegin.setName("InsertAtBegin");
+        fieldInsertAtEnd.setName("InsertAtEnd");
         spinnerStripFirstLines.setName("StripFirstLines");
         fieldApplyReplacesList.setName("ApplyReplacesList");
         fieldReplaceVarsHolders.setName("ReplaceVarsHolders");
@@ -86,7 +92,7 @@ public class SetupDesk extends JFrame {
 
         panelBody.setBorder(BorderFactory.createEmptyBorder(9, 9, 9, 9));
 
-        panelBody.setLayout(new GridLayout(14, 2, 2, 2));
+        panelBody.setLayout(new GridLayout(16, 2, 2, 2));
         panelBody.add(labelOnClipboardNewText);
         panelBody.add(comboOnClipboardNewText);
         panelBody.add(labelOnNaming);
@@ -101,6 +107,10 @@ public class SetupDesk extends JFrame {
         panelBody.add(fieldNameExtension);
         panelBody.add(labelStripFirstLines);
         panelBody.add(spinnerStripFirstLines);
+        panelBody.add(labelInsertAtBegin);
+        panelBody.add(fieldInsertAtBegin);
+        panelBody.add(labelInsertAtEnd);
+        panelBody.add(fieldInsertAtEnd);
         panelBody.add(labelApplyReplacesList);
         panelBody.add(fieldApplyReplacesList);
         panelBody.add(labelReplaceVarsHolders);

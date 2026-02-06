@@ -659,6 +659,7 @@ public class CharvsDesk extends DFrame {
             if (Setup.getStripFirstLines() > 0) {
                 text = WizString.stripFirstLines(text, Setup.getStripFirstLines());
             }
+            text = Setup.getInsertAtBegin() + text + Setup.getInsertAtEnd();
             if (Boolean.TRUE.equals(Setup.getApplyReplacesList())) {
                 text = applyReplacesList(text);
             }
