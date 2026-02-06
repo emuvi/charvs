@@ -343,7 +343,7 @@ public class CharvsDesk extends DFrame {
 
     private String cleanFileName(String title) {
         title = title.trim();
-        if (title.equals(title.toUpperCase()) || title.equals(title.toLowerCase())) {
+        if (title.equals(title.toUpperCase()))) {
             title = WizString.capitalizeWords(title.toLowerCase());
         }
         title = title
