@@ -27,16 +27,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import br.com.pointel.jarch.desk.DColPane;
+import br.com.pointel.jarch.desk.DFrame;
 import br.com.pointel.jarch.desk.DPane;
 import br.com.pointel.jarch.desk.DRowPane;
-import br.com.pointel.jarch.mage.WizDesk;
+import br.com.pointel.jarch.mage.WizGUI;
 import br.com.pointel.jarch.mage.WizFile;
 import br.com.pointel.jarch.mage.WizString;
 import br.com.pointel.jarch.mage.WizText;
 import br.com.pointel.jarch.mage.WizThread;
 import br.com.pointel.jarch.mage.WizUtilDate;
 
-public class CharvsDesk extends JFrame {
+public class CharvsDesk extends DFrame {
 
     private static final Logger LOG = LoggerFactory.getLogger(CharvsDesk.class);
 
@@ -138,24 +139,15 @@ public class CharvsDesk extends JFrame {
     private File partialFile = null;
 
     public CharvsDesk() {
-        initDesk();
-    }
-    
-    private void initDesk() {
+        super("Charvs");
         initComponents();
         initShortcuts();
         initWatcher();
-        WizDesk.initFrame(this);
     }
     
     private void initComponents() {
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Charvs");
-        setName("Charvs");
-        setLocationRelativeTo(null);
-        setContentPane(paneBody);
-        setIconImage(WizDesk.getLogo());
-        pack();
+        exitOnClose();
+        body(paneBody);
 
         buttonSetup.setToolTipText("Setup");
         buttonSetup.setName("");
@@ -333,7 +325,7 @@ public class CharvsDesk extends JFrame {
     }
 
     private boolean checkClipboardNewText() throws Exception {
-        var actualClipboard = WizDesk.getStringFromClipboard();
+        var actualClipboard = WizGUI.getStringFromClipboard();
         if (!Objects.equals(actualClipboard, clipboardText)) {
             clipboardText = actualClipboard;
             return true;
@@ -405,13 +397,13 @@ public class CharvsDesk extends JFrame {
 
     private void buttonBufferAppendActionPerformed(ActionEvent evt) {
         try {
-            var body = WizDesk.getStringFromClipboard();
+            var body = WizGUI.getStringFromClipboard();
             bufferBody = (bufferBody.trim() + "\n\n" + body.trim()).trim();
             bufferSize++;
-            WizDesk.putStringOnClipboard(bufferBody);
+            WizGUI.putStringOnClipboard(bufferBody);
             putStatus("Appended " + bufferSize + " on Buffer", bufferBody);
         } catch (Exception e) {
-            WizDesk.showError(e);
+            WizGUI.showError(e);
         }
     }
 
@@ -421,13 +413,13 @@ public class CharvsDesk extends JFrame {
             bufferSize = 0;
             putStatus("Cleaned Buffer", "");
         } catch (Exception e) {
-            WizDesk.showError(e);
+            WizGUI.showError(e);
         }
     }
 
     private void buttonInsertActionPerformed(ActionEvent evt) {
         try {
-            var body = WizDesk.getStringFromClipboard();
+            var body = WizGUI.getStringFromClipboard();
             var folder = new File(fieldInput.getText());
             var file = new File(folder, comboInput.getSelectedItem().toString());
             var input = partialInsert;
@@ -446,7 +438,7 @@ public class CharvsDesk extends JFrame {
                 throw new Exception("Not found < INSERT > tag.");
             }
             var remains = WizString.count(input, "< INSERT");
-            WizDesk.putStringOnClipboard(input);
+            WizGUI.putStringOnClipboard(input);
             putStatus("Inserted " + (remains == 0 ? "Done" : "Left " + remains) + " on " + (partialInsert != null ?  "Partial of " + partialFile.getName() : file.getName()), input);
             if (remains == 0) {
                 partialInsert = null;
@@ -459,7 +451,7 @@ public class CharvsDesk extends JFrame {
                         if (warnText.startsWith(":")) {
                             warnText = warnText.substring(1).trim();
                         }
-                        WizDesk.showInfo(warnText);
+                        WizGUI.showInfo(warnText);
                     } else {
                         throw new Exception("Malformed < WARN > tag.");
                     }
@@ -472,7 +464,7 @@ public class CharvsDesk extends JFrame {
             bufferSize = 0;
             putInsertTitle();
         } catch (Exception e) {
-            WizDesk.showError(e);
+            WizGUI.showError(e);
         }
     }
 
@@ -510,7 +502,7 @@ public class CharvsDesk extends JFrame {
 
     private void buttonInputSelectActionPerformed(ActionEvent evt) {
         var selected = new File(fieldInput.getText());
-        selected = WizDesk.selectFolder(selected);
+        selected = WizGUI.selectFolder(selected);
         if (selected != null) {
             fieldInput.setText(selected.getAbsolutePath());
         }
@@ -519,9 +511,9 @@ public class CharvsDesk extends JFrame {
     private void buttonInputOpenActionPerformed(ActionEvent evt) {
         try {
             var selected = new File(fieldInput.getText());
-            WizDesk.open(selected);
+            WizGUI.open(selected);
         } catch (Exception e) {
-            WizDesk.showError(e);
+            WizGUI.showError(e);
         }
     }
 
@@ -530,7 +522,7 @@ public class CharvsDesk extends JFrame {
             var folder = new File(fieldInput.getText());
             var file = new File(folder, comboInput.getSelectedItem().toString());
             var input = Files.readString(file.toPath());
-            WizDesk.putStringOnClipboard(input);
+            WizGUI.putStringOnClipboard(input);
             putStatus("Loaded from " + file.getName(), input);
             bufferBody = "";
             bufferSize = 0;
@@ -542,13 +534,13 @@ public class CharvsDesk extends JFrame {
                     if (warnText.startsWith(":")) {
                         warnText = warnText.substring(1).trim();
                     }
-                    WizDesk.showInfo(warnText);
+                    WizGUI.showInfo(warnText);
                 } else {
                     throw new Exception("Malformed < WARN > tag.");
                 }
             }
         } catch (Exception e) {
-            WizDesk.showError(e);
+            WizGUI.showError(e);
         }
     }
 
@@ -569,9 +561,9 @@ public class CharvsDesk extends JFrame {
         try {
             var folder = new File(fieldInput.getText());
             var file = new File(folder, comboInput.getSelectedItem().toString());
-            WizDesk.open(file);
+            WizGUI.open(file);
         } catch (Exception e) {
-            WizDesk.showError(e);
+            WizGUI.showError(e);
         }
     }
 
@@ -589,7 +581,7 @@ public class CharvsDesk extends JFrame {
         try {
             comboInput.setSelectedIndex(0);
         } catch (Exception e) {
-            WizDesk.showError(e);
+            WizGUI.showError(e);
         }
     }
 
@@ -601,7 +593,7 @@ public class CharvsDesk extends JFrame {
             }
             comboInput.setSelectedIndex(toSelect);
         } catch (Exception e) {
-            WizDesk.showError(e);
+            WizGUI.showError(e);
         }
     }
 
@@ -613,7 +605,7 @@ public class CharvsDesk extends JFrame {
             }
             comboInput.setSelectedIndex(toSelect);
         } catch (Exception e) {
-            WizDesk.showError(e);
+            WizGUI.showError(e);
         }
     }
 
@@ -621,13 +613,13 @@ public class CharvsDesk extends JFrame {
         try {
             comboInput.setSelectedItem(originLast);
         } catch (Exception e) {
-            WizDesk.showError(e);
+            WizGUI.showError(e);
         }
     }
 
     private void buttonOutputSelectActionPerformed(ActionEvent evt) {
         var selected = new File(fieldOutput.getText());
-        selected = WizDesk.selectFolder(selected);
+        selected = WizGUI.selectFolder(selected);
         if (selected != null) {
             fieldOutput.setText(selected.getAbsolutePath());
         }
@@ -636,15 +628,15 @@ public class CharvsDesk extends JFrame {
     private void buttonOutputOpenActionPerformed(ActionEvent evt) {
         try {
             var selected = new File(fieldOutput.getText());
-            WizDesk.open(selected);
+            WizGUI.open(selected);
         } catch (Exception e) {
-            WizDesk.showError(e);
+            WizGUI.showError(e);
         }
     }
 
     private void buttonSaveActionPerformed(ActionEvent evt) {
         try {
-            var text = WizDesk.getStringFromClipboard();
+            var text = WizGUI.getStringFromClipboard();
             var folder = new File(fieldOutput.getText());
             var fileName = WizUtilDate.formatTimestampFile(new Date());
             var fileExtension = Setup.getNameExtension();
@@ -690,7 +682,7 @@ public class CharvsDesk extends JFrame {
                 makeRecord();
             }
         } catch (Exception e) {
-            WizDesk.showError(e);
+            WizGUI.showError(e);
         }
     }
 
@@ -730,15 +722,15 @@ public class CharvsDesk extends JFrame {
 
     private void buttonSaveOpenActionPerformed(ActionEvent evt) {
         try {
-            WizDesk.open(savedLast);
+            WizGUI.open(savedLast);
         } catch (Exception e) {
-            WizDesk.showError(e);
+            WizGUI.showError(e);
         }
     }
 
     private void buttonRecordSelectActionPerformed(ActionEvent evt) {
         var selected = new File(fieldRecord.getText());
-        selected = WizDesk.selectFile(selected);
+        selected = WizGUI.selectFile(selected);
         if (selected != null) {
             fieldRecord.setText(selected.getAbsolutePath());
         }
@@ -747,15 +739,15 @@ public class CharvsDesk extends JFrame {
     private void buttonRecordOpenActionPerformed(ActionEvent evt) {
         try {
             var selected = new File(fieldRecord.getText());
-            WizDesk.open(selected);
+            WizGUI.open(selected);
         } catch (Exception e) {
-            WizDesk.showError(e);
+            WizGUI.showError(e);
         }
     }
 
     private void buttonArchiveSelectActionPerformed(ActionEvent evt) {
         var selected = new File(fieldArchive.getText());
-        selected = WizDesk.selectFolder(selected);
+        selected = WizGUI.selectFolder(selected);
         if (selected != null) {
             fieldArchive.setText(selected.getAbsolutePath());
         }
@@ -764,14 +756,14 @@ public class CharvsDesk extends JFrame {
     private void buttonArchiveOpenActionPerformed(ActionEvent evt) {
         try {
             var selected = new File(fieldArchive.getText());
-            WizDesk.open(selected);
+            WizGUI.open(selected);
         } catch (Exception e) {
-            WizDesk.showError(e);
+            WizGUI.showError(e);
         }
     }
     
     public static void start(String args[]) {
-        WizDesk.start(() -> new CharvsDesk().setVisible(true));
+        WizGUI.start(() -> new CharvsDesk().setVisible(true));
     }
 
 }

@@ -14,7 +14,7 @@ import javax.swing.WindowConstants;
 
 import java.awt.GridLayout;
 
-import br.com.pointel.jarch.mage.WizDesk;
+import br.com.pointel.jarch.mage.WizGUI;
 
 public class SetupDesk extends JFrame {
 
@@ -60,8 +60,8 @@ public class SetupDesk extends JFrame {
     
     private void initDesk() {
         initComponents();
-        setIconImage(WizDesk.getLogo());
-        WizDesk.initFrame(this);
+        setIconImage(WizGUI.getLogo());
+        WizGUI.initFrame(this);
     }
 
     private void initComponents() {

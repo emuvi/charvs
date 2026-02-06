@@ -9,7 +9,7 @@ import br.com.pointel.jarch.desk.DBordPane;
 import br.com.pointel.jarch.desk.DFrame;
 import br.com.pointel.jarch.desk.DListEditor;
 import br.com.pointel.jarch.desk.DPane;
-import br.com.pointel.jarch.mage.WizDesk;
+import br.com.pointel.jarch.mage.WizGUI;
 import br.com.pointel.jarch.mage.WizObject;
 
 public class ReplacesDesk extends DFrame {
@@ -37,7 +37,7 @@ public class ReplacesDesk extends DFrame {
         try {
             listEditor.setValue(Setup.readReplacesList());
         } catch (Exception e) {
-            WizDesk.showError(e);
+            WizGUI.showError(e);
         }
     }
 
@@ -45,7 +45,7 @@ public class ReplacesDesk extends DFrame {
         try {
             Setup.writeReplacesList(listEditor.getValue());
         } catch (Exception e) {
-            WizDesk.showError(e);
+            WizGUI.showError(e);
         }
     }
 
