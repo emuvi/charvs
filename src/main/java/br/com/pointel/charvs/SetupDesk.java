@@ -49,7 +49,7 @@ public class SetupDesk extends JFrame {
     private JCheckBox fieldTrimFinalText = new JCheckBox();
     private JLabel labelOnSave = new JLabel("On Save:");
     private DefaultComboBoxModel<String> modelOnSave = new DefaultComboBoxModel<>(new String[] { "Override", "KeepAll" });
-    private JComboBox<String> comboOnSave = new JComboBox<>(modelOnSave);
+    private JComboBox<String> comboOnSaveExists = new JComboBox<>(modelOnSave);
     private JLabel labelOnRecord = new JLabel("On Record:");
     private DefaultComboBoxModel<String> modelOnRecord = new DefaultComboBoxModel<>(new String[] { "Empty", "FileBase", "FileName", "FilePath" });
     private JComboBox<String> comboOnRecord = new JComboBox<>(modelOnRecord);
@@ -85,7 +85,7 @@ public class SetupDesk extends JFrame {
         fieldApplyReplacesList.setName("ApplyReplacesList");
         fieldReplaceVarsHolders.setName("ReplaceVarsHolders");
         fieldTrimFinalText.setName("TrimFinalText");
-        comboOnSave.setName("OnSave");
+        comboOnSaveExists.setName("OnSaveExists");
         comboOnRecord.setName("OnRecord");
         fieldRecordPrefix.setName("RecordPrefix");
         fieldRecordSuffix.setName("RecordSuffix");
@@ -118,7 +118,7 @@ public class SetupDesk extends JFrame {
         panelBody.add(labelTrimFinalText);
         panelBody.add(fieldTrimFinalText);
         panelBody.add(labelOnSave);
-        panelBody.add(comboOnSave);
+        panelBody.add(comboOnSaveExists);
         panelBody.add(labelOnRecord);
         panelBody.add(comboOnRecord);
         panelBody.add(labelRecordPrefix);

@@ -93,10 +93,10 @@ public class Setup {
         WizObject.write(new File("replaces.ser"), replaces);
     }
     
-    public static final String keyOnSave = "FRAME_SETUP_COMP_ON_SAVE";
+    public static final String keyOnSaveExists = "FRAME_SETUP_COMP_ON_SAVE_EXISTS";
     
-    public static OnSave getOnSave() {
-        return OnSave.values()[WizProps.get(keyOnSave, 0)];
+    public static OnSaveExists getOnSaveExists() {
+        return OnSaveExists.values()[WizProps.get(keyOnSaveExists, 0)];
     }
     
     public static final String keyOnRecord = "FRAME_SETUP_COMP_ON_RECORD";

@@ -670,7 +670,7 @@ public class CharvsDesk extends DFrame {
                 text = text.trim();
             }
             var file = new File(folder, fileName + fileExtension);
-            if (Setup.getOnSave() == OnSave.KeepAll) {
+            if (Setup.getOnSaveExists() == OnSaveExists.KeepAll) {
                 file = WizFile.notOverride(file);
             }
             var override = file.exists();

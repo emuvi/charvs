@@ -1,5 +1,5 @@
 package br.com.pointel.charvs;
 
-public enum OnSave {
+public enum OnSaveExists {
     Override, KeepAll
 }
