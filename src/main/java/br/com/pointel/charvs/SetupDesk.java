@@ -28,35 +28,38 @@ public class SetupDesk extends JFrame {
     private DefaultComboBoxModel<String> modelOnNaming = new DefaultComboBoxModel<>(new String[] { "FirstLine", "Timestamp", "Numbered" });
     private JComboBox<String> comboOnNaming = new JComboBox<>(modelOnNaming);
     private JLabel labelNumberedPrefix = new JLabel("  Numbered Prefix:");
-    private JTextField fieldNumberedPrefix = new JTextField();
+    private JTextField fieldNumberedPrefix = new JTextField(20);
     private JLabel labelNumberedSize = new JLabel("  Numbered Size:");
     private JSpinner spinnerNumberedSize = new JSpinner();
     private JLabel labelNumberedSuffix = new JLabel("  Numbered Suffix:");
-    private JTextField fieldNumberedSuffix = new JTextField();
+    private JTextField fieldNumberedSuffix = new JTextField(20);
     private JLabel labelNameExtension = new JLabel("Name Extension:");
-    private JTextField fieldNameExtension = new JTextField();
+    private JTextField fieldNameExtension = new JTextField(20);
     private JLabel labelStripFirstLines = new JLabel("Strip First Lines:");
     private JSpinner spinnerStripFirstLines = new JSpinner();
     private JLabel labelInsertAtBegin = new JLabel("Insert At Begin:");
-    private JTextField fieldInsertAtBegin = new JTextField();
+    private JTextField fieldInsertAtBegin = new JTextField(20);
     private JLabel labelInsertAtEnd = new JLabel("Insert At End:");
-    private JTextField fieldInsertAtEnd = new JTextField();
+    private JTextField fieldInsertAtEnd = new JTextField(20);
     private JLabel labelApplyReplacesList = new JLabel("Apply Replaces List:");
     private JCheckBox fieldApplyReplacesList = new JCheckBox();
     private JLabel labelReplaceVarsHolders = new JLabel("Replace Vars Holders:");
     private JCheckBox fieldReplaceVarsHolders = new JCheckBox();
     private JLabel labelTrimFinalText = new JLabel("Trim Final Text:");
     private JCheckBox fieldTrimFinalText = new JCheckBox();
-    private JLabel labelOnSave = new JLabel("On Save:");
-    private DefaultComboBoxModel<String> modelOnSave = new DefaultComboBoxModel<>(new String[] { "Override", "KeepAll" });
-    private JComboBox<String> comboOnSaveExists = new JComboBox<>(modelOnSave);
+    private JLabel labelOnSaveExists = new JLabel("On Save Exists:");
+    private DefaultComboBoxModel<String> modelOnSaveExists = new DefaultComboBoxModel<>(new String[] { "Override", "KeepAll" });
+    private JComboBox<String> comboOnSaveExists = new JComboBox<>(modelOnSaveExists);
     private JLabel labelOnRecord = new JLabel("On Record:");
     private DefaultComboBoxModel<String> modelOnRecord = new DefaultComboBoxModel<>(new String[] { "Empty", "FileBase", "FileName", "FilePath" });
     private JComboBox<String> comboOnRecord = new JComboBox<>(modelOnRecord);
-     private JLabel labelRecordPrefix = new JLabel("  Prefix:");
-    private JTextField fieldRecordPrefix = new JTextField();
+    private JLabel labelRecordPrefix = new JLabel("  Prefix:");
+    private JTextField fieldRecordPrefix = new JTextField(20);
     private JLabel labelRecordSuffix = new JLabel("  Suffix:");
-    private JTextField fieldRecordSuffix = new JTextField();
+    private JTextField fieldRecordSuffix = new JTextField(20);
+    private JLabel labelOnRecordExists = new JLabel("On Record Exists:");
+    private DefaultComboBoxModel<String> modelOnRecordExists = new DefaultComboBoxModel<>(new String[] { "Nothing", "Replace", "Append" });
+    private JComboBox<String> comboOnRecordExists = new JComboBox<>(modelOnRecordExists);
     
     public SetupDesk() {
         initDesk();
@@ -89,10 +92,11 @@ public class SetupDesk extends JFrame {
         comboOnRecord.setName("OnRecord");
         fieldRecordPrefix.setName("RecordPrefix");
         fieldRecordSuffix.setName("RecordSuffix");
+        comboOnRecordExists.setName("OnRecordExists");
 
         panelBody.setBorder(BorderFactory.createEmptyBorder(9, 9, 9, 9));
 
-        panelBody.setLayout(new GridLayout(16, 2, 2, 2));
+        panelBody.setLayout(new GridLayout(17, 2, 2, 2));
         panelBody.add(labelOnClipboardNewText);
         panelBody.add(comboOnClipboardNewText);
         panelBody.add(labelOnNaming);
@@ -117,7 +121,7 @@ public class SetupDesk extends JFrame {
         panelBody.add(fieldReplaceVarsHolders);
         panelBody.add(labelTrimFinalText);
         panelBody.add(fieldTrimFinalText);
-        panelBody.add(labelOnSave);
+        panelBody.add(labelOnSaveExists);
         panelBody.add(comboOnSaveExists);
         panelBody.add(labelOnRecord);
         panelBody.add(comboOnRecord);
@@ -125,6 +129,8 @@ public class SetupDesk extends JFrame {
         panelBody.add(fieldRecordPrefix);
         panelBody.add(labelRecordSuffix);
         panelBody.add(fieldRecordSuffix);
+        panelBody.add(labelOnRecordExists);
+        panelBody.add(comboOnRecordExists);
 
         setContentPane(scrollBody);
         setLocationRelativeTo(null);

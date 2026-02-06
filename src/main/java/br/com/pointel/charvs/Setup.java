@@ -116,5 +116,11 @@ public class Setup {
     public static String getRecordSuffix() {
         return WizProps.get(keyRecordSuffix, "");
     }
+
+    public static final String keyOnRecordExists = "FRAME_SETUP_COMP_ON_RECORD_EXISTS";
+    
+    public static OnRecordExists getOnRecordExists() {
+        return OnRecordExists.values()[WizProps.get(keyOnRecordExists, 0)];
+    }
     
 }

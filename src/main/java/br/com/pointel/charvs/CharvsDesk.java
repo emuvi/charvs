@@ -714,6 +714,16 @@ public class CharvsDesk extends DFrame {
         recordText += WizString.replaceVarsHolders(Setup.getRecordSuffix());
         var file = new File(fieldRecord.getText());
         var text = WizText.read(file);
+        var exists = text.contains(recordText);
+        if (exists && Setup.getOnRecordExists() == OnRecordExists.Nothing) {
+            return;
+        } else if (exists && Setup.getOnRecordExists() == OnRecordExists.Replace) {
+            text = text.replace(recordText, "");
+        }
+        while (text.contains("\n\n\n")) {
+            text = text.replace("\n\n\n", "\n\n");
+        }
+        text = text.trim();
         if (!text.isEmpty()) {
             text += "\n\n";
         }

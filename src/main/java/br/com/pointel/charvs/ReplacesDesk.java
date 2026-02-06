@@ -2,15 +2,12 @@ package br.com.pointel.charvs;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.File;
-import java.util.ArrayList;
 
 import br.com.pointel.jarch.desk.DBordPane;
 import br.com.pointel.jarch.desk.DFrame;
 import br.com.pointel.jarch.desk.DListEditor;
 import br.com.pointel.jarch.desk.DPane;
 import br.com.pointel.jarch.mage.WizGUI;
-import br.com.pointel.jarch.mage.WizObject;
 
 public class ReplacesDesk extends DFrame {
 
