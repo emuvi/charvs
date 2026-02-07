@@ -6,7 +6,6 @@ import java.awt.event.KeyEvent;
 import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.Objects;
 
@@ -16,11 +15,9 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
-import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
-import javax.swing.WindowConstants;
 
 import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
@@ -86,12 +83,14 @@ public class CharvsDesk extends DFrame {
     private JButton buttonOutputOpen = new JButton("*");
     private JTextField fieldOutput = new JTextField();
     private JButton buttonSave = new JButton("Save");
+    private JButton buttonSaveMultiple = new JButton("+");
     private JButton buttonSaveOpen = new JButton("*");
     private DRowPane rowOutput = new DRowPane().insets(2)
             .growNone().put(buttonOutputSelect)
             .growNone().put(buttonOutputOpen)
             .growHorizontal().put(fieldOutput)
             .growNone().put(buttonSave)
+            .growNone().put(buttonSaveMultiple)
             .growNone().put(buttonSaveOpen);
 
     private JButton buttonRecordSelect = new JButton("Record");
@@ -207,6 +206,9 @@ public class CharvsDesk extends DFrame {
         buttonSave.setMnemonic('S');
         buttonSave.setToolTipText("Saves clipboard on Output folder (ctrl+V)");
         buttonSave.addActionListener(this::buttonSaveActionPerformed);
+        buttonSaveMultiple.setMnemonic('+');
+        buttonSaveMultiple.setToolTipText("Saves clipboard on Multiple files (ctrl+M)");
+        buttonSaveMultiple.addActionListener(this::buttonSaveMultipleActionPerformed);
         buttonSaveOpen.setToolTipText("Open Last Saved File");
         buttonSaveOpen.addActionListener(this::buttonSaveOpenActionPerformed);
 
@@ -246,6 +248,14 @@ public class CharvsDesk extends DFrame {
                 buttonSaveActionPerformed(e);
             }
         };
+        var keyCtrlM = KeyStroke.getKeyStroke(KeyEvent.VK_M, InputEvent.CTRL_DOWN_MASK);
+        var saveMultipleActionKey = "SaveMultipleActionKey";
+        var saveMultipleAction = new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                buttonSaveMultipleActionPerformed(e);
+            }
+        };
         var keyCtrlA = KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.CTRL_DOWN_MASK);
         var appendActionKey = "AppendActionKey";
         var appendAction = new AbstractAction() {
@@ -276,6 +286,8 @@ public class CharvsDesk extends DFrame {
         actionMap.put(loadActionKey, loadAction);
         inputMap.put(keyCtrlV, saveActionKey);
         actionMap.put(saveActionKey, saveAction);
+        inputMap.put(keyCtrlM, saveMultipleActionKey);
+        actionMap.put(saveMultipleActionKey, saveMultipleAction);
         inputMap.put(keyCtrlA, appendActionKey);
         actionMap.put(appendActionKey, appendAction);
         inputMap.put(keyCtrlE, insertActionKey);
@@ -633,54 +645,58 @@ public class CharvsDesk extends DFrame {
 
     private void buttonSaveActionPerformed(ActionEvent evt) {
         try {
-            var text = WizGUI.getStringFromClipboard();
-            var folder = new File(fieldOutput.getText());
-            var fileName = WizUtilDate.formatTimestampFile(new Date());
-            var fileExtension = Setup.getNameExtension();
-            var setupNaming = Setup.getOnNaming();
-            if (setupNaming == OnNaming.FirstLine) {
-                fileName = cleanFileName(WizString.getFirstLine(text));
-            } else if (setupNaming == OnNaming.Numbered) {
-                var prefix = Setup.getNameNumberedPrefix();
-                var index = 1;
-                var size = Setup.getNameNumberedSize();
-                var suffix = Setup.getNameNumberedSuffix();
-                fileName = prefix + WizString.fillAtStart(index + "", '0', size) + suffix;
-                var file = new File(folder, fileName + fileExtension);
-                while (file.exists()) {
-                    index++;
-                    fileName = prefix + WizString.fillAtStart(index + "", '0', size) + suffix;
-                    file = new File(folder, fileName + fileExtension);
-                }
-            }
-            if (Setup.getStripFirstLines() > 0) {
-                text = WizString.stripFirstLines(text, Setup.getStripFirstLines());
-            }
-            text = Setup.getInsertAtBegin() + text + Setup.getInsertAtEnd();
-            if (Boolean.TRUE.equals(Setup.getApplyReplacesList())) {
-                text = applyReplacesList(text);
-            }
-            if (Boolean.TRUE.equals(Setup.getReplaceVarsHolders())) {
-                text = WizString.replaceVarsHolders(text);
-            }
-            if (Boolean.TRUE.equals(Setup.getTrimFinalText())) {
-                text = text.trim();
-            }
-            var file = new File(folder, fileName + fileExtension);
-            if (Setup.getOnSaveExists() == OnSaveExists.KeepAll) {
-                file = WizFile.notOverride(file);
-            }
-            var override = file.exists();
-            Files.writeString(file.toPath(), text);
-            putStatus((override ? "Override on " : "Saved on ") + file.getName(), text);
-            bufferBody = "";
-            bufferSize = 0;
-            savedLast = file;
-            if (checkRecordMake.isSelected()) {
-                makeRecord();
-            }
+            saveClipboardOnOutput();
         } catch (Exception e) {
             WizGUI.showError(e);
+        }
+    }
+
+    private void saveClipboardOnOutput() throws Exception {
+        var text = WizGUI.getStringFromClipboard();
+        var folder = new File(fieldOutput.getText());
+        var fileName = WizUtilDate.formatTimestampFile(new Date());
+        var fileExtension = Setup.getNameExtension();
+        var setupNaming = Setup.getOnNaming();
+        if (setupNaming == OnNaming.FirstLine) {
+            fileName = cleanFileName(WizString.getFirstLine(text));
+        } else if (setupNaming == OnNaming.Numbered) {
+            var prefix = Setup.getNameNumberedPrefix();
+            var index = 1;
+            var size = Setup.getNameNumberedSize();
+            var suffix = Setup.getNameNumberedSuffix();
+            fileName = prefix + WizString.fillAtStart(index + "", '0', size) + suffix;
+            var file = new File(folder, fileName + fileExtension);
+            while (file.exists()) {
+                index++;
+                fileName = prefix + WizString.fillAtStart(index + "", '0', size) + suffix;
+                file = new File(folder, fileName + fileExtension);
+            }
+        }
+        if (Setup.getStripFirstLines() > 0) {
+            text = WizString.stripFirstLines(text, Setup.getStripFirstLines());
+        }
+        text = Setup.getInsertAtBegin() + text + Setup.getInsertAtEnd();
+        if (Boolean.TRUE.equals(Setup.getApplyReplacesList())) {
+            text = applyReplacesList(text);
+        }
+        if (Boolean.TRUE.equals(Setup.getReplaceVarsHolders())) {
+            text = WizString.replaceVarsHolders(text);
+        }
+        if (Boolean.TRUE.equals(Setup.getTrimFinalText())) {
+            text = text.trim();
+        }
+        var file = new File(folder, fileName + fileExtension);
+        if (Setup.getOnSaveExists() == OnSaveExists.KeepAll) {
+            file = WizFile.notOverride(file);
+        }
+        var override = file.exists();
+        Files.writeString(file.toPath(), text);
+        putStatus((override ? "Override on " : "Saved on ") + file.getName(), text);
+        bufferBody = "";
+        bufferSize = 0;
+        savedLast = file;
+        if (checkRecordMake.isSelected()) {
+            makeRecord();
         }
     }
 
@@ -693,6 +709,40 @@ public class CharvsDesk extends DFrame {
             text = replace.apply(text);
         }
         return text;
+    }
+
+    private void buttonSaveMultipleActionPerformed(ActionEvent evt) {
+        try {
+            var text = WizGUI.getStringFromClipboard();
+            var divider = Setup.getSaveMultipleDivider();
+            var parts = text.split(divider);
+            for (var part : parts) {
+                part = part.trim();
+                if (part.isEmpty()) {
+                    continue;
+                }
+                WizGUI.putStringOnClipboard(part);
+                saveClipboardOnOutput();
+            }
+        } catch (Exception e) {
+            WizGUI.showError(e);
+        }
+    }
+
+    private void buttonSaveOpenActionPerformed(ActionEvent evt) {
+        try {
+            WizGUI.open(savedLast);
+        } catch (Exception e) {
+            WizGUI.showError(e);
+        }
+    }
+
+    private void buttonRecordSelectActionPerformed(ActionEvent evt) {
+        var selected = new File(fieldRecord.getText());
+        selected = WizGUI.selectFile(selected);
+        if (selected != null) {
+            fieldRecord.setText(selected.getAbsolutePath());
+        }
     }
 
     private void makeRecord() throws Exception {
@@ -726,22 +776,6 @@ public class CharvsDesk extends DFrame {
         }
         text += recordText;
         WizText.write(file, text);
-    }
-
-    private void buttonSaveOpenActionPerformed(ActionEvent evt) {
-        try {
-            WizGUI.open(savedLast);
-        } catch (Exception e) {
-            WizGUI.showError(e);
-        }
-    }
-
-    private void buttonRecordSelectActionPerformed(ActionEvent evt) {
-        var selected = new File(fieldRecord.getText());
-        selected = WizGUI.selectFile(selected);
-        if (selected != null) {
-            fieldRecord.setText(selected.getAbsolutePath());
-        }
     }
 
     private void buttonRecordOpenActionPerformed(ActionEvent evt) {

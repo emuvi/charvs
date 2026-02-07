@@ -92,6 +92,12 @@ public class Setup {
     public static void writeReplacesList(ArrayList<Replace> replaces) throws Exception {
         WizObject.write(new File("replaces.ser"), replaces);
     }
+
+    public static final String keySaveMultipleDivider = "FRAME_SETUP_COMP_SAVE_MULTIPLE_DIVIDER";
+    
+    public static String getSaveMultipleDivider() {
+        return WizProps.get(keySaveMultipleDivider, "");
+    }
     
     public static final String keyOnSaveExists = "FRAME_SETUP_COMP_ON_SAVE_EXISTS";
     

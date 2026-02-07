@@ -42,11 +42,13 @@ public class SetupDesk extends JFrame {
     private JLabel labelInsertAtEnd = new JLabel("Insert At End:");
     private JTextField fieldInsertAtEnd = new JTextField(20);
     private JLabel labelApplyReplacesList = new JLabel("Apply Replaces List:");
-    private JCheckBox fieldApplyReplacesList = new JCheckBox();
+    private JCheckBox checkApplyReplacesList = new JCheckBox();
     private JLabel labelReplaceVarsHolders = new JLabel("Replace Vars Holders:");
-    private JCheckBox fieldReplaceVarsHolders = new JCheckBox();
+    private JCheckBox checkReplaceVarsHolders = new JCheckBox();
     private JLabel labelTrimFinalText = new JLabel("Trim Final Text:");
-    private JCheckBox fieldTrimFinalText = new JCheckBox();
+    private JCheckBox checkTrimFinalText = new JCheckBox();
+    private JLabel labelSaveMultipleDivider = new JLabel("Save Multiple Divider:");
+    private JTextField fieldSaveMultipleDivider = new JTextField(20);
     private JLabel labelOnSaveExists = new JLabel("On Save Exists:");
     private DefaultComboBoxModel<String> modelOnSaveExists = new DefaultComboBoxModel<>(new String[] { "Override", "KeepAll" });
     private JComboBox<String> comboOnSaveExists = new JComboBox<>(modelOnSaveExists);
@@ -85,9 +87,10 @@ public class SetupDesk extends JFrame {
         fieldInsertAtBegin.setName("InsertAtBegin");
         fieldInsertAtEnd.setName("InsertAtEnd");
         spinnerStripFirstLines.setName("StripFirstLines");
-        fieldApplyReplacesList.setName("ApplyReplacesList");
-        fieldReplaceVarsHolders.setName("ReplaceVarsHolders");
-        fieldTrimFinalText.setName("TrimFinalText");
+        checkApplyReplacesList.setName("ApplyReplacesList");
+        checkReplaceVarsHolders.setName("ReplaceVarsHolders");
+        checkTrimFinalText.setName("TrimFinalText");
+        fieldSaveMultipleDivider.setName("SaveMultipleDivider");
         comboOnSaveExists.setName("OnSaveExists");
         comboOnRecord.setName("OnRecord");
         fieldRecordPrefix.setName("RecordPrefix");
@@ -96,7 +99,7 @@ public class SetupDesk extends JFrame {
 
         panelBody.setBorder(BorderFactory.createEmptyBorder(9, 9, 9, 9));
 
-        panelBody.setLayout(new GridLayout(17, 2, 2, 2));
+        panelBody.setLayout(new GridLayout(18, 2, 2, 2));
         panelBody.add(labelOnClipboardNewText);
         panelBody.add(comboOnClipboardNewText);
         panelBody.add(labelOnNaming);
@@ -116,11 +119,13 @@ public class SetupDesk extends JFrame {
         panelBody.add(labelInsertAtEnd);
         panelBody.add(fieldInsertAtEnd);
         panelBody.add(labelApplyReplacesList);
-        panelBody.add(fieldApplyReplacesList);
+        panelBody.add(checkApplyReplacesList);
         panelBody.add(labelReplaceVarsHolders);
-        panelBody.add(fieldReplaceVarsHolders);
+        panelBody.add(checkReplaceVarsHolders);
         panelBody.add(labelTrimFinalText);
-        panelBody.add(fieldTrimFinalText);
+        panelBody.add(checkTrimFinalText);
+        panelBody.add(labelSaveMultipleDivider);
+        panelBody.add(fieldSaveMultipleDivider);
         panelBody.add(labelOnSaveExists);
         panelBody.add(comboOnSaveExists);
         panelBody.add(labelOnRecord);
