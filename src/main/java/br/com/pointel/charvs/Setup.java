@@ -98,6 +98,12 @@ public class Setup {
     public static String getSaveMultipleDivider() {
         return WizProps.get(keySaveMultipleDivider, "");
     }
+
+    public static final String keyMultipleMinimumSize = "FRAME_SETUP_COMP_MULTIPLE_MINIMUM_SIZE";
+    
+    public static Integer getMultipleMinimumSize() {
+        return WizProps.get(keyMultipleMinimumSize, 0);
+    }
     
     public static final String keyOnSaveExists = "FRAME_SETUP_COMP_ON_SAVE_EXISTS";
     

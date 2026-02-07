@@ -49,6 +49,8 @@ public class SetupDesk extends JFrame {
     private JCheckBox checkTrimFinalText = new JCheckBox();
     private JLabel labelSaveMultipleDivider = new JLabel("Save Multiple Divider:");
     private JTextField fieldSaveMultipleDivider = new JTextField(20);
+    private JLabel labelMultipleMinimumSize = new JLabel("Multiple Minimum Size:");
+    private JSpinner spinnerMultipleMinimumSize = new JSpinner();
     private JLabel labelOnSaveExists = new JLabel("On Save Exists:");
     private DefaultComboBoxModel<String> modelOnSaveExists = new DefaultComboBoxModel<>(new String[] { "Override", "KeepAll" });
     private JComboBox<String> comboOnSaveExists = new JComboBox<>(modelOnSaveExists);
@@ -91,6 +93,7 @@ public class SetupDesk extends JFrame {
         checkReplaceVarsHolders.setName("ReplaceVarsHolders");
         checkTrimFinalText.setName("TrimFinalText");
         fieldSaveMultipleDivider.setName("SaveMultipleDivider");
+        spinnerMultipleMinimumSize.setName("MultipleMinimumSize");
         comboOnSaveExists.setName("OnSaveExists");
         comboOnRecord.setName("OnRecord");
         fieldRecordPrefix.setName("RecordPrefix");
@@ -99,7 +102,7 @@ public class SetupDesk extends JFrame {
 
         panelBody.setBorder(BorderFactory.createEmptyBorder(9, 9, 9, 9));
 
-        panelBody.setLayout(new GridLayout(18, 2, 2, 2));
+        panelBody.setLayout(new GridLayout(19, 2, 2, 2));
         panelBody.add(labelOnClipboardNewText);
         panelBody.add(comboOnClipboardNewText);
         panelBody.add(labelOnNaming);
@@ -126,6 +129,8 @@ public class SetupDesk extends JFrame {
         panelBody.add(checkTrimFinalText);
         panelBody.add(labelSaveMultipleDivider);
         panelBody.add(fieldSaveMultipleDivider);
+        panelBody.add(labelMultipleMinimumSize);
+        panelBody.add(spinnerMultipleMinimumSize);
         panelBody.add(labelOnSaveExists);
         panelBody.add(comboOnSaveExists);
         panelBody.add(labelOnRecord);

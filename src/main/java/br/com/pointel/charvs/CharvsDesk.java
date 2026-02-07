@@ -715,10 +715,12 @@ public class CharvsDesk extends DFrame {
         try {
             var text = WizGUI.getStringFromClipboard();
             var divider = Setup.getSaveMultipleDivider();
+            var minimumSize = Setup.getMultipleMinimumSize();
             var parts = text.split(divider);
             for (var part : parts) {
                 part = part.trim();
-                if (part.isEmpty()) {
+                if (part.isEmpty() || part.length() < minimumSize) {
+                    putStatus("Passed to saved part of the text.", part);
                     continue;
                 }
                 WizGUI.putStringOnClipboard(part);
