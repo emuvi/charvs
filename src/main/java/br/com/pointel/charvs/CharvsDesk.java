@@ -17,6 +17,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
+import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
@@ -41,13 +42,13 @@ public class CharvsDesk extends DFrame {
 
     private static final Logger LOG = LoggerFactory.getLogger(CharvsDesk.class);
 
-    private JButton buttonSetup = new JButton("#");
-    private JButton buttonReplaces = new JButton("$");
-    private JButton buttonBufferAppend = new JButton("Append");
-    private JButton buttonBufferClean = new JButton("C");
-    private JButton buttonInsert = new JButton("Insert");
-    private JTextField fieldInsertTitle = new JTextField();
-    private DRowPane rowMain = new DRowPane().insets(2)
+    private final JButton buttonSetup = new JButton("#");
+    private final JButton buttonReplaces = new JButton("$");
+    private final JButton buttonBufferAppend = new JButton("Append");
+    private final JButton buttonBufferClean = new JButton("C");
+    private final JButton buttonInsert = new JButton("Insert");
+    private final JTextField fieldInsertTitle = new JTextField();
+    private final DRowPane rowMain = new DRowPane().insets(2)
             .growNone().insetsRight(0).put(buttonSetup)
             .growNone().insetsRight(7).put(buttonReplaces)
             .growNone().insetsRight(0).put(buttonBufferAppend)
@@ -55,25 +56,25 @@ public class CharvsDesk extends DFrame {
             .growNone().insetsRight(0).put(buttonInsert)
             .growHorizontal().insetsRight(0).put(fieldInsertTitle);
 
-    private JButton buttonInputSelect = new JButton("Input");
-    private JButton buttonInputOpen = new JButton("*");
-    private JTextField fieldInput = new JTextField();
-    private JButton buttonLoad = new JButton("Load");
-    private DRowPane rowInput = new DRowPane().insets(2)
+    private final JButton buttonInputSelect = new JButton("Input");
+    private final JButton buttonInputOpen = new JButton("*");
+    private final JTextField fieldInput = new JTextField();
+    private final JButton buttonLoad = new JButton("Load");
+    private final DRowPane rowInput = new DRowPane().insets(2)
             .growNone().put(buttonInputSelect)
             .growNone().put(buttonInputOpen)
             .growHorizontal().put(fieldInput)
             .growNone().put(buttonLoad);
 
-    private JButton buttonInputUpdate = new JButton("~");
-    private JButton buttonInputFileOpen = new JButton("*");
+    private final JButton buttonInputUpdate = new JButton("~");
+    private final JButton buttonInputFileOpen = new JButton("*");
     private final DefaultComboBoxModel<String> modelInput = new DefaultComboBoxModel<>();
-    private JComboBox<String> comboInput = new JComboBox<>(modelInput);
-    private JButton buttonInputFirst = new JButton("^");
-    private JButton buttonInputPrior = new JButton("<");
-    private JButton buttonInputNext = new JButton(">");
-    private JButton buttonInputSwitch = new JButton("%");
-    private DRowPane rowInputFile = new DRowPane().insets(2)
+    private final JComboBox<String> comboInput = new JComboBox<>(modelInput);
+    private final JButton buttonInputFirst = new JButton("^");
+    private final JButton buttonInputPrior = new JButton("<");
+    private final JButton buttonInputNext = new JButton(">");
+    private final JButton buttonInputSwitch = new JButton("%");
+    private final DRowPane rowInputFile = new DRowPane().insets(2)
             .growNone().put(buttonInputUpdate)
             .growNone().put(buttonInputFileOpen)
             .growHorizontal().put(comboInput)
@@ -82,13 +83,13 @@ public class CharvsDesk extends DFrame {
             .growNone().put(buttonInputNext)
             .growNone().put(buttonInputSwitch);
 
-    private JButton buttonOutputSelect = new JButton("Output");
-    private JButton buttonOutputOpen = new JButton("*");
-    private JTextField fieldOutput = new JTextField();
-    private JButton buttonSave = new JButton("Save");
-    private JButton buttonSaveMultiple = new JButton("+");
-    private JButton buttonSaveOpen = new JButton("*");
-    private DRowPane rowOutput = new DRowPane().insets(2)
+    private final JButton buttonOutputSelect = new JButton("Output");
+    private final JButton buttonOutputOpen = new JButton("*");
+    private final JTextField fieldOutput = new JTextField();
+    private final JButton buttonSave = new JButton("Save");
+    private final JButton buttonSaveMultiple = new JButton("+");
+    private final JButton buttonSaveOpen = new JButton("*");
+    private final DRowPane rowOutput = new DRowPane().insets(2)
             .growNone().put(buttonOutputSelect)
             .growNone().put(buttonOutputOpen)
             .growHorizontal().put(fieldOutput)
@@ -96,41 +97,48 @@ public class CharvsDesk extends DFrame {
             .growNone().put(buttonSaveMultiple)
             .growNone().put(buttonSaveOpen);
 
-    private JButton buttonRecordSelect = new JButton("Record");
-    private JButton buttonRecordOpen = new JButton("*");
-    private JTextField fieldRecord = new JTextField();
-    private JCheckBox checkRecordMake = new JCheckBox("Make");
-    private DRowPane rowRecord = new DRowPane().insets(2)
+    private final JLabel labelOutputName = new JLabel("Name:");
+    private final JTextField fieldOutputName = new JTextField();
+    private final DRowPane rowOutputName = new DRowPane().insets(2)
+            .anchorCenter().growNone().put(labelOutputName)
+            .growHorizontal().put(fieldOutputName);
+
+    private final JButton buttonRecordSelect = new JButton("Record");
+    private final JButton buttonRecordOpen = new JButton("*");
+    private final JTextField fieldRecord = new JTextField();
+    private final JCheckBox checkRecordMake = new JCheckBox("Make");
+    private final DRowPane rowRecord = new DRowPane().insets(2)
             .growNone().put(buttonRecordSelect)
             .growNone().put(buttonRecordOpen)
             .growHorizontal().put(fieldRecord)
             .growNone().put(checkRecordMake);
 
-    private JButton buttonArchiveSelect = new JButton("Archive");
-    private JButton buttonArchiveOpen = new JButton("*");
-    private JTextField fieldArchive = new JTextField();
-    private JCheckBox checkArchiveMake = new JCheckBox("Make");
-    private DRowPane rowArchive = new DRowPane().insets(2)
+    private final JButton buttonArchiveSelect = new JButton("Archive");
+    private final JButton buttonArchiveOpen = new JButton("*");
+    private final JTextField fieldArchive = new JTextField();
+    private final JCheckBox checkArchiveMake = new JCheckBox("Make");
+    private final DRowPane rowArchive = new DRowPane().insets(2)
             .growNone().put(buttonArchiveSelect)
             .growNone().put(buttonArchiveOpen)
             .growHorizontal().put(fieldArchive)
             .growNone().put(checkArchiveMake);
 
-    private JTextField fieldStatus = new JTextField();
-    private JComboBox<String> comboPerfil = new JComboBox<>();
-    private JButton buttonPerfilAdd = new JButton("+");
-    private JButton buttonPerfilDel = new JButton("-");
-    private DRowPane rowStatus = new DRowPane().insets(2)
+    private final JTextField fieldStatus = new JTextField();
+    private final JComboBox<String> comboPerfil = new JComboBox<>();
+    private final JButton buttonPerfilAdd = new JButton("+");
+    private final JButton buttonPerfilDel = new JButton("-");
+    private final DRowPane rowStatus = new DRowPane().insets(2)
             .growBoth().put(fieldStatus)
             .growVertical().put(comboPerfil)
             .growVertical().put(buttonPerfilAdd)
             .growVertical().put(buttonPerfilDel);
 
-    private DPane paneBody = new DColPane()
+    private final DPane paneBody = new DColPane()
             .growHorizontal().put(rowMain)
             .growHorizontal().put(rowInput)
             .growHorizontal().put(rowInputFile)
             .growHorizontal().put(rowOutput)
+            .growHorizontal().put(rowOutputName)
             .growHorizontal().put(rowRecord)
             .growHorizontal().put(rowArchive)
             .growBoth().put(rowStatus)
@@ -232,6 +240,14 @@ public class CharvsDesk extends DFrame {
         buttonSaveMultiple.addActionListener(this::buttonSaveMultipleActionPerformed);
         buttonSaveOpen.setToolTipText("Open Last Saved File");
         buttonSaveOpen.addActionListener(this::buttonSaveOpenActionPerformed);
+        
+        fieldOutputName.setName("OutputName");
+        fieldOutputName.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                Setup.setOutputName(fieldOutputName.getText());
+            }
+        });
 
         buttonRecordSelect.setMnemonic('r');
         buttonRecordSelect.setToolTipText("Select Record File");
@@ -716,11 +732,13 @@ public class CharvsDesk extends DFrame {
     private void saveClipboardOnOutput() throws Exception {
         var text = WizGUI.getStringFromClipboard();
         var folder = new File(fieldOutput.getText());
-        var fileName = WizUtilDate.formatTimestampFile(new Date());
+        var fileName = fieldOutputName.getText();
         var fileExtension = Setup.getNameExtension();
         var setupNaming = Setup.getOnNaming();
         if (setupNaming == OnNaming.FirstLine) {
             fileName = cleanFileName(WizString.getFirstLine(text));
+        } else if (setupNaming == OnNaming.Timestamp) {
+            fileName = WizUtilDate.formatTimestampFile(new Date());
         } else if (setupNaming == OnNaming.Numbered) {
             var prefix = Setup.getNameNumberedPrefix();
             var index = 1;
@@ -878,6 +896,8 @@ public class CharvsDesk extends DFrame {
             buttonInputUpdateActionPerformed(evt);
             fieldOutput.setText(Setup.getOutputFolder());
             fieldOutput.setName("Output " + perfil);
+            fieldOutputName.setText(Setup.getOutputName());
+            fieldOutputName.setName("OutputName " + perfil);
             fieldRecord.setText(Setup.getRecordFile());
             fieldRecord.setName("Record " + perfil);
             checkRecordMake.setSelected(Setup.getRecordMake());

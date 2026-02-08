@@ -25,7 +25,7 @@ public class SetupDesk extends JFrame {
     private DefaultComboBoxModel<String> modelOnClipboardNewText = new DefaultComboBoxModel<>(new String[] { "Nothing", "ShowDesk", "AppendOnBuffer", "InsertOnInput" });
     private JComboBox<String> comboOnClipboardNewText = new JComboBox<>(modelOnClipboardNewText);
     private JLabel labelOnNaming = new JLabel("On Naming:");
-    private DefaultComboBoxModel<String> modelOnNaming = new DefaultComboBoxModel<>(new String[] { "FirstLine", "Timestamp", "Numbered" });
+    private DefaultComboBoxModel<String> modelOnNaming = new DefaultComboBoxModel<>(new String[] { "OutputName", "FirstLine", "Timestamp", "Numbered" });
     private JComboBox<String> comboOnNaming = new JComboBox<>(modelOnNaming);
     private JLabel labelNumberedPrefix = new JLabel("  Numbered Prefix:");
     private JTextField fieldNumberedPrefix = new JTextField(20);

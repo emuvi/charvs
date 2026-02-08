@@ -47,6 +47,16 @@ public class Setup {
         WizProps.set(KEY_OUTPUT_FOLDER + getPerfilParameter(), outputFolder);
     }
 
+    public static final String KEY_OUTPUT_NAME = "FRAME_CHARVS_COMP_OUTPUT_NAME";
+
+    public static String getOutputName() {
+        return WizProps.get(KEY_OUTPUT_NAME + getPerfilParameter(), "");
+    }
+
+    public static void setOutputName(String outputName) {
+        WizProps.set(KEY_OUTPUT_NAME + getPerfilParameter(), outputName);
+    }
+
     public static final String KEY_RECORD_FILE = "FRAME_CHARVS_COMP_RECORD_FILE";
 
     public static String getRecordFile() {
