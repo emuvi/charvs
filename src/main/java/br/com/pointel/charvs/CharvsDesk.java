@@ -1,6 +1,8 @@
 package br.com.pointel.charvs;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.io.File;
@@ -28,6 +30,7 @@ import br.com.pointel.jarch.desk.DFrame;
 import br.com.pointel.jarch.desk.DPane;
 import br.com.pointel.jarch.desk.DRowPane;
 import br.com.pointel.jarch.mage.WizGUI;
+import br.com.pointel.jarch.mage.WizObject;
 import br.com.pointel.jarch.mage.WizFile;
 import br.com.pointel.jarch.mage.WizString;
 import br.com.pointel.jarch.mage.WizText;
@@ -114,8 +117,14 @@ public class CharvsDesk extends DFrame {
             .growNone().put(checkArchiveMake);
 
     private JTextField fieldStatus = new JTextField();
+    private JComboBox<String> comboPerfil = new JComboBox<>();
+    private JButton buttonPerfilAdd = new JButton("+");
+    private JButton buttonPerfilDel = new JButton("-");
     private DRowPane rowStatus = new DRowPane().insets(2)
-            .growBoth().put(fieldStatus);
+            .growBoth().put(fieldStatus)
+            .growVertical().put(comboPerfil)
+            .growVertical().put(buttonPerfilAdd)
+            .growVertical().put(buttonPerfilDel);
 
     private DPane paneBody = new DColPane()
             .growHorizontal().put(rowMain)
@@ -175,6 +184,12 @@ public class CharvsDesk extends DFrame {
         buttonInputOpen.setToolTipText("Open Origin Folder");
         buttonInputOpen.addActionListener(this::buttonInputOpenActionPerformed);
         fieldInput.setName("InputFolder");
+        fieldInput.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                Setup.setInputFolder(fieldInput.getText());
+            }
+        });
         buttonLoad.setMnemonic('L');
         buttonLoad.setToolTipText("Loads selected Input on clipboard (ctrl+C)");
         buttonLoad.addActionListener(this::buttonLoadActionPerformed);
@@ -203,6 +218,12 @@ public class CharvsDesk extends DFrame {
         buttonOutputOpen.setToolTipText("Open Output Folder");
         buttonOutputOpen.addActionListener(this::buttonOutputOpenActionPerformed);
         fieldOutput.setName("OutputFolder");
+        fieldOutput.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                Setup.setOutputFolder(fieldOutput.getText());
+            }
+        });
         buttonSave.setMnemonic('S');
         buttonSave.setToolTipText("Saves clipboard on Output folder (ctrl+V)");
         buttonSave.addActionListener(this::buttonSaveActionPerformed);
@@ -217,8 +238,20 @@ public class CharvsDesk extends DFrame {
         buttonRecordSelect.addActionListener(this::buttonRecordSelectActionPerformed);
         buttonRecordOpen.setToolTipText("Open Record File");
         buttonRecordOpen.addActionListener(this::buttonRecordOpenActionPerformed);
-        fieldRecord.setName("RecordFolder");
+        fieldRecord.setName("RecordFile");
+        fieldRecord.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                Setup.setRecordFile(fieldRecord.getText());
+            }
+        });
         checkRecordMake.setName("RecordMake");
+        checkRecordMake.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                Setup.setRecordMake(checkRecordMake.isSelected());
+            }
+        });
 
         buttonArchiveSelect.setMnemonic('h');
         buttonArchiveSelect.setToolTipText("Select Archive Folder");
@@ -226,9 +259,28 @@ public class CharvsDesk extends DFrame {
         buttonArchiveOpen.setToolTipText("Open Archive Folder");
         buttonArchiveOpen.addActionListener(this::buttonArchiveOpenActionPerformed);
         fieldArchive.setName("ArchiveFolder");
+        fieldArchive.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                Setup.setArchiveFolder(fieldArchive.getText());
+            }
+        });
         checkArchiveMake.setName("ArchiveMake");
+        checkArchiveMake.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                Setup.setArchiveMake(checkArchiveMake.isSelected());
+            }
+        });
 
         fieldStatus.setEditable(false);
+        comboPerfil.setEditable(true);
+        comboPerfil.addActionListener(this::comboPerfilActionPerformed);
+        comboPerfil.setName("Perfil");
+        buttonPerfilAdd.setToolTipText("Add Perfil");
+        buttonPerfilAdd.addActionListener(this::comboPerfilAddActionPerformed);
+        buttonPerfilDel.setToolTipText("Del Perfil");
+        buttonPerfilDel.addActionListener(this::comboPerfilDelActionPerformed);
     }
     
     private void initShortcuts() {
@@ -799,15 +851,34 @@ public class CharvsDesk extends DFrame {
 
     private void buttonArchiveOpenActionPerformed(ActionEvent evt) {
         try {
-            var selected = new File(fieldArchive.getText());
-            WizGUI.open(selected);
+            comboPerfil.setSelectedItem("Teste");
+            // var selected = new File(fieldArchive.getText());
+            // WizGUI.open(selected);
         } catch (Exception e) {
             WizGUI.showError(e);
         }
     }
+
+    private void comboPerfilActionPerformed(ActionEvent evt) {
+        try {
+            Setup.setPerfil(WizObject.getFirstNonNull(comboPerfil.getSelectedItem(), "").toString());
+            fieldInput.setText(Setup.getInputFolder());
+            fieldOutput.setText(Setup.getOutputFolder());
+            fieldRecord.setText(Setup.getRecordFile());
+            checkRecordMake.setSelected(Setup.getRecordMake());
+            fieldArchive.setText(Setup.getArchiveFolder());
+            checkArchiveMake.setSelected(Setup.getArchiveMake());
+        } catch (Exception e) {
+            WizGUI.showError(e);
+        }
+    }
+
+    private void comboPerfilAddActionPerformed(ActionEvent evt) {
+        comboPerfil.addItem(comboPerfil.getSelectedItem().toString());
+    }
     
-    public static void start(String args[]) {
-        WizGUI.start(() -> new CharvsDesk().setVisible(true));
+    private void comboPerfilDelActionPerformed(ActionEvent evt) {
+        comboPerfil.removeItem(comboPerfil.getSelectedItem());
     }
 
 }
