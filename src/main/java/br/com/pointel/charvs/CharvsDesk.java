@@ -606,15 +606,25 @@ public class CharvsDesk extends DFrame {
     }
 
     private void buttonInputUpdateActionPerformed(ActionEvent evt) {
+        var selected = WizObject.getFirstNonNull(comboInput.getSelectedItem(), "").toString();
         modelInput.removeAllElements();
         var folder = new File(fieldInput.getText());
         if (!folder.exists()) {
             return;
         }
+        var found = false;
         for (var inside : folder.listFiles()) {
             if (inside.getName().toLowerCase().endsWith(".txt")) {
                 modelInput.addElement(inside.getName());
+                if (selected.equals(inside.getName())) {
+                    found = true;
+                }
             }
+        }
+        if (found) {
+            comboInput.setSelectedItem(selected);
+        } else {
+            comboInput.setSelectedIndex(-1);
         }
     }
 
@@ -861,13 +871,21 @@ public class CharvsDesk extends DFrame {
 
     private void comboPerfilActionPerformed(ActionEvent evt) {
         try {
-            Setup.setPerfil(WizObject.getFirstNonNull(comboPerfil.getSelectedItem(), "").toString());
+            var perfil = WizObject.getFirstNonNull(comboPerfil.getSelectedItem(), "").toString();
+            Setup.setPerfil(perfil);
             fieldInput.setText(Setup.getInputFolder());
+            fieldInput.setName("Input " + perfil);
+            buttonInputUpdateActionPerformed(evt);
             fieldOutput.setText(Setup.getOutputFolder());
+            fieldOutput.setName("Output " + perfil);
             fieldRecord.setText(Setup.getRecordFile());
+            fieldRecord.setName("Record " + perfil);
             checkRecordMake.setSelected(Setup.getRecordMake());
+            checkRecordMake.setName("RecordMake " + perfil);
             fieldArchive.setText(Setup.getArchiveFolder());
+            fieldArchive.setName("Archive " + perfil);
             checkArchiveMake.setSelected(Setup.getArchiveMake());
+            checkArchiveMake.setName("ArchiveMake " + perfil);
         } catch (Exception e) {
             WizGUI.showError(e);
         }
