@@ -879,9 +879,8 @@ public class CharvsDesk extends DFrame {
 
     private void buttonArchiveOpenActionPerformed(ActionEvent evt) {
         try {
-            comboPerfil.setSelectedItem("Teste");
-            // var selected = new File(fieldArchive.getText());
-            // WizGUI.open(selected);
+            var selected = new File(fieldArchive.getText());
+            WizGUI.open(selected);
         } catch (Exception e) {
             WizGUI.showError(e);
         }
