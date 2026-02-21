@@ -579,7 +579,7 @@ public class CharvsDesk extends DFrame {
 
     private void buttonInputSelectActionPerformed(ActionEvent evt) {
         var selected = new File(fieldInput.getText());
-        selected = WizGUI.selectFolder(selected);
+        selected = WizFile.openDir(selected);
         if (selected != null) {
             fieldInput.setText(selected.getAbsolutePath());
         }
@@ -706,7 +706,7 @@ public class CharvsDesk extends DFrame {
 
     private void buttonOutputSelectActionPerformed(ActionEvent evt) {
         var selected = new File(fieldOutput.getText());
-        selected = WizGUI.selectFolder(selected);
+        selected = WizFile.openDir(selected);
         if (selected != null) {
             fieldOutput.setText(selected.getAbsolutePath());
         }
@@ -821,7 +821,7 @@ public class CharvsDesk extends DFrame {
 
     private void buttonRecordSelectActionPerformed(ActionEvent evt) {
         var selected = new File(fieldRecord.getText());
-        selected = WizGUI.selectFile(selected);
+        selected = WizFile.openFile(selected);
         if (selected != null) {
             fieldRecord.setText(selected.getAbsolutePath());
         }
@@ -871,7 +871,7 @@ public class CharvsDesk extends DFrame {
 
     private void buttonArchiveSelectActionPerformed(ActionEvent evt) {
         var selected = new File(fieldArchive.getText());
-        selected = WizGUI.selectFolder(selected);
+        selected = WizFile.openDir(selected);
         if (selected != null) {
             fieldArchive.setText(selected.getAbsolutePath());
         }
